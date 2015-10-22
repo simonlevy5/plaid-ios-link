@@ -97,8 +97,6 @@
 #pragma mark - Private
 
 - (void)presentFinishedViewController {
-  self.navigationItem.hidesBackButton = YES;
-
   PLDLinkFinishedViewController *nextViewController = [[PLDLinkFinishedViewController alloc] init];
   nextViewController.delegate = self;
   [self pushViewController:nextViewController animated:YES];

@@ -77,6 +77,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.navigationItem.hidesBackButton = YES;
+  self.title = @"Success";
   [_view.continueButton addTarget:self
                            action:@selector(didTapContinue)
                  forControlEvents:UIControlEventTouchUpInside];
