@@ -44,7 +44,7 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
     bankContainerView.bankTileView = animatedTileView;
     selectedCell.hidden = YES;
 
-    bankContainerView.contentContainer.alpha = 0;
+    bankContainerView.contentContainer.hidden = YES;
     bankContainerView.contentContainer.transform =
         CGAffineTransformMakeTranslation(0, -bankContainerView.contentContainer.bounds.size.height);
 
@@ -59,11 +59,13 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
       fromViewTransform.m34 = 1.0 / -500;
       bankSelectionView.layer.transform = CATransform3DTranslate(fromViewTransform, 0, 0, -200);
       } completion:^(BOOL finished) {
+        bankContainerView.contentContainer.hidden = NO;
+        [animatedTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
+                           cornerRadii:CGSizeMake(10, 10)];
         [UIView animateWithDuration:kInputContainerAnimationDuration
                              delay:0
                            options:UIViewAnimationOptionCurveEaseOut
                         animations:^{
-          bankContainerView.contentContainer.alpha = 1;
           bankContainerView.contentContainer.transform = CGAffineTransformIdentity;
           } completion:^(BOOL finished) {
             bankContainerView.alpha = 1;
@@ -95,11 +97,11 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-      bankContainerView.contentContainer.alpha = 0;
       bankContainerView.contentContainer.frame =
        CGRectOffset(bankContainerView.contentContainer.frame, 0,
                     -CGRectGetHeight(bankContainerView.contentContainer.bounds));
       } completion:^(BOOL finished) {
+        bankContainerView.contentContainer.alpha = 0;
         PLDLinkBankTileView *bankTileView = bankContainerView.bankTileView;
         bankTileView.alpha = 0;
         PLDLinkBankTileView *animatedTileView = [[PLDLinkBankTileView alloc] initWithFrame:bankTileView.frame];

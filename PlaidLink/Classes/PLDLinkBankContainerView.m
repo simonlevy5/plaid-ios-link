@@ -29,9 +29,11 @@ static CGFloat const kExplainerHeight = 50.0;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor redColor];
 
     _bankTileView = [[PLDLinkBankTileView alloc] initWithFrame:CGRectZero];
+    // Don't add it as a subview yet.
+
     _explainerView = [[PLDLinkBankMFAExplainerView alloc] initWithFrame:CGRectZero];
     [self addSubview:_explainerView];
 

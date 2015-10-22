@@ -34,7 +34,6 @@ static CGFloat const kPadding = 20.0;
 
 - (instancetype)initWithSelection:(PLDMFAAuthenticationSelection *)selection {
   if (self = [super initWithFrame:CGRectZero]) {
-    self.backgroundColor = [UIColor whiteColor];
     _questionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _questionLabel.text = selection.question;
     [self addSubview:_questionLabel];

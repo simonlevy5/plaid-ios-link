@@ -40,10 +40,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  self.title = @"Select your bank";
-
   [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.96 alpha:1]];
   [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  self.title = @"Select your bank";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

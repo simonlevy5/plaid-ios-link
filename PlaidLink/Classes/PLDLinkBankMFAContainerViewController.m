@@ -60,7 +60,7 @@
                                                           product:_product];
   viewController.delegate = self;
   [self addChildViewController:viewController];
-  viewController.view.frame = _view.contentContainer.frame;
+  viewController.view.frame = _view.contentContainer.bounds;
   [_view.contentContainer addSubview:viewController.view];
   [viewController didMoveToParentViewController:self];
   _currentChildViewController = viewController;

@@ -34,8 +34,6 @@ static CGFloat const kInputHeight = 40.0;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    self.backgroundColor = [UIColor whiteColor];
-    
     _inputLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _inputLabel.text = @"InputLabel";
     [_inputLabel sizeToFit];

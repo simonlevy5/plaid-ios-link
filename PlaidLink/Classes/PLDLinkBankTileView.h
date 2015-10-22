@@ -14,4 +14,6 @@
 
 @property(nonatomic) PLDInstitution *institution;
 
+- (void)roundCorners:(UIRectCorner)corners cornerRadii:(CGSize)cornerRadii;
+
 @end

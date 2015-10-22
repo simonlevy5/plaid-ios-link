@@ -51,8 +51,6 @@ static CGFloat const kPadding = 20.0;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    self.backgroundColor = [UIColor whiteColor];
-    
     _choiceButtons = [NSMutableArray array];
   }
   return self;
