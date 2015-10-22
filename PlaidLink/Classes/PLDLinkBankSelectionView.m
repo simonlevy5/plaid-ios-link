@@ -67,7 +67,8 @@
   [super layoutSubviews];
   
   _collectionView.frame = self.bounds;
-  _collectionViewLayout.itemSize = CGSizeMake((self.frame.size.width - 24) / 2, 120);
+  CGFloat itemWidth = (self.frame.size.width - 24) / 2;
+  _collectionViewLayout.itemSize = CGSizeMake(itemWidth, itemWidth / 2);
 }
 
 - (PLDLinkBankSelectionViewCell *)selectedCell {

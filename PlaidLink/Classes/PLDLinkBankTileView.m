@@ -12,15 +12,13 @@
 
 @implementation PLDLinkBankTileView {
   UIImageView *_logo;
-  UILabel *_label;
   UIBezierPath *_maskPath;
   CAShapeLayer *_maskLayer;
 }
 
 - (void)setInstitution:(PLDInstitution *)institution {
   _institution = institution;
-  _label.text = _institution.name;
-  [_label sizeToFit];
+  [_logo setImage:[UIImage imageNamed:_institution.type]];
   [self setNeedsLayout];
 }
 
@@ -29,19 +27,20 @@
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = 8.0f;
 
-    _logo = [[UIImageView alloc] initWithImage:nil];
+    _logo = [[UIImageView alloc] initWithFrame:frame];
+    _logo.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:_logo];
-
-    _label = [[UILabel alloc] initWithFrame:CGRectZero];
-    _label.textColor = [UIColor colorWithWhite:0.7 alpha:1];
-    [self addSubview:_label];
   }
   return self;
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  _label.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+  if (self.bounds.size.width < 200) {
+    _logo.frame = CGRectInset(self.bounds, 18, 20);
+  } else {
+    _logo.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
+  }
   _logo.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 

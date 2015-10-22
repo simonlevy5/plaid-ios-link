@@ -29,6 +29,7 @@
 		5316B5211BD8672B006F627E /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 5316B51B1BD8672B006F627E /* Base.lproj */; settings = {ASSET_TAGS = (); }; };
 		5316B5221BD8672B006F627E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B51C1BD8672B006F627E /* main.m */; settings = {ASSET_TAGS = (); }; };
 		5316B5251BD8689A006F627E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5316B5241BD8689A006F627E /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		B18282791BD9560B0032AF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18282781BD9560B0032AF19 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		C0F4E46B175DA32EFB1F370C /* libPods-PlaidLink.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2655A45D9522B3615EE7B18 /* libPods-PlaidLink.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		5316B51C1BD8672B006F627E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PlaidLinkDemo/main.m; sourceTree = "<group>"; };
 		5316B5241BD8689A006F627E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		99A13A2D3F78158267BA4FA5 /* Pods-PlaidLink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLink.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLink/Pods-PlaidLink.release.xcconfig"; sourceTree = "<group>"; };
+		B18282781BD9560B0032AF19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		C2655A45D9522B3615EE7B18 /* libPods-PlaidLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaidLink.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB45B1F18220C68AD92A8C70 /* Pods-PlaidLink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLink/Pods-PlaidLink.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				5316B5241BD8689A006F627E /* Info.plist */,
+				B18282781BD9560B0032AF19 /* Assets.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			files = (
 				5316B5211BD8672B006F627E /* Base.lproj in Resources */,
 				5316B5201BD8672B006F627E /* Assets.xcassets in Resources */,
+				B18282791BD9560B0032AF19 /* Assets.xcassets in Resources */,
 				5316B5251BD8689A006F627E /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
