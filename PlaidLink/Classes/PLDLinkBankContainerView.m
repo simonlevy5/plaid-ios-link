@@ -11,7 +11,7 @@
 #import "PLDLinkBankTileView.h"
 #import "PLDLinkBankMFAExplainerView.h"
 
-static CGFloat const kLogoHeight = 160.0;
+static CGFloat const kLogoHeight = 140.0;
 static CGFloat const kContentPadding = 8.0;
 static CGFloat const kExplainerHeight = 50.0;
 
@@ -29,8 +29,6 @@ static CGFloat const kExplainerHeight = 50.0;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    self.backgroundColor = [UIColor redColor];
-
     _bankTileView = [[PLDLinkBankTileView alloc] initWithFrame:CGRectZero];
     // Don't add it as a subview yet.
 
@@ -38,7 +36,6 @@ static CGFloat const kExplainerHeight = 50.0;
     [self addSubview:_explainerView];
 
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
-    _contentContainer.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
     [self addSubview:_contentContainer];
   }
   return self;
