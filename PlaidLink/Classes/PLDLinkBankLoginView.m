@@ -18,24 +18,27 @@ static CGFloat const kInputHeight = 48.0;
     _usernameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _usernameTextField.placeholder = @"username";
     _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _usernameTextField.textColor = [UIColor whiteColor];
     [self addSubview:_usernameTextField];
 
     _passwordTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _passwordTextField.placeholder = @"password";
     _passwordTextField.secureTextEntry = YES;
+    _passwordTextField.textColor = [UIColor whiteColor];
     [self addSubview:_passwordTextField];
     
     _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _pinTextField.placeholder = @"pin";
     _pinTextField.secureTextEntry = YES;
+    _pinTextField.textColor = [UIColor whiteColor];
     [self addSubview:_pinTextField];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
     _submitButton.layer.cornerRadius = 4.0;
-    _submitButton.backgroundColor = [UIColor lightGrayColor];
+    _submitButton.backgroundColor = [UIColor colorWithRed:250/255.0f green:59/255.0f blue:0 alpha:1];
     _submitButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
-    [_submitButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:_submitButton];
   }
   return self;

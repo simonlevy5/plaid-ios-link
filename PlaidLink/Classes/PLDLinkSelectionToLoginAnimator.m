@@ -14,8 +14,8 @@
 
 @implementation PLDLinkSelectionToLoginAnimator
 
-static CGFloat const kInputContainerAnimationDuration = 0.3;
-static CGFloat const kBankTileAnimationDuration = 0.4;
+static CGFloat const kInputContainerAnimationDuration = 0.25;
+static CGFloat const kBankTileAnimationDuration = 0.35;
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
   return kBankTileAnimationDuration + kInputContainerAnimationDuration;
@@ -59,13 +59,13 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
       fromViewTransform.m34 = 1.0 / -500;
       bankSelectionView.layer.transform = CATransform3DTranslate(fromViewTransform, 0, 0, -200);
       } completion:^(BOOL finished) {
-        bankContainerView.contentContainer.hidden = NO;
         [animatedTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
-                           cornerRadii:CGSizeMake(10, 10)];
+                           cornerRadii:CGSizeMake(0, 0)];
         [UIView animateWithDuration:kInputContainerAnimationDuration
                              delay:0
                            options:UIViewAnimationOptionCurveEaseOut
                         animations:^{
+          bankContainerView.contentContainer.hidden = NO;
           bankContainerView.contentContainer.transform = CGAffineTransformIdentity;
           } completion:^(BOOL finished) {
             bankContainerView.alpha = 1;

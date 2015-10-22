@@ -52,7 +52,7 @@
   [super viewDidLoad];
 
   self.title = _institution.name;
-  _view.contentContainer.backgroundColor = _institution.backgroundColor;
+//  _view.contentContainer.backgroundColor = _institution.backgroundColor;
   self.navigationItem.backBarButtonItem.action = @selector(didTapBack);
   self.navigationItem.backBarButtonItem.target = self;
 

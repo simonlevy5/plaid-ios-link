@@ -36,6 +36,7 @@ static CGFloat const kExplainerHeight = 50.0;
     [self addSubview:_explainerView];
 
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
+    _contentContainer.backgroundColor = [UIColor colorWithRed:222/255.0f green:32/255.0f blue:0 alpha:1];
     [self addSubview:_contentContainer];
   }
   return self;
@@ -53,6 +54,16 @@ static CGFloat const kExplainerHeight = 50.0;
                                        CGRectGetMaxY(_bankTileView.frame),
                                        self.bounds.size.width - 2 * kContentPadding,
                                        220);
+
+  UIBezierPath *path =
+      [UIBezierPath bezierPathWithRoundedRect:_contentContainer.bounds
+                            byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)
+                                  cornerRadii:CGSizeMake(10, 10)];
+  CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+  maskLayer.frame = _contentContainer.bounds;
+  maskLayer.path  = path.CGPath;
+  _contentContainer.layer.mask = maskLayer;
+
 }
 
 - (void)setBankTileView:(PLDLinkBankTileView *)bankTileView {
