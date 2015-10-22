@@ -1,0 +1,11 @@
+.DS_Store
+
+*.xcodeproj/xcuserdata/*.xcuserdatad
+
+*.xccheckout
+*.xcuserdatad
+
+Pods
+Podfile.lock
+Pods
+Plaid\ Link.xcworkspace

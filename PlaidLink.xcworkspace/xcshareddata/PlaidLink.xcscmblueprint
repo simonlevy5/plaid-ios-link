@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6550239AE76C5A2AA23678E02243B8450BF29E07",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B3B564B6E5774BB76AB63040B20D8672F3D510A5" : 0,
+    "6550239AE76C5A2AA23678E02243B8450BF29E07" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A4071ABE-D384-41D1-BAFA-7E7A2DD4C578",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B3B564B6E5774BB76AB63040B20D8672F3D510A5" : "plaid-ios\/",
+    "6550239AE76C5A2AA23678E02243B8450BF29E07" : "plaid-ios-link\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PlaidLink",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PlaidLink.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vouch\/plaid-ios-link.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6550239AE76C5A2AA23678E02243B8450BF29E07"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vouch\/plaid-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B3B564B6E5774BB76AB63040B20D8672F3D510A5"
+    }
+  ]
+}
