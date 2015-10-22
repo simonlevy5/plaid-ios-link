@@ -77,8 +77,10 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
     }];
 
   } else {
-    PLDLinkBankSelectionView *bankSelectionView = [transitionContext viewForKey:UITransitionContextToViewKey];
-    PLDLinkBankContainerView *bankContainerView = [transitionContext viewForKey:UITransitionContextFromViewKey];
+    PLDLinkBankSelectionView *bankSelectionView =
+        [transitionContext viewForKey:UITransitionContextToViewKey];
+    PLDLinkBankContainerView *bankContainerView =
+        [transitionContext viewForKey:UITransitionContextFromViewKey];
     [[transitionContext containerView] setBackgroundColor:[UIColor colorWithWhite:0.96 alpha:1]];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
@@ -87,7 +89,8 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
     bankSelectionView.collectionView.alpha = 0;
     CATransform3D fromViewTransform = CATransform3DIdentity;
     fromViewTransform.m34 = 1.0 / -500;
-    bankSelectionView.collectionView.layer.transform = CATransform3DTranslate(fromViewTransform, 0, 0, -200);
+    bankSelectionView.collectionView.layer.transform =
+        CATransform3DTranslate(fromViewTransform, 0, 0, -200);
     bankContainerView.backgroundColor = [UIColor clearColor];
 
     PLDLinkBankSelectionViewCell *selectedCell = [bankSelectionView selectedCell];
@@ -104,7 +107,8 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
         bankContainerView.contentContainer.alpha = 0;
         PLDLinkBankTileView *bankTileView = bankContainerView.bankTileView;
         bankTileView.alpha = 0;
-        PLDLinkBankTileView *animatedTileView = [[PLDLinkBankTileView alloc] initWithFrame:bankTileView.frame];
+        PLDLinkBankTileView *animatedTileView =
+            [[PLDLinkBankTileView alloc] initWithFrame:bankTileView.frame];
         animatedTileView.institution = bankTileView.institution;
         [animatedTileView layoutSubviews];
         [bankSelectionView addSubview:animatedTileView];
@@ -114,7 +118,8 @@ static CGFloat const kBankTileAnimationDuration = 0.4;
                         animations:^{
           bankSelectionView.collectionView.alpha = 1;
           bankSelectionView.collectionView.layer.transform = CATransform3DIdentity;
-          animatedTileView.frame = selectedCell.frame;
+          animatedTileView.frame = [bankSelectionView convertRect:selectedCell.frame
+                                                         fromView:bankSelectionView.collectionView];
           [animatedTileView layoutSubviews];
         } completion:^(BOOL finished) {
           selectedCell.hidden = NO;
