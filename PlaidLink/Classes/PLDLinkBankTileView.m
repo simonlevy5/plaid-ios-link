@@ -36,11 +36,7 @@
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  if (self.bounds.size.width < 200) {
-    _logo.frame = CGRectInset(self.bounds, 18, 20);
-  } else {
-    _logo.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
-  }
+  _logo.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
   _logo.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 
