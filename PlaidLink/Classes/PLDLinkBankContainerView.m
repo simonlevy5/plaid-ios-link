@@ -11,29 +11,14 @@
 #import "PLDLinkBankTileView.h"
 #import "PLDLinkBankMFAExplainerView.h"
 
-static CGFloat const kLogoHeight = 140.0;
 static CGFloat const kContentPadding = 8.0;
-static CGFloat const kExplainerHeight = 50.0;
 
-@implementation PLDLinkBankContainerView {
-  PLDLinkBankMFAExplainerView *_explainerView;
-}
-
-- (NSString *)explainerText {
-  return _explainerView.explainerText;
-}
-
-- (void)setExplainerText:(NSString *)explainerText {
-  _explainerView.explainerText = explainerText;
-}
+@implementation PLDLinkBankContainerView
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     _bankTileView = [[PLDLinkBankTileView alloc] initWithFrame:CGRectZero];
     // Don't add it as a subview yet.
-
-    _explainerView = [[PLDLinkBankMFAExplainerView alloc] initWithFrame:CGRectZero];
-    [self addSubview:_explainerView];
 
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
     _contentContainer.backgroundColor = [UIColor colorWithRed:222/255.0f green:32/255.0f blue:0 alpha:1];
@@ -47,9 +32,7 @@ static CGFloat const kExplainerHeight = 50.0;
 
   CGRect bounds = self.bounds;
   _bankTileView.frame =
-      CGRectMake(kContentPadding, 0, bounds.size.width - kContentPadding * 2, kLogoHeight);
-  _explainerView.frame =
-      CGRectMake(0, kLogoHeight - kExplainerHeight, self.bounds.size.width, kExplainerHeight);
+      CGRectMake(kContentPadding, 0, bounds.size.width - kContentPadding * 2, bounds.size.height / 4);
   _contentContainer.frame = CGRectMake(kContentPadding,
                                        CGRectGetMaxY(_bankTileView.frame),
                                        self.bounds.size.width - 2 * kContentPadding,
@@ -58,7 +41,7 @@ static CGFloat const kExplainerHeight = 50.0;
   UIBezierPath *path =
       [UIBezierPath bezierPathWithRoundedRect:_contentContainer.bounds
                             byRoundingCorners:(UIRectCornerBottomLeft | UIRectCornerBottomRight)
-                                  cornerRadii:CGSizeMake(10, 10)];
+                                  cornerRadii:CGSizeMake(8, 8)];
   CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
   maskLayer.frame = _contentContainer.bounds;
   maskLayer.path  = path.CGPath;

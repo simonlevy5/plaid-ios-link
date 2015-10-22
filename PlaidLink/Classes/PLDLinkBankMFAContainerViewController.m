@@ -14,7 +14,7 @@
 #import "PLDLinkBankContainerView.h"
 #import "PLDLinkBankMFAViewController.h"
 #import "PLDLinkBankMFAChoiceViewController.h"
-#import "PLDLinkBankMFAInputViewController.h"
+#import "PLDLinkBankMFAQuestionOrCodeViewController.h"
 #import "PLDLinkBankMFASelectionsViewController.h"
 
 @interface PLDLinkBankMFAContainerViewController ()<PLDLinkBankLoginViewControllerDelegate,
@@ -105,13 +105,13 @@
         [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:authentication];
   } else if (mfaType == kPLDMFATypeCode) {
     mfaViewController =
-        [[PLDLinkBankMFAInputViewController alloc] initWithAuthentication:authentication];
+        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:authentication];
   } else if (mfaType == kPLDMFATypeSelection) {
     mfaViewController =
         [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:authentication];
   } else if (mfaType == kPLDMFATypeQuestion) {
     mfaViewController =
-        [[PLDLinkBankMFAInputViewController alloc] initWithAuthentication:authentication];
+        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:authentication];
   } else {
     NSAssert(NO, @"Invalid mfa type");
   }

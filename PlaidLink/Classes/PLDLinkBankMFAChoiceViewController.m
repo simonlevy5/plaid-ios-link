@@ -10,70 +10,7 @@
 
 #import "PLDAuthentication.h"
 #import "PLDLinkBankContainerView.h"
-
-static CGFloat const kButtonHeight = 50.0;
-static CGFloat const kPadding = 20.0;
-
-@protocol PLDLinkBankMFAChoiceViewDelegate <NSObject>
-
-- (void)choiceView:(UIView *)view didSelectChoice:(NSString *)choice;
-
-@end
-
-@interface PLDLinkBankMFAChoiceView : UIView
-
-@property(nonatomic, weak) id<PLDLinkBankMFAChoiceViewDelegate> delegate;
-@property(nonatomic) NSArray *choices;
-
-@end
-
-@implementation PLDLinkBankMFAChoiceView {
-  NSMutableArray *_choiceButtons;
-}
-
-- (void)setChoices:(NSArray *)choices {
-  _choices = choices;
-  for (UIButton *button in _choiceButtons) {
-    [button removeFromSuperview];
-    [_choiceButtons removeAllObjects];
-  }
-  for (PLDMFAAuthenticationChoice *choice in _choices) {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
-    button.backgroundColor = [UIColor grayColor];
-    [button setTitle:choice.displayText forState:UIControlStateNormal];
-    [button addTarget:self
-               action:@selector(didTapChoiceButton:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [_choiceButtons addObject:button];
-    [self addSubview:button];
-  }
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-  if (self = [super initWithFrame:frame]) {
-    _choiceButtons = [NSMutableArray array];
-  }
-  return self;
-}
-
-- (void)layoutSubviews {
-  [super layoutSubviews];
-
-  CGFloat buttonY = kPadding;
-  CGFloat buttonWidth = self.bounds.size.width - kPadding * 2;
-  for (UIButton *button in _choiceButtons) {
-    button.frame = CGRectMake(kPadding, buttonY, buttonWidth, kButtonHeight);
-    buttonY += kButtonHeight + kPadding;
-  }
-}
-
-- (void)didTapChoiceButton:(id)sender {
-  NSUInteger index = [_choiceButtons indexOfObject:sender];
-  PLDMFAAuthenticationChoice *choice = [_choices objectAtIndex:index];
-  [self.delegate choiceView:self didSelectChoice:choice.choice];
-}
-
-@end
+#import "PLDLinkBankMFAChoiceView.h"
 
 @interface PLDLinkBankMFAChoiceViewController ()<PLDLinkBankMFAChoiceViewDelegate>
 @end

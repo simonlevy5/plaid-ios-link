@@ -10,5 +10,5 @@
 
 #import "PLDLinkBankMFAViewController.h"
 
-@interface PLDLinkBankMFAInputViewController : PLDLinkBankMFAViewController
+@interface PLDLinkBankMFAQuestionOrCodeViewController : PLDLinkBankMFAViewController
 @end
