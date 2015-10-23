@@ -57,6 +57,7 @@
 #pragma mark - Private
 
 - (void)didTapSubmit {
+  [self.view endEditing:YES];
   NSDictionary *options = @{
       @"list" : @(YES)
   };

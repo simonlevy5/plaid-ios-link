@@ -35,6 +35,8 @@
       [[PLDLinkBankSelectionViewController alloc] init];
   if (self = [super initWithRootViewController:rootViewController]) {
     rootViewController.delegate = self;
+    rootViewController.title = @"Select your bank";
+
     _environment = environment;
     _product = product;
     _publicKey = publicKey;
