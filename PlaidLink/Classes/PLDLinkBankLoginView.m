@@ -30,12 +30,13 @@ static CGFloat const kInputHeight = 48.0;
     _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _pinTextField.placeholder = @"pin";
     _pinTextField.secureTextEntry = YES;
+    _pinTextField.hidden = YES;
     _pinTextField.textColor = [UIColor whiteColor];
     [self addSubview:_pinTextField];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
     _submitButton.layer.cornerRadius = 8.0;
-    _submitButton.backgroundColor = [UIColor colorWithRed:250/255.0f green:59/255.0f blue:0 alpha:1];
+    _submitButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
     _submitButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
     [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

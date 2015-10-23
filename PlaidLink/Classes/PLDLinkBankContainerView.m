@@ -11,6 +11,8 @@
 #import "PLDLinkBankTileView.h"
 #import "PLDLinkBankMFAExplainerView.h"
 
+#import "PLDInstitution.h"
+
 static CGFloat const kContentPadding = 8.0;
 
 @implementation PLDLinkBankContainerView
@@ -21,7 +23,6 @@ static CGFloat const kContentPadding = 8.0;
     // Don't add it as a subview yet.
 
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
-    _contentContainer.backgroundColor = [UIColor colorWithRed:222/255.0f green:32/255.0f blue:0 alpha:1];
     [self addSubview:_contentContainer];
   }
   return self;
@@ -53,6 +54,7 @@ static CGFloat const kContentPadding = 8.0;
   [bankTileView removeFromSuperview];
   _bankTileView = bankTileView;
   [self insertSubview:_bankTileView aboveSubview:_contentContainer];
+  _contentContainer.backgroundColor = _bankTileView.institution.backgroundColor;
 }
 
 @end
