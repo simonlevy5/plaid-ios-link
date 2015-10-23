@@ -8,6 +8,9 @@
 
 #import "PLDLinkBankLoginView.h"
 
+#import "PLDLinkStyledButton.h"
+#import "UIColor+PLDLinkUIColor.h"
+
 static CGFloat const kInputVerticalPadding = 12.0;
 static CGFloat const kInputHorizontalPadding = 24.0;
 static CGFloat const kInputHeight = 46.0;
@@ -22,7 +25,7 @@ static CGFloat const kInputHeight = 46.0;
     _usernameTextField.tintColor = [UIColor whiteColor];
     _usernameTextField.attributedPlaceholder =
         [[NSAttributedString alloc] initWithString:@"username"
-                                        attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
+                                        attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
     [self addSubview:_usernameTextField];
 
     _passwordTextField = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -31,7 +34,7 @@ static CGFloat const kInputHeight = 46.0;
     _passwordTextField.tintColor = [UIColor whiteColor];
     _passwordTextField.attributedPlaceholder =
         [[NSAttributedString alloc] initWithString:@"password"
-                                        attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
+                                        attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
     [self addSubview:_passwordTextField];
     
     _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -41,12 +44,13 @@ static CGFloat const kInputHeight = 46.0;
     _pinTextField.tintColor = [UIColor whiteColor];
     _pinTextField.attributedPlaceholder =
         [[NSAttributedString alloc] initWithString:@"pin"
-                                        attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
+                                        attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
     [self addSubview:_pinTextField];
 
-    _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero];
+    _submitButton.tintColor = tintColor;
+    _submitButton.backgroundColor = [tintColor lighterColorForBackground];
     _submitButton.layer.cornerRadius = 8.0;
-    _submitButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
     _submitButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
     [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

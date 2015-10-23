@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class PLDLinkStyledButton;
+
 @interface PLDLinkBankLoginView : UIView
 
 @property(nonatomic, assign) BOOL isPinRequired;
@@ -15,7 +17,7 @@
 @property(nonatomic, readonly) UITextField *usernameTextField;
 @property(nonatomic, readonly) UITextField *passwordTextField;
 @property(nonatomic, readonly) UITextField *pinTextField;
-@property(nonatomic, readonly) UIButton *submitButton;
+@property(nonatomic, readonly) PLDLinkStyledButton *submitButton;
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
 

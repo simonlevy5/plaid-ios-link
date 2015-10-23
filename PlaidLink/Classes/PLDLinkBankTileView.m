@@ -26,7 +26,7 @@
   if (self = [super initWithFrame:frame]) {
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = 8.0f;
-    self.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
+    self.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.11].CGColor;
     self.layer.borderWidth = 0.5f;
 
     _logo = [[UIImageView alloc] initWithFrame:frame];

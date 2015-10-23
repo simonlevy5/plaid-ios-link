@@ -12,6 +12,7 @@
 #import "PLDAuthentication.h"
 #import "PLDLinkBankLoginView.h"
 #import "PLDInstitution.h"
+#import "PLDLinkStyledButton.h"
 
 @implementation PLDLinkBankLoginViewController {
   PLDInstitution *_institution;
@@ -57,6 +58,7 @@
 #pragma mark - Private
 
 - (void)didTapSubmit {
+  [_view.submitButton startLoading];
   [self.view endEditing:YES];
   NSDictionary *options = @{
       @"list" : @(YES)
@@ -71,7 +73,7 @@
                                      NSLog(@"Error adding user: %@", error);
                                      return;
                                    }
-                                   
+                                   [_view.submitButton stopLoading];
                                    [_delegate loginViewController:self
                                       didFinishWithAuthentication:authentication];
                                  }];
