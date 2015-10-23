@@ -26,6 +26,7 @@ static CGFloat const kInputHeight = 46.0;
     _inputTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     _inputTextField.placeholder = @"placeholder";
     _inputTextField.textColor = [UIColor whiteColor];
+    _inputTextField.tintColor = [UIColor whiteColor];
     [self addSubview:_inputTextField];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -59,7 +60,7 @@ static CGFloat const kInputHeight = 46.0;
                                  paddedWidth,
                                  kInputHeight);
   _inputTextField.frame = CGRectMake(kInputHorizontalPadding,
-                                     CGRectGetMaxY(_inputLabel.frame) + kInputVerticalPadding,
+                                     CGRectGetMaxY(_inputLabel.frame),
                                      paddedWidth,
                                      kInputHeight);
   _submitButton.frame = CGRectMake(kInputHorizontalPadding,

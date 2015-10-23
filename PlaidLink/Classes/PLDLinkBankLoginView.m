@@ -17,22 +17,31 @@ static CGFloat const kInputHeight = 46.0;
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
     _usernameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _usernameTextField.placeholder = @"username";
     _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     _usernameTextField.textColor = [UIColor whiteColor];
+    _usernameTextField.tintColor = [UIColor whiteColor];
+    _usernameTextField.attributedPlaceholder =
+        [[NSAttributedString alloc] initWithString:@"username"
+                                        attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
     [self addSubview:_usernameTextField];
 
     _passwordTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _passwordTextField.placeholder = @"password";
     _passwordTextField.secureTextEntry = YES;
     _passwordTextField.textColor = [UIColor whiteColor];
+    _passwordTextField.tintColor = [UIColor whiteColor];
+    _passwordTextField.attributedPlaceholder =
+        [[NSAttributedString alloc] initWithString:@"password"
+                                        attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
     [self addSubview:_passwordTextField];
     
     _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _pinTextField.placeholder = @"pin";
     _pinTextField.secureTextEntry = YES;
     _pinTextField.hidden = YES;
     _pinTextField.textColor = [UIColor whiteColor];
+    _pinTextField.tintColor = [UIColor whiteColor];
+    _pinTextField.attributedPlaceholder =
+        [[NSAttributedString alloc] initWithString:@"pin"
+                                        attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
     [self addSubview:_pinTextField];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];

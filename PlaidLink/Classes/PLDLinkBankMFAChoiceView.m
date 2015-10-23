@@ -42,6 +42,12 @@ static CGFloat const kPadding = 20.0;
   return self;
 }
 
+- (void)didTapChoiceButton:(id)sender {
+  NSUInteger index = [_choiceButtons indexOfObject:sender];
+  PLDMFAAuthenticationChoice *choice = [_choices objectAtIndex:index];
+  [self.delegate choiceView:self didSelectChoice:choice.choice];
+}
+
 - (void)layoutSubviews {
   [super layoutSubviews];
 
@@ -53,10 +59,13 @@ static CGFloat const kPadding = 20.0;
   }
 }
 
-- (void)didTapChoiceButton:(id)sender {
-  NSUInteger index = [_choiceButtons indexOfObject:sender];
-  PLDMFAAuthenticationChoice *choice = [_choices objectAtIndex:index];
-  [self.delegate choiceView:self didSelectChoice:choice.choice];
+- (void)sizeToFit {
+  [self layoutSubviews];
+
+  CGRect frame = self.frame;
+  UIButton *lastButton = _choiceButtons.lastObject;
+  frame.size.height = CGRectGetMaxY(lastButton.frame) + kPadding;
+  self.frame = frame;
 }
 
 @end
