@@ -8,8 +8,9 @@
 
 #import "PLDLinkBankLoginView.h"
 
-static CGFloat const kInputPadding = 24.0;
-static CGFloat const kInputHeight = 48.0;
+static CGFloat const kInputVerticalPadding = 12.0;
+static CGFloat const kInputHorizontalPadding = 24.0;
+static CGFloat const kInputHeight = 46.0;
 
 @implementation PLDLinkBankLoginView
 
@@ -49,27 +50,35 @@ static CGFloat const kInputHeight = 48.0;
   [super layoutSubviews];
 
   CGRect bounds = self.bounds;
-  _usernameTextField.frame = CGRectMake(kInputPadding,
-                                        kInputPadding,
-                                        bounds.size.width - kInputPadding * 2,
+  _usernameTextField.frame = CGRectMake(kInputHorizontalPadding,
+                                        kInputVerticalPadding,
+                                        bounds.size.width - kInputHorizontalPadding * 2,
                                         kInputHeight);
-  _passwordTextField.frame = CGRectMake(kInputPadding,
+  _passwordTextField.frame = CGRectMake(kInputHorizontalPadding,
                                         CGRectGetMaxY(_usernameTextField.frame),
-                                        bounds.size.width - kInputPadding * 2,
+                                        bounds.size.width - kInputHorizontalPadding * 2,
                                         kInputHeight);
   if (_pinTextField) {
-    _pinTextField.frame = CGRectMake(kInputPadding,
-                                     CGRectGetMaxY(_passwordTextField.frame) + kInputPadding,
-                                     bounds.size.width - kInputPadding * 2,
+    _pinTextField.frame = CGRectMake(kInputHorizontalPadding,
+                                     CGRectGetMaxY(_passwordTextField.frame) + kInputVerticalPadding,
+                                     bounds.size.width - kInputHorizontalPadding * 2,
                                      kInputHeight);
   }
 
-  CGFloat submitButtonY = _isPinRequired ? CGRectGetMaxY(_pinTextField.frame) + kInputPadding :
-      CGRectGetMaxY(_passwordTextField.frame) + kInputPadding;
-  _submitButton.frame = CGRectMake(kInputPadding,
+  CGFloat submitButtonY = _isPinRequired ? CGRectGetMaxY(_pinTextField.frame) + kInputVerticalPadding :
+      CGRectGetMaxY(_passwordTextField.frame) + kInputVerticalPadding;
+  _submitButton.frame = CGRectMake(kInputHorizontalPadding,
                                    submitButtonY,
-                                   bounds.size.width - kInputPadding * 2,
+                                   bounds.size.width - kInputHorizontalPadding * 2,
                                    kInputHeight);
+}
+
+- (void)sizeToFit {
+  [self layoutSubviews];
+
+  CGRect frame = self.frame;
+  frame.size.height = CGRectGetMaxY(_submitButton.frame) + kInputVerticalPadding * 2;
+  self.frame = frame;
 }
 
 @end

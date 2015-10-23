@@ -16,4 +16,6 @@
 @property(nonatomic, assign) NSString *explainerText;
 @property(nonatomic, readonly) UIView *contentContainer;
 
+- (void)setCurrentContentView:(UIView *)contentView;
+
 @end

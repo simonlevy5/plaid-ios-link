@@ -8,8 +8,9 @@
 
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 
-static CGFloat const kPadding = 20.0;
-static CGFloat const kInputHeight = 40.0;
+static CGFloat const kInputVerticalPadding = 12.0;
+static CGFloat const kInputHorizontalPadding = 24.0;
+static CGFloat const kInputHeight = 46.0;
 
 @implementation PLDLinkBankMFAQuestionOrCodeView
 
@@ -22,12 +23,15 @@ static CGFloat const kInputHeight = 40.0;
     [self addSubview:_inputLabel];
 
     _inputTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+    _inputTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     _inputTextField.placeholder = @"placeholder";
     _inputTextField.textColor = [UIColor whiteColor];
     [self addSubview:_inputTextField];
 
     _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    _submitButton.backgroundColor = [UIColor grayColor];
+    _submitButton.layer.cornerRadius = 8.0;
+    _submitButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
+    [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
     [_submitButton addTarget:self
                       action:@selector(didTapSubmit)
@@ -37,27 +41,39 @@ static CGFloat const kInputHeight = 40.0;
   return self;
 }
 
-- (void)layoutSubviews {
-  [super layoutSubviews];
-
-  CGRect bounds = self.bounds;
-  CGFloat paddedWidth = bounds.size.width - kPadding * 2;
-  _inputLabel.frame = CGRectMake(kPadding,
-                                 kPadding,
-                                 paddedWidth,
-                                 kInputHeight);
-  _inputTextField.frame = CGRectMake(kPadding,
-                                     CGRectGetMaxY(_inputLabel.frame) + kPadding,
-                                     paddedWidth,
-                                     kInputHeight);
-  _submitButton.frame = CGRectMake(kPadding,
-                                   CGRectGetMaxY(_inputTextField.frame) + kPadding,
-                                   paddedWidth,
-                                   kInputHeight);
+- (BOOL)becomeFirstResponder {
+  return [_inputTextField becomeFirstResponder];
 }
 
 - (void)didTapSubmit {
   [_delegate inputView:self didTapSubmitWithResponse:_inputTextField.text];
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+
+  CGRect bounds = self.bounds;
+  CGFloat paddedWidth = bounds.size.width - kInputHorizontalPadding * 2;
+  _inputLabel.frame = CGRectMake(kInputHorizontalPadding,
+                                 kInputVerticalPadding,
+                                 paddedWidth,
+                                 kInputHeight);
+  _inputTextField.frame = CGRectMake(kInputHorizontalPadding,
+                                     CGRectGetMaxY(_inputLabel.frame) + kInputVerticalPadding,
+                                     paddedWidth,
+                                     kInputHeight);
+  _submitButton.frame = CGRectMake(kInputHorizontalPadding,
+                                   CGRectGetMaxY(_inputTextField.frame) + kInputVerticalPadding,
+                                   paddedWidth,
+                                   kInputHeight);
+}
+
+- (void)sizeToFit {
+  [self layoutSubviews];
+
+  CGRect frame = self.frame;
+  frame.size.height = CGRectGetMaxY(_submitButton.frame) + kInputVerticalPadding * 2;
+  self.frame = frame;
 }
 
 @end

@@ -14,8 +14,11 @@
 #import "PLDInstitution.h"
 
 static CGFloat const kContentPadding = 8.0;
+static CGFloat const kDefaultContentHeight = 200;
 
-@implementation PLDLinkBankContainerView
+@implementation PLDLinkBankContainerView {
+  UIView *_currentContent;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
@@ -28,6 +31,30 @@ static CGFloat const kContentPadding = 8.0;
   return self;
 }
 
+- (void)setBankTileView:(PLDLinkBankTileView *)bankTileView {
+  [bankTileView removeFromSuperview];
+  _bankTileView = bankTileView;
+  [self insertSubview:_bankTileView aboveSubview:_contentContainer];
+  _contentContainer.backgroundColor = _bankTileView.institution.backgroundColor;
+}
+
+- (void)setCurrentContentView:(UIView *)contentView {
+  if (_currentContent) {
+    [self animateCurrentContentOutWithCompletion:^(BOOL finished) {
+      [_currentContent removeFromSuperview];
+      _currentContent = contentView;
+      [_contentContainer addSubview:_currentContent];
+      [self animateCurrentContentIn:^(BOOL finished) {
+        [_currentContent becomeFirstResponder];
+      }];
+    }];
+  } else {
+    [_currentContent removeFromSuperview];
+    _currentContent = contentView;
+    [_contentContainer addSubview:_currentContent];
+  }
+}
+
 - (void)layoutSubviews {
   [super layoutSubviews];
 
@@ -37,7 +64,14 @@ static CGFloat const kContentPadding = 8.0;
   _contentContainer.frame = CGRectMake(kContentPadding,
                                        CGRectGetMaxY(_bankTileView.frame),
                                        self.bounds.size.width - 2 * kContentPadding,
-                                       220);
+                                       kDefaultContentHeight);
+  if (_currentContent) {
+    _currentContent.frame = _contentContainer.bounds;
+    [_currentContent sizeToFit];
+    CGRect containerFrame = _contentContainer.frame;
+    containerFrame.size.height = _currentContent.bounds.size.height;
+    _contentContainer.frame = containerFrame;
+  }
 
   UIBezierPath *path =
       [UIBezierPath bezierPathWithRoundedRect:_contentContainer.bounds
@@ -47,14 +81,32 @@ static CGFloat const kContentPadding = 8.0;
   maskLayer.frame = _contentContainer.bounds;
   maskLayer.path  = path.CGPath;
   _contentContainer.layer.mask = maskLayer;
-
 }
 
-- (void)setBankTileView:(PLDLinkBankTileView *)bankTileView {
-  [bankTileView removeFromSuperview];
-  _bankTileView = bankTileView;
-  [self insertSubview:_bankTileView aboveSubview:_contentContainer];
-  _contentContainer.backgroundColor = _bankTileView.institution.backgroundColor;
+- (void)animateCurrentContentOutWithCompletion:(void (^ __nullable)(BOOL finished))completion {
+  CGAffineTransform transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(self.bounds), 0);
+  [UIView animateWithDuration:0.25
+                        delay:0
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+                     _currentContent.alpha = 0;
+                     _currentContent.transform = transform;
+                   } completion:completion];
+}
+
+- (void)animateCurrentContentIn:(void (^ __nullable)(BOOL finished))completion {
+  _currentContent.frame = _contentContainer.bounds;
+  [_currentContent layoutSubviews];
+  _currentContent.alpha = 0;
+  _currentContent.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.bounds), 0);
+  [UIView animateWithDuration:0.25
+                        delay:0
+                      options:UIViewAnimationOptionCurveEaseOut
+                   animations:^{
+                     _currentContent.alpha = 1;
+                     _currentContent.transform = CGAffineTransformIdentity;
+                     [self layoutSubviews];
+                   } completion:completion];
 }
 
 @end

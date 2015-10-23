@@ -42,17 +42,10 @@
   self.view = _view;
 }
 
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-
-  self.childViewControllers.firstObject.view.frame = _view.contentContainer.bounds;
-}
-
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   self.title = _institution.name;
-//  _view.contentContainer.backgroundColor = _institution.backgroundColor;
   self.navigationItem.backBarButtonItem.action = @selector(didTapBack);
   self.navigationItem.backBarButtonItem.target = self;
 
@@ -61,8 +54,7 @@
                                                           product:_product];
   viewController.delegate = self;
   [self addChildViewController:viewController];
-  viewController.view.frame = _view.contentContainer.bounds;
-  [_view.contentContainer addSubview:viewController.view];
+  [_view setCurrentContentView:viewController.view];
   [viewController didMoveToParentViewController:self];
   _currentChildViewController = viewController;
 }
@@ -118,13 +110,11 @@
 
   mfaViewController.delegate = self;
   [self addChildViewController:mfaViewController];
-  mfaViewController.view.frame = _view.contentContainer.bounds;
-  [_view.contentContainer addSubview:mfaViewController.view];
+  [_view setCurrentContentView:mfaViewController.view];
   [mfaViewController didMoveToParentViewController:self];
 
   if (_currentChildViewController) {
     [_currentChildViewController willMoveToParentViewController:nil];
-    [_currentChildViewController.view removeFromSuperview];
     [_currentChildViewController removeFromParentViewController];
   }
   _currentChildViewController = mfaViewController;
