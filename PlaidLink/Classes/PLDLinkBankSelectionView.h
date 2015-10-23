@@ -34,4 +34,7 @@
 @property(nonatomic) NSArray *institutions;  // NSArray<PLDInstitution *>
 @property(nonatomic) PLDLinkBankSelectionViewCell *selectedCell;
 
+- (void)showLoading;
+- (void)hideLoading;
+
 @end

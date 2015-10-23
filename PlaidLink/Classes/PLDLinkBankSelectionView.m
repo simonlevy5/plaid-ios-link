@@ -50,9 +50,11 @@
 
 @implementation PLDLinkBankSelectionView {
   UICollectionViewFlowLayout *_collectionViewLayout;
+  UIActivityIndicatorView *_spinner;
 }
 
 - (void)setInstitutions:(NSArray *)institutions {
+  [self hideLoading];
   _institutions = institutions;
   [self.collectionView performBatchUpdates:^{
     [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
@@ -62,6 +64,12 @@
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     _institutions = [NSArray array];
+
+    _spinner = [[UIActivityIndicatorView alloc]
+        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _spinner.hidesWhenStopped = YES;
+    _spinner.alpha = 0.0;
+    [self addSubview:_spinner];
     
     _collectionViewLayout = [[PLDLinkBankSelectionLayout alloc] init];
     _collectionViewLayout.minimumLineSpacing = 8;
@@ -83,6 +91,8 @@
 
 - (void)layoutSubviews {
   [super layoutSubviews];
+
+  _spinner.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
   
   _collectionView.frame = self.bounds;
   CGFloat itemWidth = (self.frame.size.width - 24) / 2;
@@ -120,6 +130,22 @@
 - (void)collectionView:(UICollectionView *)collectionView
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   [_delegate bankSelectionView:self didSelectInstitution:_institutions[indexPath.row]];
+}
+
+- (void)showLoading {
+  [_spinner startAnimating];
+  [UIView animateWithDuration:1
+                        delay:0.15
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+    if (_institutions.count == 0) {
+     _spinner.alpha = 1.0;
+    }
+  } completion:nil];
+}
+
+- (void)hideLoading {
+  [_spinner stopAnimating];
 }
 
 @end
