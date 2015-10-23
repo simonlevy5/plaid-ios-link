@@ -27,10 +27,10 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
         [transitionContext viewForKey:UITransitionContextFromViewKey];
     PLDLinkBankContainerView *bankContainerView =
         [transitionContext viewForKey:UITransitionContextToViewKey];
-    [[transitionContext containerView] setBackgroundColor:[UIColor colorWithWhite:0.96 alpha:1]];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
-    bankContainerView.frame = bankSelectionView.frame;
+    bankContainerView.frame =
+        [transitionContext finalFrameForViewController:[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
     [bankContainerView layoutSubviews];
     bankContainerView.backgroundColor = [UIColor clearColor];
 
@@ -52,12 +52,12 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-      bankContainerView.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1];
       [bankContainerView layoutSubviews];
       [animatedTileView layoutSubviews];
       CATransform3D fromViewTransform = CATransform3DIdentity;
       fromViewTransform.m34 = 1.0 / -500;
       bankSelectionView.layer.transform = CATransform3DTranslate(fromViewTransform, 0, 0, -200);
+      bankSelectionView.alpha = 0;
       } completion:^(BOOL finished) {
         [animatedTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
                            cornerRadii:CGSizeMake(0, 0)];
@@ -81,10 +81,10 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
         [transitionContext viewForKey:UITransitionContextToViewKey];
     PLDLinkBankContainerView *bankContainerView =
         [transitionContext viewForKey:UITransitionContextFromViewKey];
-    [[transitionContext containerView] setBackgroundColor:[UIColor colorWithWhite:0.96 alpha:1]];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
-    bankSelectionView.frame = bankContainerView.frame;
+    bankSelectionView.frame =
+        [transitionContext finalFrameForViewController:[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
     [bankSelectionView layoutSubviews];
     bankSelectionView.collectionView.alpha = 0;
     CATransform3D fromViewTransform = CATransform3DIdentity;
@@ -101,14 +101,16 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
       bankContainerView.contentContainer.frame =
-       CGRectOffset(bankContainerView.contentContainer.frame, 0,
-                    -CGRectGetHeight(bankContainerView.contentContainer.bounds));
+          CGRectOffset(bankContainerView.contentContainer.frame, 0,
+                       -CGRectGetHeight(bankContainerView.contentContainer.bounds));
       } completion:^(BOOL finished) {
         bankContainerView.contentContainer.alpha = 0;
         PLDLinkBankTileView *bankTileView = bankContainerView.bankTileView;
         bankTileView.alpha = 0;
+        CGRect adjustedFrame = [bankContainerView convertRect:bankTileView.frame
+                                                       toView:bankSelectionView];
         PLDLinkBankTileView *animatedTileView =
-            [[PLDLinkBankTileView alloc] initWithFrame:bankTileView.frame];
+            [[PLDLinkBankTileView alloc] initWithFrame:adjustedFrame];
         animatedTileView.institution = bankTileView.institution;
         [animatedTileView layoutSubviews];
         [bankSelectionView addSubview:animatedTileView];

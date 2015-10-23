@@ -18,6 +18,8 @@
 - (void)bankSelectionViewController:(PLDLinkBankSelectionViewController *)viewController
            didFinishWithInstitution:(PLDInstitution *)institution;
 
+- (void)bankSelectionViewControllerCancelled:(PLDLinkBankSelectionViewController *)viewController;
+
 @end
 
 @interface PLDLinkBankSelectionViewController : UIViewController

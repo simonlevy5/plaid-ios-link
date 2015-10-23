@@ -48,6 +48,7 @@
   self.title = _institution.name;
   self.navigationItem.backBarButtonItem.action = @selector(didTapBack);
   self.navigationItem.backBarButtonItem.target = self;
+  self.edgesForExtendedLayout = UIRectEdgeNone;
 
   PLDLinkBankLoginViewController *viewController =
       [[PLDLinkBankLoginViewController alloc] initWithInstitution:_institution

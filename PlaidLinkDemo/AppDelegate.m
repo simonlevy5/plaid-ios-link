@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 
+#import "RootViewController.h"
+
 #import "Plaid.h"
-#import "PLDLinkNavigationViewController.h"
 
 @interface AppDelegate ()
 @end
@@ -18,19 +19,16 @@
   UIWindow *_window;
 }
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[Plaid sharedInstance] setClientId:@"test_id"
                                secret:@"test_secret"];
-  
-  UINavigationController *nav =
-      [[PLDLinkNavigationViewController alloc] initWithEnvironment:PlaidEnvironmentTartan
-                                                           product:PlaidProductConnect
-                                                         publicKey:nil];
+
+  UIViewController *vc = [[RootViewController alloc] init];
   
   _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  _window.rootViewController = nav;
+  _window.rootViewController = vc;
   [_window makeKeyAndVisible];
+
   return YES;
 }
 

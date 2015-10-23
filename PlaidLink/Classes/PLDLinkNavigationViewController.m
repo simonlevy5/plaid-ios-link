@@ -12,12 +12,10 @@
 #import "PLDInstitution.h"
 #import "PLDLinkBankMFAContainerViewController.h"
 #import "PLDLinkBankSelectionViewController.h"
-#import "PLDLinkFinishedViewController.h"
 #import "PLDLinkSelectionToLoginAnimator.h"
 
 @interface PLDLinkNavigationViewController()<UINavigationControllerDelegate,
-    PLDLinkBankSelectionViewControllerDelegate, PLDLinkBankMFAContainerViewControllerDelegate,
-    PLDLinkFinishedViewControllerDelegate>
+    PLDLinkBankSelectionViewControllerDelegate, PLDLinkBankMFAContainerViewControllerDelegate>
 @end
 
 @implementation PLDLinkNavigationViewController {
@@ -40,11 +38,16 @@
     _environment = environment;
     _product = product;
     _publicKey = publicKey;
-
-    self.delegate = self;
     _animator = [[PLDLinkSelectionToLoginAnimator alloc] init];
 
-    self.navigationBar.translucent = NO;
+    self.delegate = self;
+
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurView.frame = self.view.frame;
+    [self.view insertSubview:blurView atIndex:0];
+
+    [self.navigationBar setTranslucent:YES];
     [self.navigationBar setTintColor:[UIColor blackColor]];
     [self.navigationBar setShadowImage:[UIImage new]];
     [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -65,17 +68,15 @@
   [self pushViewController:nextViewController animated:YES];
 }
 
+- (void)bankSelectionViewControllerCancelled:(PLDLinkBankSelectionViewController *)viewController {
+  [_linkDelegate linkNavigationControllerCancelled:self];
+}
+
 #pragma mark - PLDLinkBankMFAContainerViewControllerDelegate
 
 - (void)mfaContainerViewController:(PLDLinkBankMFAContainerViewController *)viewController
        didFinishWithAuthentication:(PLDAuthentication *)authentication {
   _accessToken = authentication.accessToken;
-  [self presentFinishedViewController];
-}
-
-#pragma mark - PLDLinkFinishedViewControllerDelegate
-
-- (void)finishedViewControllerDidFinish:(PLDLinkFinishedViewController *)viewController {
   [_linkDelegate linkNavigationContoller:self didFinishWithAccessToken:_accessToken];
 }
 
@@ -91,15 +92,6 @@
     return _animator;
   }
   return nil;
-}
-
-
-#pragma mark - Private
-
-- (void)presentFinishedViewController {
-  PLDLinkFinishedViewController *nextViewController = [[PLDLinkFinishedViewController alloc] init];
-  nextViewController.delegate = self;
-  [self pushViewController:nextViewController animated:YES];
 }
 
 @end

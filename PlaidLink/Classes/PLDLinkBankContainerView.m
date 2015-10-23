@@ -22,6 +22,8 @@ static CGFloat const kDefaultContentHeight = 200;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
+    self.clipsToBounds = YES;
+
     _bankTileView = [[PLDLinkBankTileView alloc] initWithFrame:CGRectZero];
     // Don't add it as a subview yet.
 

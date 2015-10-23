@@ -34,6 +34,13 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.edgesForExtendedLayout = UIRectEdgeNone;
+  UIBarButtonItem *closeButton =
+      [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                    target:self
+                                                    action:@selector(didTapCancel)];
+  self.navigationItem.rightBarButtonItem = closeButton;
+
   [[Plaid sharedInstance] getInstitutionsWithCompletion:^(id response, NSError *error) {
     _bankSelectionView.institutions = response;
   }];
@@ -50,6 +57,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
   self.title = @"";
+}
+
+- (void)didTapCancel {
+  [_delegate bankSelectionViewControllerCancelled:self];
 }
 
 #pragma mark - PLDLinkBankSelectionViewDelegate

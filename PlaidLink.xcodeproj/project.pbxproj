@@ -21,7 +21,6 @@
 		5316B5111BD866F6006F627E /* PLDLinkBankSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B4FC1BD866F6006F627E /* PLDLinkBankSelectionView.m */; settings = {ASSET_TAGS = (); }; };
 		5316B5121BD866F6006F627E /* PLDLinkBankSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B4FE1BD866F6006F627E /* PLDLinkBankSelectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5316B5131BD866F6006F627E /* PLDLinkBankTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B5001BD866F6006F627E /* PLDLinkBankTileView.m */; settings = {ASSET_TAGS = (); }; };
-		5316B5141BD866F6006F627E /* PLDLinkFinishedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B5021BD866F6006F627E /* PLDLinkFinishedViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5316B5151BD866F6006F627E /* PLDLinkNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B5041BD866F6006F627E /* PLDLinkNavigationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5316B5161BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B5061BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.m */; settings = {ASSET_TAGS = (); }; };
 		5316B51F1BD8672B006F627E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B5191BD8672B006F627E /* AppDelegate.m */; settings = {ASSET_TAGS = (); }; };
@@ -32,6 +31,8 @@
 		B18282791BD9560B0032AF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18282781BD9560B0032AF19 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B182827C1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B182827B1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m */; settings = {ASSET_TAGS = (); }; };
 		B182827F1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = B182827E1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.m */; settings = {ASSET_TAGS = (); }; };
+		B18282831BD9EBA70032AF19 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B18282811BD9EBA70032AF19 /* RootViewController.m */; settings = {ASSET_TAGS = (); }; };
+		B18282841BD9EBA70032AF19 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18282821BD9EBA70032AF19 /* RootViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		C0F4E46B175DA32EFB1F370C /* libPods-PlaidLink.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2655A45D9522B3615EE7B18 /* libPods-PlaidLink.a */; };
 /* End PBXBuildFile section */
 
@@ -76,8 +77,6 @@
 		5316B4FE1BD866F6006F627E /* PLDLinkBankSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankSelectionViewController.m; path = Classes/PLDLinkBankSelectionViewController.m; sourceTree = "<group>"; };
 		5316B4FF1BD866F6006F627E /* PLDLinkBankTileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkBankTileView.h; path = Classes/PLDLinkBankTileView.h; sourceTree = "<group>"; };
 		5316B5001BD866F6006F627E /* PLDLinkBankTileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankTileView.m; path = Classes/PLDLinkBankTileView.m; sourceTree = "<group>"; };
-		5316B5011BD866F6006F627E /* PLDLinkFinishedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkFinishedViewController.h; path = Classes/PLDLinkFinishedViewController.h; sourceTree = "<group>"; };
-		5316B5021BD866F6006F627E /* PLDLinkFinishedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkFinishedViewController.m; path = Classes/PLDLinkFinishedViewController.m; sourceTree = "<group>"; };
 		5316B5031BD866F6006F627E /* PLDLinkNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkNavigationViewController.h; path = Classes/PLDLinkNavigationViewController.h; sourceTree = "<group>"; };
 		5316B5041BD866F6006F627E /* PLDLinkNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkNavigationViewController.m; path = Classes/PLDLinkNavigationViewController.m; sourceTree = "<group>"; };
 		5316B5051BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkSelectionToLoginAnimator.h; path = Classes/PLDLinkSelectionToLoginAnimator.h; sourceTree = "<group>"; };
@@ -94,6 +93,9 @@
 		B182827B1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankMFAQuestionOrCodeView.m; path = Classes/PLDLinkBankMFAQuestionOrCodeView.m; sourceTree = "<group>"; };
 		B182827D1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkBankMFAChoiceView.h; path = Classes/PLDLinkBankMFAChoiceView.h; sourceTree = "<group>"; };
 		B182827E1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankMFAChoiceView.m; path = Classes/PLDLinkBankMFAChoiceView.m; sourceTree = "<group>"; };
+		B18282801BD9EBA70032AF19 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = PlaidLinkDemo/RootViewController.h; sourceTree = "<group>"; };
+		B18282811BD9EBA70032AF19 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = PlaidLinkDemo/RootViewController.m; sourceTree = "<group>"; };
+		B18282821BD9EBA70032AF19 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = PlaidLinkDemo/RootViewController.xib; sourceTree = "<group>"; };
 		C2655A45D9522B3615EE7B18 /* libPods-PlaidLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaidLink.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB45B1F18220C68AD92A8C70 /* Pods-PlaidLink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLink/Pods-PlaidLink.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +174,9 @@
 				5316B51A1BD8672B006F627E /* Assets.xcassets */,
 				5316B51B1BD8672B006F627E /* Base.lproj */,
 				5316B51C1BD8672B006F627E /* main.m */,
+				B18282801BD9EBA70032AF19 /* RootViewController.h */,
+				B18282811BD9EBA70032AF19 /* RootViewController.m */,
+				B18282821BD9EBA70032AF19 /* RootViewController.xib */,
 			);
 			name = PlaidLinkDemo;
 			sourceTree = "<group>";
@@ -196,8 +201,6 @@
 				5316B4FA1BD866F6006F627E /* PLDLinkBankMFAViewController.m */,
 				5316B4FD1BD866F6006F627E /* PLDLinkBankSelectionViewController.h */,
 				5316B4FE1BD866F6006F627E /* PLDLinkBankSelectionViewController.m */,
-				5316B5011BD866F6006F627E /* PLDLinkFinishedViewController.h */,
-				5316B5021BD866F6006F627E /* PLDLinkFinishedViewController.m */,
 				5316B5031BD866F6006F627E /* PLDLinkNavigationViewController.h */,
 				5316B5041BD866F6006F627E /* PLDLinkNavigationViewController.m */,
 				5316B5051BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.h */,
@@ -330,6 +333,7 @@
 			files = (
 				5316B5211BD8672B006F627E /* Base.lproj in Resources */,
 				5316B5201BD8672B006F627E /* Assets.xcassets in Resources */,
+				B18282841BD9EBA70032AF19 /* RootViewController.xib in Resources */,
 				B18282791BD9560B0032AF19 /* Assets.xcassets in Resources */,
 				5316B5251BD8689A006F627E /* Info.plist in Resources */,
 			);
@@ -405,9 +409,9 @@
 				5316B5161BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.m in Sources */,
 				5316B50B1BD866F6006F627E /* PLDLinkBankMFAContainerViewController.m in Sources */,
 				5316B5091BD866F6006F627E /* PLDLinkBankLoginViewController.m in Sources */,
+				B18282831BD9EBA70032AF19 /* RootViewController.m in Sources */,
 				5316B5121BD866F6006F627E /* PLDLinkBankSelectionViewController.m in Sources */,
 				5316B50F1BD866F6006F627E /* PLDLinkBankMFASelectionViewController.m in Sources */,
-				5316B5141BD866F6006F627E /* PLDLinkFinishedViewController.m in Sources */,
 				5316B5081BD866F6006F627E /* PLDLinkBankLoginView.m in Sources */,
 				5316B50D1BD866F6006F627E /* PLDLinkBankMFAQuestionOrCodeViewController.m in Sources */,
 				B182827C1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m in Sources */,

@@ -12,6 +12,21 @@
 
 #import "PLDInstitution.h"
 
+@interface PLDLinkBankSelectionLayout : UICollectionViewFlowLayout
+@end
+
+@implementation PLDLinkBankSelectionLayout
+
+- (UICollectionViewLayoutAttributes*)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+  UICollectionViewLayoutAttributes *attributes =
+      [super initialLayoutAttributesForAppearingItemAtIndexPath:itemIndexPath];
+  attributes.alpha = 0;
+  attributes.transform = CGAffineTransformMakeTranslation(0, 300);
+  return attributes;
+}
+
+@end
+
 @implementation PLDLinkBankSelectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -39,21 +54,24 @@
 
 - (void)setInstitutions:(NSArray *)institutions {
   _institutions = institutions;
-  [_collectionView reloadData];
+  [self.collectionView performBatchUpdates:^{
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+  } completion:^(BOOL finished) {}];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     _institutions = [NSArray array];
     
-    _collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+    _collectionViewLayout = [[PLDLinkBankSelectionLayout alloc] init];
     _collectionViewLayout.minimumLineSpacing = 8;
     _collectionViewLayout.minimumInteritemSpacing = 8;
     _collectionViewLayout.sectionInset = UIEdgeInsetsMake(0, 8, 8, 8);
 
     _collectionView = [[UICollectionView alloc] initWithFrame:frame
                                          collectionViewLayout:_collectionViewLayout];
-    _collectionView.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1];
+    _collectionView.backgroundColor = [UIColor clearColor];
+    _collectionView.clipsToBounds = YES;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     [_collectionView registerClass:[PLDLinkBankSelectionViewCell class]

@@ -37,11 +37,17 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  self.edgesForExtendedLayout = UIRectEdgeNone;
   _view.usernameTextField.text = @"plaid_test";
   _view.passwordTextField.text = @"plaid_good";
   [_view.submitButton addTarget:self
                          action:@selector(didTapSubmit)
                forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self setEdgesForExtendedLayout:UIRectEdgeBottom];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
