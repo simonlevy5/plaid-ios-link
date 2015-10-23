@@ -23,6 +23,7 @@
     _spinner = [[UIActivityIndicatorView alloc]
         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     _spinner.hidesWhenStopped = YES;
+    _spinner.alpha = 0.6;
     [self addSubview:_spinner];
 
     _loadingText = @"Sending";
@@ -35,6 +36,7 @@
   _loading = YES;
   _originalText = self.titleLabel.text;
   [self setTitle:_loadingText forState:UIControlStateNormal];
+  [self setTitleColor:[self.tintColor lighterColorForText] forState:UIControlStateNormal];
   [_spinner startAnimating];
   self.backgroundColor = [self.tintColor darkerColorForBackground];
 }
@@ -43,6 +45,7 @@
   self.enabled = YES;
   _loading = NO;
   [self setTitle:_originalText forState:UIControlStateNormal];
+  [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   [_spinner stopAnimating];
   self.backgroundColor = [self.tintColor lighterColorForBackground];
 }
@@ -53,11 +56,13 @@
                                 CGRectGetMidY(self.bounds));
 }
 
--(void) setHighlighted:(BOOL)highlighted {
+-(void)setHighlighted:(BOOL)highlighted {
   if (highlighted || _loading) {
     self.backgroundColor = [self.tintColor darkerColorForBackground];
+    [self setTitleColor:[self.tintColor lighterColorForText] forState:UIControlStateNormal];
   } else {
     self.backgroundColor = [self.tintColor lighterColorForBackground];
+    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   }
   [super setHighlighted:highlighted];
 }

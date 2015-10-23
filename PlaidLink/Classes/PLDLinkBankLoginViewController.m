@@ -69,8 +69,8 @@
                                        type:_institution.type
                                     options:options
                                  completion:^(PLDAuthentication *authentication, id response, NSError *error) {
-                                   [_view.submitButton stopLoading];
                                    if (error) {
+                                     [_view.submitButton stopLoading];
                                      NSLog(@"Error adding user: %@", error);
                                      return;
                                    }
