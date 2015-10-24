@@ -9,6 +9,7 @@
 #import "PLDLinkBankLoginView.h"
 
 #import "PLDLinkStyledButton.h"
+#import "PLDLinkStyledTextField.h"
 #import "UIColor+PLDLinkUIColor.h"
 
 static CGFloat const kInputVerticalPadding = 12.0;
@@ -19,22 +20,15 @@ static CGFloat const kInputHeight = 46.0;
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
-    _usernameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _usernameTextField.textColor = [UIColor whiteColor];
-    _usernameTextField.tintColor = [UIColor whiteColor];
-    _usernameTextField.attributedPlaceholder =
-        [[NSAttributedString alloc] initWithString:@"username"
-                                        attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
+    _usernameTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
+                                                             tintColor:tintColor
+                                                           placeholder:@"username"];
     [self addSubview:_usernameTextField];
 
-    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+    _passwordTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
+                                                             tintColor:tintColor
+                                                           placeholder:@"password"];
     _passwordTextField.secureTextEntry = YES;
-    _passwordTextField.textColor = [UIColor whiteColor];
-    _passwordTextField.tintColor = [UIColor whiteColor];
-    _passwordTextField.attributedPlaceholder =
-        [[NSAttributedString alloc] initWithString:@"password"
-                                        attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
     [self addSubview:_passwordTextField];
     
     _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];

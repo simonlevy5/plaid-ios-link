@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class PLDLinkStyledTextField;
+
 @protocol PLDLinkBankMFAQuestionOrCodeViewDelegate <NSObject>
 
 - (void)inputView:(UIView *)view didTapSubmitWithResponse:(NSString *)response;

@@ -9,6 +9,7 @@
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 
 #import "PLDLinkStyledButton.h"
+#import "PLDLinkStyledTextField.h"
 
 static CGFloat const kInputVerticalPadding = 12.0;
 static CGFloat const kInputHorizontalPadding = 24.0;
@@ -26,11 +27,9 @@ static CGFloat const kInputHeight = 46.0;
     [_inputLabel sizeToFit];
     [self addSubview:_inputLabel];
 
-    _inputTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _inputTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _inputTextField.placeholder = @"placeholder";
-    _inputTextField.textColor = [UIColor whiteColor];
-    _inputTextField.tintColor = [UIColor whiteColor];
+    _inputTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
+                                                          tintColor:tintColor
+                                                        placeholder:@""];
     [self addSubview:_inputTextField];
 
     _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:self.tintColor];
