@@ -12,6 +12,7 @@
 
 - (UIColor *)lighterColorForBackground;
 - (UIColor *)lighterColorForText;
+- (UIColor *)lighterColorForLine;
 
 - (UIColor *)darkerColorForBackground;
 - (UIColor *)darkerColorForText;

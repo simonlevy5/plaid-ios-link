@@ -14,7 +14,8 @@
 
 static CGFloat const kInputVerticalPadding = 12.0;
 static CGFloat const kInputHorizontalPadding = 24.0;
-static CGFloat const kInputHeight = 46.0;
+static CGFloat const kTextFieldHeight = 36.0;
+static CGFloat const kButtonHeight = 46.0;
 
 @implementation PLDLinkBankLoginView
 
@@ -55,24 +56,24 @@ static CGFloat const kInputHeight = 46.0;
   _usernameTextField.frame = CGRectMake(kInputHorizontalPadding,
                                         kInputVerticalPadding,
                                         bounds.size.width - kInputHorizontalPadding * 2,
-                                        kInputHeight);
+                                        kTextFieldHeight);
   _passwordTextField.frame = CGRectMake(kInputHorizontalPadding,
-                                        CGRectGetMaxY(_usernameTextField.frame),
+                                        CGRectGetMaxY(_usernameTextField.frame) + kInputVerticalPadding,
                                         bounds.size.width - kInputHorizontalPadding * 2,
-                                        kInputHeight);
+                                        kTextFieldHeight);
   if (_pinTextField) {
     _pinTextField.frame = CGRectMake(kInputHorizontalPadding,
                                      CGRectGetMaxY(_passwordTextField.frame) + kInputVerticalPadding,
                                      bounds.size.width - kInputHorizontalPadding * 2,
-                                     kInputHeight);
+                                     kTextFieldHeight);
   }
 
   CGFloat submitButtonY = _isPinRequired ? CGRectGetMaxY(_pinTextField.frame) + kInputVerticalPadding :
       CGRectGetMaxY(_passwordTextField.frame) + kInputVerticalPadding;
   _submitButton.frame = CGRectMake(kInputHorizontalPadding,
-                                   submitButtonY,
+                                   submitButtonY + kInputVerticalPadding,
                                    bounds.size.width - kInputHorizontalPadding * 2,
-                                   kInputHeight);
+                                   kButtonHeight);
 }
 
 - (void)sizeToFit {

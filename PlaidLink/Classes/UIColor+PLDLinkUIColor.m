@@ -18,12 +18,16 @@
   return [self alterColorWithDeltaSaturation:-0.3 deltaBrightness:0.3];
 }
 
+- (UIColor *)lighterColorForLine {
+  return [self alterColorWithDeltaSaturation:-0.1 deltaBrightness:0.1];
+}
+
 - (UIColor *)darkerColorForBackground {
-  return [self alterColorWithDeltaSaturation:0.15 deltaBrightness:-0.15];
+  return [self alterColorWithDeltaSaturation:0.12 deltaBrightness:-0.12];
 }
 
 - (UIColor *)darkerColorForText {
-  return [self alterColorWithDeltaSaturation:0.3 deltaBrightness:-0.3];
+  return [self alterColorWithDeltaSaturation:0.24 deltaBrightness:-0.24];
 }
 
 #pragma mark Private

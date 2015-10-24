@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class PLDLinkStyledTextField;
+@class PLDLinkBankMFAExplainerView;
 
 @protocol PLDLinkBankMFAQuestionOrCodeViewDelegate <NSObject>
 
@@ -21,6 +22,7 @@
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
 
 @property(nonatomic, weak) id<PLDLinkBankMFAQuestionOrCodeViewDelegate> delegate;
+@property(nonatomic, readonly) PLDLinkBankMFAExplainerView *explainer;
 @property(nonatomic, readonly) UILabel *inputLabel;
 @property(nonatomic, readonly) UITextField *inputTextField;
 @property(nonatomic, readonly) UIButton *submitButton;

@@ -8,10 +8,9 @@
 
 #import "PLDLinkBankMFAExplainerView.h"
 
-static CGFloat const kPadding = 20.0;
+#import "UIColor+PLDLinkUIColor.h"
 
 @implementation PLDLinkBankMFAExplainerView {
-  UIImageView *_explainerIcon;
   UILabel *_explainerLabel;
 }
 
@@ -24,12 +23,14 @@ static CGFloat const kPadding = 20.0;
   [self setNeedsLayout];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
-    _explainerIcon = [[UIImageView alloc] initWithImage:nil];
-    [self addSubview:_explainerIcon];
-    
+    self.tintColor = tintColor;
     _explainerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_explainerLabel setTextAlignment:NSTextAlignmentCenter];
+    [_explainerLabel setFont:[UIFont systemFontOfSize:11]];
+    [_explainerLabel setTextColor:[UIColor whiteColor]];
+    [_explainerLabel setBackgroundColor:[self.tintColor darkerColorForBackground]];
     [self addSubview:_explainerLabel];
   }
   return self;
@@ -37,12 +38,7 @@ static CGFloat const kPadding = 20.0;
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  
-  [_explainerLabel sizeToFit];
-  CGRect labelFrame = _explainerLabel.frame;
-  labelFrame.origin.x = self.bounds.size.width - labelFrame.size.width - kPadding;
-  labelFrame.origin.y = self.bounds.size.height / 2 - labelFrame.size.height / 2;
-  _explainerLabel.frame = labelFrame;
+  _explainerLabel.frame = self.bounds;
 }
 
 @end

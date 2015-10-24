@@ -12,4 +12,6 @@
 
 @property(nonatomic, assign) NSString *explainerText;
 
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
+
 @end

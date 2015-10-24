@@ -28,6 +28,21 @@
   return self;
 }
 
+- (void)drawRect:(CGRect)rect {
+  [super drawRect:rect];
+
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  CGFloat lineHeight = 1.0;
+  CGColorRef lineColor = [_containerColor lighterColorForLine].CGColor;
+  CGContextSetFillColorWithColor(context, lineColor);
+  CGContextMoveToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect) - lineHeight);
+  CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect) - lineHeight);
+  CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+  CGContextAddLineToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect));
+  CGContextAddLineToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect) - lineHeight);
+  CGContextFillPath(context);
+}
+
 - (void)setPlaceholder:(NSString *)placeholder {
   self.attributedPlaceholder = [[NSMutableAttributedString alloc] initWithString:placeholder
       attributes:@{NSForegroundColorAttributeName:[_containerColor lighterColorForText]}];

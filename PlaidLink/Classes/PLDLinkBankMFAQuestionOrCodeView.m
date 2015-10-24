@@ -8,18 +8,25 @@
 
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 
+#import "PLDLinkBankMFAExplainerView.h"
+
 #import "PLDLinkStyledButton.h"
 #import "PLDLinkStyledTextField.h"
 
 static CGFloat const kInputVerticalPadding = 12.0;
 static CGFloat const kInputHorizontalPadding = 24.0;
-static CGFloat const kInputHeight = 46.0;
+static CGFloat const kTextFieldHeight = 36.0;
+static CGFloat const kButtonHeight = 46.0;
 
 @implementation PLDLinkBankMFAQuestionOrCodeView
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
     self.tintColor = tintColor;
+
+    _explainer = [[PLDLinkBankMFAExplainerView alloc] initWithFrame:CGRectZero tintColor:tintColor];
+    [_explainer setExplainerText:@"SECURITY QUESTIONS"];
+    [self addSubview:_explainer];
 
     _inputLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _inputLabel.textColor = [UIColor whiteColor];
@@ -55,18 +62,20 @@ static CGFloat const kInputHeight = 46.0;
 
   CGRect bounds = self.bounds;
   CGFloat paddedWidth = bounds.size.width - kInputHorizontalPadding * 2;
+
+  _explainer.frame = CGRectMake(0, 0, bounds.size.width, 24);
   _inputLabel.frame = CGRectMake(kInputHorizontalPadding,
-                                 kInputVerticalPadding,
+                                 CGRectGetMaxY(_explainer.frame) + kInputVerticalPadding,
                                  paddedWidth,
-                                 kInputHeight);
+                                 kTextFieldHeight);
   _inputTextField.frame = CGRectMake(kInputHorizontalPadding,
                                      CGRectGetMaxY(_inputLabel.frame),
                                      paddedWidth,
-                                     kInputHeight);
+                                     kTextFieldHeight);
   _submitButton.frame = CGRectMake(kInputHorizontalPadding,
-                                   CGRectGetMaxY(_inputTextField.frame) + kInputVerticalPadding,
+                                   CGRectGetMaxY(_inputTextField.frame) + kInputVerticalPadding * 2,
                                    paddedWidth,
-                                   kInputHeight);
+                                   kButtonHeight);
 }
 
 - (void)sizeToFit {
