@@ -47,13 +47,8 @@ static CGFloat const kInputHeight = 46.0;
                                         attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
     [self addSubview:_pinTextField];
 
-    _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero];
-    _submitButton.tintColor = tintColor;
-    _submitButton.backgroundColor = [tintColor lighterColorForBackground];
-    _submitButton.layer.cornerRadius = 8.0;
-    _submitButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:tintColor];
     [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
-    [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:_submitButton];
   }
   return self;

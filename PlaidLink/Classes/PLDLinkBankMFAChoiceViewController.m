@@ -9,6 +9,8 @@
 #import "PLDLinkBankMFAChoiceViewController.h"
 
 #import "PLDAuthentication.h"
+#import "PLDInstitution.h"
+
 #import "PLDLinkBankContainerView.h"
 #import "PLDLinkBankMFAChoiceView.h"
 
@@ -20,7 +22,8 @@
 }
 
 - (void)loadView {
-  _view = [[PLDLinkBankMFAChoiceView alloc] initWithFrame:CGRectZero];
+  _view = [[PLDLinkBankMFAChoiceView alloc] initWithFrame:CGRectZero
+                                                tintColor:self.institution.backgroundColor];
   _view.choices = self.authentication.mfa.data;
   _view.delegate = self;
   self.view = _view;

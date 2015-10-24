@@ -8,14 +8,18 @@
 
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 
+#import "PLDLinkStyledButton.h"
+
 static CGFloat const kInputVerticalPadding = 12.0;
 static CGFloat const kInputHorizontalPadding = 24.0;
 static CGFloat const kInputHeight = 46.0;
 
 @implementation PLDLinkBankMFAQuestionOrCodeView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
+    self.tintColor = tintColor;
+
     _inputLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _inputLabel.textColor = [UIColor whiteColor];
     _inputLabel.text = @"InputLabel";
@@ -29,10 +33,7 @@ static CGFloat const kInputHeight = 46.0;
     _inputTextField.tintColor = [UIColor whiteColor];
     [self addSubview:_inputTextField];
 
-    _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    _submitButton.layer.cornerRadius = 8.0;
-    _submitButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
-    [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:self.tintColor];
     [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
     [_submitButton addTarget:self
                       action:@selector(didTapSubmit)

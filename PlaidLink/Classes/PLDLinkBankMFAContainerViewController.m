@@ -95,16 +95,20 @@
   PLDLinkBankMFAViewController *mfaViewController = nil;
   if (mfaType == kPLDMFATypeList) {
     mfaViewController =
-        [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:authentication];
+        [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:authentication
+                                                               institution:_institution];
   } else if (mfaType == kPLDMFATypeCode) {
     mfaViewController =
-        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:authentication];
+        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:authentication
+                                                                       institution:_institution];
   } else if (mfaType == kPLDMFATypeSelection) {
     mfaViewController =
-        [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:authentication];
+        [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:authentication
+                                                                   institution:_institution];
   } else if (mfaType == kPLDMFATypeQuestion) {
     mfaViewController =
-        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:authentication];
+        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:authentication
+                                                                       institution:_institution];
   } else {
     NSAssert(NO, @"Invalid mfa type");
   }

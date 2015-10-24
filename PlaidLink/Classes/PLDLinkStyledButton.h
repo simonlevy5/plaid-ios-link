@@ -10,6 +10,8 @@
 
 @interface PLDLinkStyledButton : UIButton
 
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
+
 - (void)startLoading;
 - (void)stopLoading;
 

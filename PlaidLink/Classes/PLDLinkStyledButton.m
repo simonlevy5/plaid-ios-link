@@ -17,8 +17,13 @@
   BOOL _loading;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
+    self.tintColor = tintColor;
+    self.backgroundColor = [tintColor lighterColorForBackground];
+    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.layer.cornerRadius = 6.0;
+
     _loading = NO;
     _spinner = [[UIActivityIndicatorView alloc]
         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];

@@ -9,6 +9,8 @@
 #import "PLDLinkBankMFAQuestionOrCodeViewController.h"
 
 #import "PLDAuthentication.h"
+#import "PLDInstitution.h"
+
 #import "PLDLinkBankContainerView.h"
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 
@@ -20,7 +22,8 @@
 }
 
 - (void)loadView {
-  _view = [[PLDLinkBankMFAQuestionOrCodeView alloc] initWithFrame:CGRectZero];
+  _view = [[PLDLinkBankMFAQuestionOrCodeView alloc] initWithFrame:CGRectZero
+                                                        tintColor:self.institution.backgroundColor];
   self.view = _view;
 }
 

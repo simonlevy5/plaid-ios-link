@@ -19,8 +19,9 @@
   NSArray *_selections;
 }
 
-- (instancetype)initWithAuthentication:(PLDAuthentication *)authentication {
-  if (self = [super initWithAuthentication:authentication]) {
+- (instancetype)initWithAuthentication:(PLDAuthentication *)authentication
+                           institution:(PLDInstitution *)institution {
+  if (self = [super initWithAuthentication:authentication institution:institution]) {
     _answers = [NSMutableArray array];
     _selections = authentication.mfa.data;
     for (PLDMFAAuthenticationSelection *selection in _selections) {

@@ -22,9 +22,11 @@
   PLDLinkBankContainerView *_view;
 }
 
-- (instancetype)initWithAuthentication:(PLDAuthentication *)authentication {
+- (instancetype)initWithAuthentication:(PLDAuthentication *)authentication
+                           institution:(PLDInstitution *)institution {
   if (self = [super init]) {
     _authentication = authentication;
+    _institution = institution;
   }
   return self;
 }
@@ -79,17 +81,17 @@
   PLDMFAType mfaType = _authentication.mfa.type;
   PLDLinkBankMFAViewController *mfaViewController = nil;
   if (mfaType == kPLDMFATypeList) {
-    mfaViewController =
-    [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:_authentication];
+    mfaViewController = [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:_authentication
+                                                                               institution:_institution];
   } else if (mfaType == kPLDMFATypeCode) {
-    mfaViewController =
-    [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication];
+    mfaViewController = [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication
+                                                                                       institution:_institution];
   } else if (mfaType == kPLDMFATypeSelection) {
-    mfaViewController =
-    [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:_authentication];
+    mfaViewController = [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:_authentication
+                                                                                   institution:_institution];
   } else if (mfaType == kPLDMFATypeQuestion) {
-    mfaViewController =
-    [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication];
+    mfaViewController = [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication
+                                                                                       institution:_institution];
   } else {
     NSAssert(NO, @"Invalid mfa type");
   }

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class PLDAuthentication;
+@class PLDInstitution;
 @class PLDLinkBankMFAViewController;
 
 @protocol PLDLinkBankMFAViewControllerDelegate <NSObject>
@@ -22,8 +23,10 @@
 
 @property(nonatomic, weak) id<PLDLinkBankMFAViewControllerDelegate> delegate;
 @property(nonatomic, readonly) PLDAuthentication *authentication;
+@property(nonatomic, readonly) PLDInstitution *institution;
 
-- (instancetype)initWithAuthentication:(PLDAuthentication *)authentication;
+- (instancetype)initWithAuthentication:(PLDAuthentication *)authentication
+                           institution:(PLDInstitution *)institution;
 
 - (void)submitMFAStepResponse:(id)response
                       options:(NSDictionary *)options

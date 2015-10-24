@@ -16,6 +16,8 @@
 
 @interface PLDLinkBankMFAQuestionOrCodeView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
+
 @property(nonatomic, weak) id<PLDLinkBankMFAQuestionOrCodeViewDelegate> delegate;
 @property(nonatomic, readonly) UILabel *inputLabel;
 @property(nonatomic, readonly) UITextField *inputTextField;

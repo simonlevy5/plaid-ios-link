@@ -10,6 +10,8 @@
 
 #import "PLDAuthentication.h"
 
+#import "PLDLinkStyledButton.h"
+
 static CGFloat const kButtonHeight = 50.0;
 static CGFloat const kPadding = 20.0;
 
@@ -24,8 +26,8 @@ static CGFloat const kPadding = 20.0;
     [_choiceButtons removeAllObjects];
   }
   for (PLDMFAAuthenticationChoice *choice in _choices) {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
-    button.backgroundColor = [UIColor grayColor];
+    PLDLinkStyledButton *button = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero
+                                                                   tintColor:self.tintColor];
     [button setTitle:choice.displayText forState:UIControlStateNormal];
     [button addTarget:self
                action:@selector(didTapChoiceButton:)
@@ -35,8 +37,9 @@ static CGFloat const kPadding = 20.0;
   }
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor{
   if (self = [super initWithFrame:frame]) {
+    self.tintColor = tintColor;
     _choiceButtons = [NSMutableArray array];
   }
   return self;

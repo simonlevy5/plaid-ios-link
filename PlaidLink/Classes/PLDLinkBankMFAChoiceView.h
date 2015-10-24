@@ -16,6 +16,8 @@
 
 @interface PLDLinkBankMFAChoiceView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
+
 @property(nonatomic, weak) id<PLDLinkBankMFAChoiceViewDelegate> delegate;
 @property(nonatomic) NSArray *choices;
 
