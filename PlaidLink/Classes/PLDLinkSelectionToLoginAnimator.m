@@ -32,7 +32,6 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
     bankContainerView.frame =
         [transitionContext finalFrameForViewController:[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
     [bankContainerView layoutSubviews];
-    bankContainerView.backgroundColor = [UIColor clearColor];
 
     PLDLinkBankSelectionViewCell *selectedCell = [bankSelectionView selectedCell];
     PLDLinkBankTileView *tileView = selectedCell.tileView;
@@ -60,7 +59,7 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
       bankSelectionView.alpha = 0;
       } completion:^(BOOL finished) {
         [animatedTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
-                           cornerRadii:CGSizeMake(0, 0)];
+                           cornerRadii:CGSizeMake(8, 8)];
         [UIView animateWithDuration:kInputContainerAnimationDuration
                              delay:0
                            options:UIViewAnimationOptionCurveEaseOut
@@ -75,7 +74,6 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
           }];
     }];
-
   } else {
     PLDLinkBankSelectionView *bankSelectionView =
         [transitionContext viewForKey:UITransitionContextToViewKey];

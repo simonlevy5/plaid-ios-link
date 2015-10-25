@@ -10,7 +10,7 @@
 
 @class PLDLinkBankTileView;
 
-@interface PLDLinkBankContainerView : UIView
+@interface PLDLinkBankContainerView : UIScrollView
 
 @property(nonatomic) PLDLinkBankTileView *bankTileView;
 @property(nonatomic, assign) NSString *explainerText;

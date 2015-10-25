@@ -22,7 +22,8 @@ static CGFloat const kDefaultContentHeight = 200;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    self.clipsToBounds = YES;
+    self.clipsToBounds = NO;
+    self.alwaysBounceVertical = YES;
 
     _bankTileView = [[PLDLinkBankTileView alloc] initWithFrame:CGRectZero];
     // Don't add it as a subview yet.
@@ -61,6 +62,7 @@ static CGFloat const kDefaultContentHeight = 200;
   [super layoutSubviews];
 
   CGRect bounds = self.bounds;
+
   _bankTileView.frame =
       CGRectMake(kContentPadding, 0, bounds.size.width - kContentPadding * 2, bounds.size.height / 4);
   _contentContainer.frame = CGRectMake(kContentPadding,
@@ -83,6 +85,8 @@ static CGFloat const kDefaultContentHeight = 200;
   maskLayer.frame = _contentContainer.bounds;
   maskLayer.path  = path.CGPath;
   _contentContainer.layer.mask = maskLayer;
+
+  self.contentSize = CGSizeMake(bounds.size.width, CGRectGetMaxY(_contentContainer.frame));
 }
 
 - (void)animateCurrentContentOutWithCompletion:(void (^ __nullable)(BOOL finished))completion {
