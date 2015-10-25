@@ -18,6 +18,7 @@ static CGFloat const kDefaultContentHeight = 200;
 
 @implementation PLDLinkBankContainerView {
   UIView *_currentContent;
+  CAShapeLayer * _maskBehindTile;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -30,6 +31,8 @@ static CGFloat const kDefaultContentHeight = 200;
 
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
     [self addSubview:_contentContainer];
+
+    _maskBehindTile = [[CAShapeLayer alloc] init];
   }
   return self;
 }
@@ -85,6 +88,17 @@ static CGFloat const kDefaultContentHeight = 200;
   maskLayer.frame = _contentContainer.bounds;
   maskLayer.path  = path.CGPath;
   _contentContainer.layer.mask = maskLayer;
+
+  if (!CGAffineTransformEqualToTransform(_contentContainer.transform, CGAffineTransformIdentity)) {
+    _maskBehindTile.frame = self.frame;
+    _maskBehindTile.path =
+        [UIBezierPath bezierPathWithRoundedRect:CGRectMake(kContentPadding,
+                                                           0,
+                                                           self.bounds.size.width - 2 * kContentPadding,
+                                                           self.bounds.size.height)
+                                   cornerRadius:8.0].CGPath;
+    self.layer.mask = _maskBehindTile;
+  }
 
   self.contentSize = CGSizeMake(bounds.size.width, CGRectGetMaxY(_contentContainer.frame));
 }
