@@ -18,6 +18,7 @@
 #import "PLDLinkBankMFASelectionsViewController.h"
 
 static const CGFloat kTopEdgeInset = 64.0f;
+static const CGFloat kKeyboardPadding = 8.0f;
 
 @interface PLDLinkBankMFAContainerViewController ()<UIScrollViewDelegate,
     PLDLinkBankLoginViewControllerDelegate, PLDLinkBankMFAViewControllerDelegate>
@@ -51,11 +52,12 @@ static const CGFloat kTopEdgeInset = 64.0f;
   [super viewDidLoad];
 
   self.title = _institution.name;
-  self.navigationItem.backBarButtonItem.action = @selector(didTapBack);
-  self.navigationItem.backBarButtonItem.target = self;
   self.edgesForExtendedLayout = UIRectEdgeAll;
   self.automaticallyAdjustsScrollViewInsets = NO;
-  [_view setContentInset:UIEdgeInsetsMake(kTopEdgeInset, 0, 0, 0)];
+  [_view setContentInset:UIEdgeInsetsMake(kTopEdgeInset, 0, kKeyboardPadding, 0)];
+
+  self.navigationItem.backBarButtonItem.action = @selector(didTapBack);
+  self.navigationItem.backBarButtonItem.target = self;
 
   PLDLinkBankLoginViewController *viewController =
       [[PLDLinkBankLoginViewController alloc] initWithInstitution:_institution
@@ -67,12 +69,70 @@ static const CGFloat kTopEdgeInset = 64.0f;
   _currentChildViewController = viewController;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+  [notificationCenter addObserver:self
+                         selector:@selector(keyboardWillShow:)
+                             name:UIKeyboardWillShowNotification
+                           object:nil];
+  [notificationCenter addObserver:self
+                         selector:@selector(keyboardWillChangeFrame:)
+                             name:UIKeyboardWillChangeFrameNotification
+                           object:nil];
+  [notificationCenter addObserver:self
+                         selector:@selector(keyboardWillHide:)
+                             name:UIKeyboardWillHideNotification
+                           object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (BOOL)prefersStatusBarHidden {
   return _shouldHideStatusBar;
 }
 
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
   return UIStatusBarAnimationSlide;
+}
+
+#pragma mark - Keyboard management
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+  CGRect keyboardFrame = [notification.userInfo [UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  UIEdgeInsets currentInsets = _view.contentInset;
+  currentInsets.bottom = keyboardFrame.size.height + kKeyboardPadding;
+  [_view setContentInset:currentInsets];
+  CGFloat realViewHeight = _view.bounds.size.height - (currentInsets.bottom + currentInsets.top);
+  CGFloat contentDelta = _view.contentSize.height - realViewHeight;
+  if (contentDelta > 0) {
+    _draggingScrollView = YES;
+    [UIView animateWithDuration:0.25
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                       [_view setContentOffset:CGPointMake(0, -kTopEdgeInset + contentDelta)];
+                     } completion:^(BOOL finished) {
+                       _draggingScrollView = NO;
+                     }];
+  }
+}
+
+- (void)keyboardWillChangeFrame:(NSNotification *)notification {
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+  UIEdgeInsets currentInsets = _view.contentInset;
+  currentInsets.bottom = kKeyboardPadding;
+  [_view setContentInset:currentInsets];
+  _draggingScrollView = YES;
+  [UIView animateWithDuration:0.25
+                        delay:0
+                      options:UIViewAnimationOptionCurveEaseOut
+                   animations:^{
+                     [_view setContentOffset:CGPointMake(0, -kTopEdgeInset)];
+                   } completion:nil];
 }
 
 #pragma mark - PLDLinkBankLoginViewControllerDelegate
@@ -139,6 +199,12 @@ static const CGFloat kTopEdgeInset = 64.0f;
       [self setNeedsStatusBarAppearanceUpdate];
     }];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+  } else if (targetContentOffset->y > - 22) {
+    _shouldHideStatusBar = YES;
+    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
+      [self setNeedsStatusBarAppearanceUpdate];
+    }];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
   }
 }
 
