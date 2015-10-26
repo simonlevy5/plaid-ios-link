@@ -17,6 +17,8 @@
 #import "PLDLinkBankMFAQuestionOrCodeViewController.h"
 #import "PLDLinkBankMFASelectionsViewController.h"
 
+static const CGFloat kTopEdgeInset = 64.0f;
+
 @interface PLDLinkBankMFAContainerViewController ()<UIScrollViewDelegate,
     PLDLinkBankLoginViewControllerDelegate, PLDLinkBankMFAViewControllerDelegate>
 @end
@@ -53,7 +55,7 @@
   self.navigationItem.backBarButtonItem.target = self;
   self.edgesForExtendedLayout = UIRectEdgeAll;
   self.automaticallyAdjustsScrollViewInsets = NO;
-  [_view setContentInset:UIEdgeInsetsMake(64, 0, 0, 0)];
+  [_view setContentInset:UIEdgeInsetsMake(kTopEdgeInset, 0, 0, 0)];
 
   PLDLinkBankLoginViewController *viewController =
       [[PLDLinkBankLoginViewController alloc] initWithInstitution:_institution
@@ -115,10 +117,10 @@
     }];
   }
 
-  if (scrollView.contentOffset.y > -62 && !self.navigationController.isNavigationBarHidden) {
+  if (scrollView.contentOffset.y > -kTopEdgeInset && !self.navigationController.isNavigationBarHidden) {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
-  } else if (scrollView.contentOffset.y < -63 && self.navigationController.isNavigationBarHidden) {
+  } else if (scrollView.contentOffset.y <= -kTopEdgeInset && self.navigationController.isNavigationBarHidden) {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
   }
 }
@@ -131,11 +133,13 @@
                      withVelocity:(CGPoint)velocity
               targetContentOffset:(inout CGPoint *)targetContentOffset {
   _draggingScrollView = NO;
-  _shouldHideStatusBar = NO;
-  [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
-    [self setNeedsStatusBarAppearanceUpdate];
-  }];
-  [self.navigationController setNavigationBarHidden:NO animated:YES];
+  if (targetContentOffset->y == -kTopEdgeInset) {
+    _shouldHideStatusBar = NO;
+    [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
+      [self setNeedsStatusBarAppearanceUpdate];
+    }];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+  }
 }
 
 #pragma mark - Private
