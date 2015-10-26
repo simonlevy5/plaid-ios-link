@@ -25,6 +25,7 @@ static CGFloat const kDefaultContentHeight = 200;
   if (self = [super initWithFrame:frame]) {
     self.clipsToBounds = NO;
     self.alwaysBounceVertical = YES;
+    self.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 
     _bankTileView = [[PLDLinkBankTileView alloc] initWithFrame:CGRectZero];
     // Don't add it as a subview yet.

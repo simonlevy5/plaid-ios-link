@@ -123,10 +123,10 @@ static const CGFloat kKeyboardPadding = 8.0f;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+  _draggingScrollView = YES;
   UIEdgeInsets currentInsets = _view.contentInset;
   currentInsets.bottom = kKeyboardPadding;
   [_view setContentInset:currentInsets];
-  _draggingScrollView = YES;
   [UIView animateWithDuration:0.25
                         delay:0
                       options:UIViewAnimationOptionCurveEaseOut
