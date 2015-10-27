@@ -14,6 +14,7 @@
 #import "PLDLinkBankContainerView.h"
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 #import "PLDLinkStyledButton.h"
+#import "PLDLinkBankMFAExplainerView.h"
 
 @interface PLDLinkBankMFAQuestionOrCodeViewController ()<PLDLinkBankMFAQuestionOrCodeViewDelegate>
 @end
@@ -35,9 +36,11 @@
   if (self.authentication.mfa.type == kPLDMFATypeCode) {
     _view.inputLabel.text = self.authentication.mfa.data;
     _view.inputTextField.placeholder = @"Code";
+    [_view.explainer setExplainerText:@"ENTER THE SECURITY CODE"];
   } else if (self.authentication.mfa.type == kPLDMFATypeQuestion) {
     _view.inputLabel.text = self.authentication.mfa.data;
     _view.inputTextField.placeholder = @"Answer";
+    [_view.explainer setExplainerText:@"SECURITY QUESTIONS"];
   } else {
     NSAssert(NO, @"Inproper mfa type for PLDLinkBankMFAQuestionOrCodeViewController");
   }

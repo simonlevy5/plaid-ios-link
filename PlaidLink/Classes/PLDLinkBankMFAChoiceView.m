@@ -13,9 +13,10 @@
 #import "PLDLinkBankMFAExplainerView.h"
 #import "PLDLinkStyledButton.h"
 
-static CGFloat const kButtonHeight = 50.0;
-static CGFloat const kPadding = 20.0;
 static CGFloat const kExplainerHeight = 24.0;
+static CGFloat const kInputVerticalPadding = 16.0;
+static CGFloat const kInputHorizontalPadding = 24.0;
+static CGFloat const kButtonHeight = 46.0;
 
 @implementation PLDLinkBankMFAChoiceView {
   NSMutableArray *_choiceButtons;
@@ -27,13 +28,14 @@ static CGFloat const kExplainerHeight = 24.0;
     _choiceButtons = [NSMutableArray array];
 
     _explainer = [[PLDLinkBankMFAExplainerView alloc] initWithFrame:CGRectZero tintColor:tintColor];
-    [_explainer setExplainerText:@"SEND SECURITY CODE"];
+    [_explainer setExplainerText:@"SECURITY CODE"];
     [self addSubview:_explainer];
 
     _inputLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _inputLabel.textColor = [UIColor whiteColor];
-    _inputLabel.text = @"Where would you like to send it?";
-    [_inputLabel sizeToFit];
+    _inputLabel.text = @"Where would you like to send your security code?";
+    _inputLabel.numberOfLines = 0;
+    _inputLabel.font = [UIFont systemFontOfSize:16];
     [self addSubview:_inputLabel];
   }
   return self;
@@ -67,17 +69,17 @@ static CGFloat const kExplainerHeight = 24.0;
   [super layoutSubviews];
 
   _explainer.frame = CGRectMake(0, 0, self.bounds.size.width, kExplainerHeight);
-  _inputLabel.frame = CGRectMake(kPadding,
-                                 CGRectGetMaxY(_explainer.frame) + kPadding,
-                                 self.bounds.size.width - 2 * kPadding,
+  _inputLabel.frame = CGRectMake(kInputHorizontalPadding,
+                                 CGRectGetMaxY(_explainer.frame) + kInputVerticalPadding,
+                                 self.bounds.size.width - 2 * kInputHorizontalPadding,
                                  0);
   [_inputLabel sizeToFit];
 
-  CGFloat buttonY = CGRectGetMaxY(_inputLabel.frame) + kPadding;
-  CGFloat buttonWidth = self.bounds.size.width - kPadding * 2;
+  CGFloat buttonY = CGRectGetMaxY(_inputLabel.frame) + kInputVerticalPadding + 4;
+  CGFloat buttonWidth = self.bounds.size.width - kInputHorizontalPadding * 2;
   for (UIButton *button in _choiceButtons) {
-    button.frame = CGRectMake(kPadding, buttonY, buttonWidth, kButtonHeight);
-    buttonY += kButtonHeight + kPadding / 2;
+    button.frame = CGRectMake(kInputHorizontalPadding, buttonY, buttonWidth, kButtonHeight);
+    buttonY += kButtonHeight + kInputVerticalPadding;
   }
 }
 
@@ -86,7 +88,7 @@ static CGFloat const kExplainerHeight = 24.0;
 
   CGRect frame = self.frame;
   UIButton *lastButton = _choiceButtons.lastObject;
-  frame.size.height = CGRectGetMaxY(lastButton.frame) + kPadding;
+  frame.size.height = CGRectGetMaxY(lastButton.frame) + kInputHorizontalPadding;
   self.frame = frame;
 }
 

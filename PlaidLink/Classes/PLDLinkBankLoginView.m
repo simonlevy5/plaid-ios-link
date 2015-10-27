@@ -46,7 +46,7 @@ static CGFloat const kButtonHeight = 46.0;
     [self addSubview:_pinTextField];
 
     _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:tintColor];
-    [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
+    [_submitButton setTitle:@"Log in" forState:UIControlStateNormal];
     [self addSubview:_submitButton];
   }
   return self;
@@ -83,7 +83,7 @@ static CGFloat const kButtonHeight = 46.0;
   [self layoutSubviews];
 
   CGRect frame = self.frame;
-  frame.size.height = CGRectGetMaxY(_submitButton.frame) + kInputVerticalPadding * 2;
+  frame.size.height = CGRectGetMaxY(_submitButton.frame) + kInputHorizontalPadding;
   self.frame = frame;
 }
 
