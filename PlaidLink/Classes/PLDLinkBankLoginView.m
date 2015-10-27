@@ -24,16 +24,19 @@ static CGFloat const kButtonHeight = 46.0;
     _usernameTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                              tintColor:tintColor
                                                            placeholder:@"username"];
+    _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self addSubview:_usernameTextField];
 
     _passwordTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                              tintColor:tintColor
                                                            placeholder:@"password"];
     _passwordTextField.secureTextEntry = YES;
+    _passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self addSubview:_passwordTextField];
     
     _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];
     _pinTextField.secureTextEntry = YES;
+    _pinTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _pinTextField.hidden = YES;
     _pinTextField.textColor = [UIColor whiteColor];
     _pinTextField.tintColor = [UIColor whiteColor];

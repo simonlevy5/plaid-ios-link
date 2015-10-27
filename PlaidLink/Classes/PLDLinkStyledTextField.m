@@ -10,6 +10,9 @@
 
 #import "UIColor+PLDLinkUIColor.h"
 
+static CGFloat const kHorizontalInset = 2.0;
+static CGFloat const kLineHeight = 1.0;
+
 @implementation PLDLinkStyledTextField {
   UIColor *_containerColor;
 }
@@ -32,20 +35,27 @@
   [super drawRect:rect];
 
   CGContextRef context = UIGraphicsGetCurrentContext();
-  CGFloat lineHeight = 1.0;
   CGColorRef lineColor = [_containerColor lighterColorForLine].CGColor;
   CGContextSetFillColorWithColor(context, lineColor);
-  CGContextMoveToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect) - lineHeight);
-  CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect) - lineHeight);
+  CGContextMoveToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect) - kLineHeight);
+  CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect) - kLineHeight);
   CGContextAddLineToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect));
   CGContextAddLineToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect));
-  CGContextAddLineToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect) - lineHeight);
+  CGContextAddLineToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect) - kLineHeight);
   CGContextFillPath(context);
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
   self.attributedPlaceholder = [[NSMutableAttributedString alloc] initWithString:placeholder
       attributes:@{NSForegroundColorAttributeName:[_containerColor lighterColorForText]}];
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+  return CGRectInset([super textRectForBounds:bounds], kHorizontalInset, 0);
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+  return CGRectInset([super editingRectForBounds:bounds], kHorizontalInset, 0);
 }
 
 @end
