@@ -13,6 +13,7 @@
 
 #import "PLDLinkBankContainerView.h"
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
+#import "PLDLinkStyledButton.h"
 
 @interface PLDLinkBankMFAQuestionOrCodeViewController ()<PLDLinkBankMFAQuestionOrCodeViewDelegate>
 @end
@@ -45,8 +46,17 @@
 #pragma mark - PLDLinkBankMFAInputViewDelegate
 
 - (void)inputView:(UIView *)view didTapSubmitWithResponse:(NSString *)response {
+  [_view.submitButton showLoadingState];
   [self submitMFAStepResponse:response options:nil completion:^(NSError *error) {
-
+    if (error) {
+      [_view.submitButton hideLoadingState];
+      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                          message:[error localizedRecoverySuggestion]
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+      [alertView show];
+    }
   }];
 }
 

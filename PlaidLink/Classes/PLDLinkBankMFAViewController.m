@@ -63,16 +63,15 @@
                                  mfaResponse:response
                                      options:options
                                   completion:^(PLDAuthentication *authentication, id response, NSError *error) {
-                                    if (error) {
-                                      NSLog(@"Error stepping user: %@", error);
-                                      completion(error);
-                                      return;
-                                    }
+    if (error) {
+      completion(error);
+      return;
+    }
 
-                                    completion(nil);
-                                    [_delegate bankMFAViewController:self
-                                         didFinishWithAuthentication:authentication];
-                                  }];
+    completion(nil);
+    [_delegate bankMFAViewController:self
+         didFinishWithAuthentication:authentication];
+  }];
 }
 
 #pragma mark - Private
@@ -81,17 +80,21 @@
   PLDMFAType mfaType = _authentication.mfa.type;
   PLDLinkBankMFAViewController *mfaViewController = nil;
   if (mfaType == kPLDMFATypeList) {
-    mfaViewController = [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:_authentication
-                                                                               institution:_institution];
+    mfaViewController =
+        [[PLDLinkBankMFAChoiceViewController alloc] initWithAuthentication:_authentication
+                                                               institution:_institution];
   } else if (mfaType == kPLDMFATypeCode) {
-    mfaViewController = [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication
-                                                                                       institution:_institution];
+    mfaViewController =
+        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication
+                                                                       institution:_institution];
   } else if (mfaType == kPLDMFATypeSelection) {
-    mfaViewController = [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:_authentication
-                                                                                   institution:_institution];
+    mfaViewController =
+        [[PLDLinkBankMFASelectionsViewController alloc] initWithAuthentication:_authentication
+                                                                   institution:_institution];
   } else if (mfaType == kPLDMFATypeQuestion) {
-    mfaViewController = [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication
-                                                                                       institution:_institution];
+    mfaViewController =
+        [[PLDLinkBankMFAQuestionOrCodeViewController alloc] initWithAuthentication:_authentication
+                                                                       institution:_institution];
   } else {
     NSAssert(NO, @"Invalid mfa type");
   }

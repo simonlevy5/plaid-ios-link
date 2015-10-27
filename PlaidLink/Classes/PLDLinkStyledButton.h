@@ -12,7 +12,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
 
-- (void)startLoading;
-- (void)stopLoading;
+- (void)showLoadingState;
+- (void)hideLoadingState;
 
 @end

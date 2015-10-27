@@ -76,10 +76,6 @@ static const CGFloat kKeyboardPadding = 8.0f;
                              name:UIKeyboardWillShowNotification
                            object:nil];
   [notificationCenter addObserver:self
-                         selector:@selector(keyboardWillChangeFrame:)
-                             name:UIKeyboardWillChangeFrameNotification
-                           object:nil];
-  [notificationCenter addObserver:self
                          selector:@selector(keyboardWillHide:)
                              name:UIKeyboardWillHideNotification
                            object:nil];
@@ -100,7 +96,7 @@ static const CGFloat kKeyboardPadding = 8.0f;
 #pragma mark - Keyboard management
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-  CGRect keyboardFrame = [notification.userInfo [UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  CGRect keyboardFrame = [notification.userInfo [UIKeyboardFrameEndUserInfoKey] CGRectValue];
   UIEdgeInsets currentInsets = _view.contentInset;
   currentInsets.bottom = keyboardFrame.size.height + kKeyboardPadding;
   [_view setContentInset:currentInsets];
@@ -117,9 +113,6 @@ static const CGFloat kKeyboardPadding = 8.0f;
                        _draggingScrollView = NO;
                      }];
   }
-}
-
-- (void)keyboardWillChangeFrame:(NSNotification *)notification {
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {

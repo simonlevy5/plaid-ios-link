@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class PLDLinkStyledButton;
 @class PLDLinkStyledTextField;
 @class PLDLinkBankMFAExplainerView;
 
@@ -25,6 +26,6 @@
 @property(nonatomic, readonly) PLDLinkBankMFAExplainerView *explainer;
 @property(nonatomic, readonly) UILabel *inputLabel;
 @property(nonatomic, readonly) UITextField *inputTextField;
-@property(nonatomic, readonly) UIButton *submitButton;
+@property(nonatomic, readonly) PLDLinkStyledButton *submitButton;
 
 @end

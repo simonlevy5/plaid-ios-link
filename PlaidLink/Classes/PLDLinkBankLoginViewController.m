@@ -52,7 +52,7 @@
 #pragma mark - Private
 
 - (void)didTapSubmit {
-  [_view.submitButton startLoading];
+  [_view.submitButton showLoadingState];
   [self.view endEditing:YES];
   NSDictionary *options = @{
       @"list" : @(YES)
@@ -63,14 +63,19 @@
                                        type:_institution.type
                                     options:options
                                  completion:^(PLDAuthentication *authentication, id response, NSError *error) {
-                                   if (error) {
-                                     [_view.submitButton stopLoading];
-                                     NSLog(@"Error adding user: %@", error);
-                                     return;
-                                   }
-                                   [_delegate loginViewController:self
-                                      didFinishWithAuthentication:authentication];
-                                 }];
+    if (error) {
+     [_view.submitButton hideLoadingState];
+     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                         message:[error localizedRecoverySuggestion]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+     [alertView show];
+     return;
+    }
+    [_delegate loginViewController:self
+      didFinishWithAuthentication:authentication];
+  }];
 }
 
 @end

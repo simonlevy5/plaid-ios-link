@@ -36,7 +36,7 @@
   return self;
 }
 
-- (void)startLoading {
+- (void)showLoadingState {
   self.enabled = NO;
   _loading = YES;
   _originalText = self.titleLabel.text;
@@ -46,7 +46,7 @@
   self.backgroundColor = [self.tintColor darkerColorForBackground];
 }
 
-- (void)stopLoading {
+- (void)hideLoadingState {
   self.enabled = YES;
   _loading = NO;
   [self setTitle:_originalText forState:UIControlStateNormal];

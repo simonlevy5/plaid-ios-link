@@ -42,7 +42,14 @@
       }
     };
   [self submitMFAStepResponse:nil options:options completion:^(NSError *error) {
-    
+    if (error) {
+      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                          message:[error localizedRecoverySuggestion]
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+      [alertView show];
+    }
   }];
 }
 
