@@ -13,7 +13,7 @@
 #import "Plaid.h"
 #import "PLDInstitution.h"
 
-#import "PLDLinkBankLoginView.h"
+#import "PLDLinkBankMFALoginView.h"
 #import "PLDLinkBankSelectionView.h"
 
 @interface PLDLinkBankSelectionViewController ()<PLDLinkBankSelectionViewDelegate>

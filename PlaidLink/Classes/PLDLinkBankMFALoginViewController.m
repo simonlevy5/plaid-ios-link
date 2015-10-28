@@ -6,18 +6,18 @@
 //  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
-#import "PLDLinkBankLoginViewController.h"
+#import "PLDLinkBankMFALoginViewController.h"
 
 #import "Plaid.h"
 #import "PLDAuthentication.h"
-#import "PLDLinkBankLoginView.h"
+#import "PLDLinkBankMFALoginView.h"
 #import "PLDInstitution.h"
 #import "PLDLinkStyledButton.h"
 
-@implementation PLDLinkBankLoginViewController {
+@implementation PLDLinkBankMFALoginViewController {
   PLDInstitution *_institution;
   PlaidProduct _product;
-  PLDLinkBankLoginView *_view;
+  PLDLinkBankMFALoginView *_view;
 }
 
 - (instancetype)initWithInstitution:(PLDInstitution *)institution
@@ -30,7 +30,7 @@
 }
 
 - (void)loadView {
-  _view = [[PLDLinkBankLoginView alloc] initWithFrame:CGRectZero
+  _view = [[PLDLinkBankMFALoginView alloc] initWithFrame:CGRectZero
                                             tintColor:_institution.backgroundColor];
   self.view = _view;
 }

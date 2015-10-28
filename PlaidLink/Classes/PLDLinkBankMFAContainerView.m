@@ -6,7 +6,7 @@
 //  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFAContainerView.h"
 
 #import "PLDLinkBankTileView.h"
 #import "PLDLinkBankMFAExplainerView.h"
@@ -16,7 +16,7 @@
 static CGFloat const kContentPadding = 8.0;
 static CGFloat const kDefaultContentHeight = 200;
 
-@implementation PLDLinkBankContainerView {
+@implementation PLDLinkBankMFAContainerView {
   UIView *_currentContent;
   CAShapeLayer * _maskBehindTile;
 }

@@ -10,8 +10,8 @@
 
 #import "PLDAuthentication.h"
 #import "PLDInstitution.h"
-#import "PLDLinkBankLoginViewController.h"
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFALoginViewController.h"
+#import "PLDLinkBankMFAContainerView.h"
 #import "PLDLinkBankMFAViewController.h"
 #import "PLDLinkBankMFAChoiceViewController.h"
 #import "PLDLinkBankMFAQuestionOrCodeViewController.h"
@@ -26,7 +26,7 @@ static const CGFloat kKeyboardPadding = 8.0f;
 
 @implementation PLDLinkBankMFAContainerViewController {
   UIViewController *_currentChildViewController;
-  PLDLinkBankContainerView *_view;
+  PLDLinkBankMFAContainerView *_view;
   BOOL _shouldHideStatusBar;
   BOOL _draggingScrollView;
 
@@ -43,7 +43,7 @@ static const CGFloat kKeyboardPadding = 8.0f;
 }
 
 - (void)loadView {
-  _view = [[PLDLinkBankContainerView alloc] initWithFrame:CGRectZero];
+  _view = [[PLDLinkBankMFAContainerView alloc] initWithFrame:CGRectZero];
   _view.delegate = self;
   self.view = _view;
 }
@@ -60,8 +60,8 @@ static const CGFloat kKeyboardPadding = 8.0f;
   self.navigationItem.backBarButtonItem.target = self;
   self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
-  PLDLinkBankLoginViewController *viewController =
-      [[PLDLinkBankLoginViewController alloc] initWithInstitution:_institution
+  PLDLinkBankMFALoginViewController *viewController =
+      [[PLDLinkBankMFALoginViewController alloc] initWithInstitution:_institution
                                                           product:_product];
   viewController.delegate = self;
   [self addChildViewController:viewController];
@@ -131,7 +131,7 @@ static const CGFloat kKeyboardPadding = 8.0f;
 
 #pragma mark - PLDLinkBankLoginViewControllerDelegate
 
-- (void)loginViewController:(PLDLinkBankLoginViewController *)loginViewController
+- (void)loginViewController:(PLDLinkBankMFALoginViewController *)loginViewController
     didFinishWithAuthentication:(PLDAuthentication *)authentication {
   if (authentication.mfa) {
     [self displayNextMFAStepWithAuthentication:authentication];

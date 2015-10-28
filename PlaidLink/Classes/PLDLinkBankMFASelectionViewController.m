@@ -9,7 +9,7 @@
 #import "PLDLinkBankMFASelectionViewController.h"
 
 #import "PLDAuthentication.h"
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFAContainerView.h"
 
 static CGFloat const kButtonHeight = 50.0;
 static CGFloat const kPadding = 20.0;

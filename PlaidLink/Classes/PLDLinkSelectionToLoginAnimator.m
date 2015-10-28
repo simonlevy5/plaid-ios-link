@@ -8,7 +8,7 @@
 
 #import "PLDLinkSelectionToLoginAnimator.h"
 
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFAContainerView.h"
 #import "PLDLinkBankSelectionView.h"
 #import "PLDLinkBankTileView.h"
 
@@ -25,7 +25,7 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
   if (!self.reverse) {
     PLDLinkBankSelectionView *bankSelectionView =
         [transitionContext viewForKey:UITransitionContextFromViewKey];
-    PLDLinkBankContainerView *bankContainerView =
+    PLDLinkBankMFAContainerView *bankContainerView =
         [transitionContext viewForKey:UITransitionContextToViewKey];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
@@ -77,7 +77,7 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
   } else {
     PLDLinkBankSelectionView *bankSelectionView =
         [transitionContext viewForKey:UITransitionContextToViewKey];
-    PLDLinkBankContainerView *bankContainerView =
+    PLDLinkBankMFAContainerView *bankContainerView =
         [transitionContext viewForKey:UITransitionContextFromViewKey];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];

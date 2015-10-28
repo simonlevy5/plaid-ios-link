@@ -10,7 +10,7 @@
 
 #import "Plaid.h"
 #import "PLDAuthentication.h"
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFAContainerView.h"
 #import "PLDLinkBankMFAChoiceViewController.h"
 #import "PLDLinkBankMFAQuestionOrCodeViewController.h"
 #import "PLDLinkBankMFASelectionsViewController.h"
@@ -19,7 +19,7 @@
 @end
 
 @implementation PLDLinkBankMFAViewController {
-  PLDLinkBankContainerView *_view;
+  PLDLinkBankMFAContainerView *_view;
 }
 
 - (instancetype)initWithAuthentication:(PLDAuthentication *)authentication
@@ -32,7 +32,7 @@
 }
 
 - (void)loadView {
-  _view = [[PLDLinkBankContainerView alloc] initWithFrame:CGRectZero];
+  _view = [[PLDLinkBankMFAContainerView alloc] initWithFrame:CGRectZero];
   self.view = _view;
 }
 

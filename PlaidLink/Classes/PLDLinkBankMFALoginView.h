@@ -10,7 +10,7 @@
 
 @class PLDLinkStyledButton;
 
-@interface PLDLinkBankLoginView : UIView
+@interface PLDLinkBankMFALoginView : UIView
 
 @property(nonatomic, assign) BOOL isPinRequired;
 
