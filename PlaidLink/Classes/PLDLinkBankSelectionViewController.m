@@ -11,16 +11,25 @@
 #import "PLDLinkBankSelectionViewController.h"
 
 #import "Plaid.h"
-#import "PLDInstitution.h"
-
 #import "PLDLinkBankLoginView.h"
+#import "PLDLinkBankSelectionSearchResultsViewController.h"
 #import "PLDLinkBankSelectionView.h"
 
-@interface PLDLinkBankSelectionViewController ()<PLDLinkBankSelectionViewDelegate>
+@interface PLDLinkBankSelectionViewController ()<PLDLinkBankSelectionViewDelegate,
+    PLDLinkBankSelectionSearchResultsViewControllerDelegate, UISearchResultsUpdating>
 @end
 
 @implementation PLDLinkBankSelectionViewController {
   PLDLinkBankSelectionView *_bankSelectionView;
+  PlaidProduct _product;
+  PLDLinkBankSelectionSearchResultsViewController *_searchResultsController;
+}
+
+- (instancetype)initWithProduct:(PlaidProduct)product {
+  if (self = [super init]) {
+    _product = product;
+  }
+  return self;
 }
 
 - (void)loadView {
@@ -42,7 +51,11 @@
   self.navigationItem.rightBarButtonItem = closeButton;
 
   [[Plaid sharedInstance] getInstitutionsWithCompletion:^(id response, NSError *error) {
-    _bankSelectionView.institutions = response;
+    NSMutableArray *institutions = [NSMutableArray arrayWithArray:response];
+    if (_product == PlaidProductConnect) {
+      [institutions addObject:@"searchCell"];
+    }
+    _bankSelectionView.institutions = institutions;
   }];
 }
 
@@ -66,11 +79,59 @@
   [_delegate bankSelectionViewControllerCancelled:self];
 }
 
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+  NSString *searchQuery = searchController.searchBar.text;
+  if ([searchQuery length] <= 1) {
+    return;
+  }
+  [[Plaid sharedInstance] getLongTailInstitutionsWithQuery:searchController.searchBar.text
+                                                   product:_product
+                                                completion:^(id response, NSError *error) {
+                                                  if (error) {
+                                                    // TODO: Show error here.
+                                                    return;
+                                                  }
+                                                  _searchResultsController.institutions = response;
+  }];
+}
+
 #pragma mark - PLDLinkBankSelectionViewDelegate
 
 - (void)bankSelectionView:(PLDLinkBankSelectionView *)view
      didSelectInstitution:(PLDInstitution *)institution {
   [_delegate bankSelectionViewController:self didFinishWithInstitution:institution];
+}
+
+- (void)bankSelectionViewDidSelectSearch:(PLDLinkBankSelectionView *)view {
+  _searchResultsController =
+      [[PLDLinkBankSelectionSearchResultsViewController alloc] init];
+  _searchResultsController.delegate = self;
+  UISearchController *search =
+      [[UISearchController alloc] initWithSearchResultsController:_searchResultsController];
+  search.searchResultsUpdater = self;
+  [self presentViewController:search animated:YES completion:nil];
+}
+
+#pragma mark - PLDLinkBankSelectionSearchResultsViewControllerDelegate
+
+- (void)searchResultsViewController:(PLDLinkBankSelectionSearchResultsViewController *)viewController
+       didSelectLongTailInstitution:(PLDLongTailInstitution *)institution {
+  NSMutableArray *institutions = [NSMutableArray arrayWithArray:_bankSelectionView.institutions];
+  NSUInteger searchIndex = ([institutions count] - 1);
+  [institutions insertObject:institution atIndex:searchIndex];
+
+  _bankSelectionView.institutions = institutions;
+
+  NSIndexPath *index = [NSIndexPath indexPathForRow:searchIndex inSection:0];
+  [_bankSelectionView.collectionView selectItemAtIndexPath:index
+                                                  animated:NO
+                                            scrollPosition:UICollectionViewScrollPositionBottom];
+
+  [viewController dismissViewControllerAnimated:YES completion:^{
+    [_delegate bankSelectionViewController:self didFinishWithInstitution:institution];
+  }];
 }
 
 @end

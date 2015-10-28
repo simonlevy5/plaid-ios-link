@@ -26,4 +26,6 @@
 
 @property(nonatomic, weak) id<PLDLinkBankSelectionViewControllerDelegate> delegate;
 
+- (instancetype)initWithProduct:(PlaidProduct)product;
+
 @end

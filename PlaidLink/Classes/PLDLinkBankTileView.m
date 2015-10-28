@@ -18,7 +18,11 @@
 
 - (void)setInstitution:(PLDInstitution *)institution {
   _institution = institution;
-  [_logo setImage:[UIImage imageNamed:_institution.type]];
+  if (institution.logoImage) {
+    [_logo setImage:institution.logoImage];
+  } else {
+    [_logo setImage:[UIImage imageNamed:_institution.type]];
+  }
   [self setNeedsLayout];
 }
 

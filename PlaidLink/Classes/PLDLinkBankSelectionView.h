@@ -18,6 +18,7 @@
 
 - (void)bankSelectionView:(PLDLinkBankSelectionView *)view
      didSelectInstitution:(PLDInstitution *)institution;
+- (void)bankSelectionViewDidSelectSearch:(PLDLinkBankSelectionView *)view;
 
 @end
 

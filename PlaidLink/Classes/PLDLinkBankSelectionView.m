@@ -27,6 +27,35 @@
 
 @end
 
+@interface PLDLinkBankLongtailSearchViewCell : UICollectionViewCell
+@end
+
+@implementation PLDLinkBankLongtailSearchViewCell {
+  UILabel *_label;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+  if (self = [super initWithFrame:frame]) {
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.cornerRadius = 8.0;
+
+    _label = [[UILabel alloc] initWithFrame:frame];
+    _label.numberOfLines = 2;
+    _label.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+    _label.textAlignment = NSTextAlignmentCenter;
+    _label.text = @"Don't see your bank?\nTap here";
+    [self addSubview:_label];
+  }
+  return self;
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  _label.frame = self.bounds;
+}
+
+@end
+
 @implementation PLDLinkBankSelectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -82,6 +111,8 @@
     _collectionView.delegate = self;
     [_collectionView registerClass:[PLDLinkBankSelectionViewCell class]
         forCellWithReuseIdentifier:@"cell"];
+    [_collectionView registerClass:[PLDLinkBankLongtailSearchViewCell class]
+        forCellWithReuseIdentifier:@"searchCell"];
     [self addSubview:_collectionView];
 
     _gestureRecognizer =
@@ -94,8 +125,6 @@
   }
   return self;
 }
-
-# pragma mark - Private
 
 - (void)layoutSubviews {
   [super layoutSubviews];
@@ -110,8 +139,8 @@
 - (void)setInstitutions:(NSArray *)institutions {
   [self hideLoading];
   _institutions = institutions;
-  [self.collectionView performBatchUpdates:^{
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+  [_collectionView performBatchUpdates:^{
+    [_collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
   } completion:^(BOOL finished) {}];
 }
 
@@ -141,30 +170,6 @@
   [_spinner stopAnimating];
 }
 
-- (void)handlePress:(UILongPressGestureRecognizer *)recognizer {
-  if (_dragging) {
-    return;
-  }
-
-  CGPoint locationInView = [recognizer locationInView:_collectionView];
-  NSIndexPath *indexPath = [_collectionView indexPathForItemAtPoint:locationInView];
-  UICollectionViewCell* cell = [_collectionView cellForItemAtIndexPath:indexPath];
-  if (cell != _pressedCell) {
-    if (_pressedCell) {
-      _pressedCell.transform = CGAffineTransformIdentity;
-    }
-    _pressedCell = cell;
-  }
-  if (recognizer.state == UIGestureRecognizerStateEnded && _pressedCell) {
-    _pressedCell.transform = CGAffineTransformIdentity;
-    _pressedCell = nil;
-    return;
-  }
-  if (_pressedCell) {
-    cell.transform = CGAffineTransformMakeScale(0.93, 0.93);
-  }
-}
-
 # pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
@@ -176,10 +181,15 @@
   return 1;
 }
 
-# pragma mark - UICollectionViewDelegate
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  id rowData = _institutions[indexPath.row];
+  if ([rowData isKindOfClass:[NSString class]]) {
+    PLDLinkBankLongtailSearchViewCell *cell =
+        [collectionView dequeueReusableCellWithReuseIdentifier:@"searchCell"
+                                                  forIndexPath:indexPath];
+    return cell;
+  }
   PLDLinkBankSelectionViewCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:@"cell"
                                                 forIndexPath:indexPath];
@@ -187,8 +197,15 @@
   return cell;
 }
 
+# pragma mark - UICollectionViewDelegate
+
 - (void)collectionView:(UICollectionView *)collectionView
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+  id rowData = _institutions[indexPath.row];
+  if ([rowData isKindOfClass:[NSString class]]) {
+    [_delegate bankSelectionViewDidSelectSearch:self];
+    return;
+  }
   [_delegate bankSelectionView:self didSelectInstitution:_institutions[indexPath.row]];
 }
 
@@ -213,6 +230,32 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
     shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
   return YES;
+}
+
+# pragma mark - Private
+
+- (void)handlePress:(UILongPressGestureRecognizer *)recognizer {
+  if (_dragging) {
+    return;
+  }
+  
+  CGPoint locationInView = [recognizer locationInView:_collectionView];
+  NSIndexPath *indexPath = [_collectionView indexPathForItemAtPoint:locationInView];
+  UICollectionViewCell* cell = [_collectionView cellForItemAtIndexPath:indexPath];
+  if (cell != _pressedCell) {
+    if (_pressedCell) {
+      _pressedCell.transform = CGAffineTransformIdentity;
+    }
+    _pressedCell = cell;
+  }
+  if (recognizer.state == UIGestureRecognizerStateEnded && _pressedCell) {
+    _pressedCell.transform = CGAffineTransformIdentity;
+    _pressedCell = nil;
+    return;
+  }
+  if (_pressedCell) {
+    cell.transform = CGAffineTransformMakeScale(0.93, 0.93);
+  }
 }
 
 @end

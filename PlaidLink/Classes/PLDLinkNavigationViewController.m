@@ -32,7 +32,7 @@
                             product:(PlaidProduct)product
                           publicKey:(NSString *)publicKey {
   PLDLinkBankSelectionViewController *rootViewController =
-      [[PLDLinkBankSelectionViewController alloc] init];
+      [[PLDLinkBankSelectionViewController alloc] initWithProduct:product];
   if (self = [super initWithRootViewController:rootViewController]) {
     rootViewController.delegate = self;
     rootViewController.title = @"Select your bank";

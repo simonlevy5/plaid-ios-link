@@ -28,6 +28,7 @@
 		5316B5211BD8672B006F627E /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 5316B51B1BD8672B006F627E /* Base.lproj */; settings = {ASSET_TAGS = (); }; };
 		5316B5221BD8672B006F627E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B51C1BD8672B006F627E /* main.m */; settings = {ASSET_TAGS = (); }; };
 		5316B5251BD8689A006F627E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5316B5241BD8689A006F627E /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		5369A53B1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		B13E99AD1BDB06E0007A1B27 /* PLDLinkStyledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B13E99AC1BDB06E0007A1B27 /* PLDLinkStyledTextField.m */; settings = {ASSET_TAGS = (); }; };
 		B18282791BD9560B0032AF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18282781BD9560B0032AF19 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B182827C1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B182827B1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m */; settings = {ASSET_TAGS = (); }; };
@@ -90,6 +91,8 @@
 		5316B51B1BD8672B006F627E /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = PlaidLinkDemo/Base.lproj; sourceTree = "<group>"; };
 		5316B51C1BD8672B006F627E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PlaidLinkDemo/main.m; sourceTree = "<group>"; };
 		5316B5241BD8689A006F627E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		5369A5391BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkBankSelectionSearchResultsViewController.h; path = Classes/PLDLinkBankSelectionSearchResultsViewController.h; sourceTree = "<group>"; };
+		5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankSelectionSearchResultsViewController.m; path = Classes/PLDLinkBankSelectionSearchResultsViewController.m; sourceTree = "<group>"; };
 		99A13A2D3F78158267BA4FA5 /* Pods-PlaidLink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLink.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLink/Pods-PlaidLink.release.xcconfig"; sourceTree = "<group>"; };
 		B13E99AB1BDB06E0007A1B27 /* PLDLinkStyledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkStyledTextField.h; path = Classes/PLDLinkStyledTextField.h; sourceTree = "<group>"; };
 		B13E99AC1BDB06E0007A1B27 /* PLDLinkStyledTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkStyledTextField.m; path = Classes/PLDLinkStyledTextField.m; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				5316B4F81BD866F6006F627E /* PLDLinkBankMFASelectionViewController.m */,
 				5316B4F91BD866F6006F627E /* PLDLinkBankMFAViewController.h */,
 				5316B4FA1BD866F6006F627E /* PLDLinkBankMFAViewController.m */,
+				5369A5391BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.h */,
+				5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */,
 				5316B4FD1BD866F6006F627E /* PLDLinkBankSelectionViewController.h */,
 				5316B4FE1BD866F6006F627E /* PLDLinkBankSelectionViewController.m */,
 				5316B5031BD866F6006F627E /* PLDLinkNavigationViewController.h */,
@@ -435,6 +440,7 @@
 				B18282831BD9EBA70032AF19 /* RootViewController.m in Sources */,
 				5316B5121BD866F6006F627E /* PLDLinkBankSelectionViewController.m in Sources */,
 				B13E99AD1BDB06E0007A1B27 /* PLDLinkStyledTextField.m in Sources */,
+				5369A53B1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m in Sources */,
 				B182828B1BDAC4A40032AF19 /* PLDLinkStyledButton.m in Sources */,
 				5316B50F1BD866F6006F627E /* PLDLinkBankMFASelectionViewController.m in Sources */,
 				5316B5081BD866F6006F627E /* PLDLinkBankLoginView.m in Sources */,
