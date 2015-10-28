@@ -48,17 +48,15 @@
 
 @end
 
+@interface PLDLinkBankSelectionView ()<UIGestureRecognizerDelegate>
+@end
+
 @implementation PLDLinkBankSelectionView {
   UICollectionViewFlowLayout *_collectionViewLayout;
   UIActivityIndicatorView *_spinner;
-}
-
-- (void)setInstitutions:(NSArray *)institutions {
-  [self hideLoading];
-  _institutions = institutions;
-  [self.collectionView performBatchUpdates:^{
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-  } completion:^(BOOL finished) {}];
+  BOOL _dragging;
+  UILongPressGestureRecognizer *_gestureRecognizer;
+  UICollectionViewCell *_pressedCell;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -85,9 +83,19 @@
     [_collectionView registerClass:[PLDLinkBankSelectionViewCell class]
         forCellWithReuseIdentifier:@"cell"];
     [self addSubview:_collectionView];
+
+    _gestureRecognizer =
+        [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handlePress:)];
+    _gestureRecognizer.minimumPressDuration = 0;
+    _gestureRecognizer.delaysTouchesBegan = NO;
+    _gestureRecognizer.cancelsTouchesInView = NO;
+    _gestureRecognizer.delegate = self;
+    [_collectionView addGestureRecognizer:_gestureRecognizer];
   }
   return self;
 }
+
+# pragma mark - Private
 
 - (void)layoutSubviews {
   [super layoutSubviews];
@@ -97,6 +105,14 @@
   _collectionView.frame = self.bounds;
   CGFloat itemWidth = (self.frame.size.width - 24) / 2;
   _collectionViewLayout.itemSize = CGSizeMake(itemWidth, itemWidth / 2);
+}
+
+- (void)setInstitutions:(NSArray *)institutions {
+  [self hideLoading];
+  _institutions = institutions;
+  [self.collectionView performBatchUpdates:^{
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+  } completion:^(BOOL finished) {}];
 }
 
 - (PLDLinkBankSelectionViewCell *)selectedCell {
@@ -109,6 +125,48 @@
   return nil;
 }
 
+- (void)showLoading {
+  [_spinner startAnimating];
+  [UIView animateWithDuration:1
+                        delay:0.15
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+                     if (_institutions.count == 0) {
+                       _spinner.alpha = 1.0;
+                     }
+                   } completion:nil];
+}
+
+- (void)hideLoading {
+  [_spinner stopAnimating];
+}
+
+- (void)handlePress:(UILongPressGestureRecognizer *)recognizer {
+  if (_dragging) {
+    return;
+  }
+
+  CGPoint locationInView = [recognizer locationInView:_collectionView];
+  NSIndexPath *indexPath = [_collectionView indexPathForItemAtPoint:locationInView];
+  UICollectionViewCell* cell = [_collectionView cellForItemAtIndexPath:indexPath];
+  if (cell != _pressedCell) {
+    if (_pressedCell) {
+      _pressedCell.transform = CGAffineTransformIdentity;
+    }
+    _pressedCell = cell;
+  }
+  if (recognizer.state == UIGestureRecognizerStateEnded && _pressedCell) {
+    _pressedCell.transform = CGAffineTransformIdentity;
+    _pressedCell = nil;
+    return;
+  }
+  if (_pressedCell) {
+    cell.transform = CGAffineTransformMakeScale(0.93, 0.93);
+  }
+}
+
+# pragma mark - UICollectionViewDataSource
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
   return [_institutions count];
@@ -117,6 +175,8 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
   return 1;
 }
+
+# pragma mark - UICollectionViewDelegate
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,20 +192,27 @@
   [_delegate bankSelectionView:self didSelectInstitution:_institutions[indexPath.row]];
 }
 
-- (void)showLoading {
-  [_spinner startAnimating];
-  [UIView animateWithDuration:1
-                        delay:0.15
-                      options:UIViewAnimationOptionCurveEaseIn
-                   animations:^{
-    if (_institutions.count == 0) {
-     _spinner.alpha = 1.0;
-    }
-  } completion:nil];
+# pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+  _dragging = YES;
+  if (_pressedCell) {
+    _pressedCell.transform = CGAffineTransformIdentity;
+    _pressedCell = nil;
+  }
 }
 
-- (void)hideLoading {
-  [_spinner stopAnimating];
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset {
+  _dragging = NO;
+}
+
+# pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+  return YES;
 }
 
 @end
