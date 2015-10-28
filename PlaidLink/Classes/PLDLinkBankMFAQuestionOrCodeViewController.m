@@ -50,10 +50,18 @@
 
 - (void)inputView:(UIView *)view didTapSubmitWithResponse:(NSString *)response {
   [_view.submitButton showLoadingState];
+  __weak PLDLinkBankMFAQuestionOrCodeViewController *weakSelf = self;
+  __weak PLDLinkBankMFAQuestionOrCodeView *weakView = _view;
   [self submitMFAStepResponse:response options:nil completion:^(NSError *error) {
-    if (error) {
-      [_view.submitButton hideLoadingState];
-      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+    if (error && weakSelf) {
+      [weakView.submitButton hideLoadingState];
+      NSString *errorTitle;
+      if (weakSelf.authentication.mfa.type == kPLDMFATypeQuestion) {
+        errorTitle = @"Wrong answer";
+      } else {
+        errorTitle = @"Invalid security code";
+      }
+      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:errorTitle
                                                           message:[error localizedRecoverySuggestion]
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"

@@ -20,7 +20,7 @@
 static const CGFloat kTopEdgeInset = 64.0f;
 static const CGFloat kKeyboardPadding = 8.0f;
 
-@interface PLDLinkBankMFAContainerViewController ()<UIScrollViewDelegate,
+@interface PLDLinkBankMFAContainerViewController ()<UIScrollViewDelegate, UIGestureRecognizerDelegate,
     PLDLinkBankLoginViewControllerDelegate, PLDLinkBankMFAViewControllerDelegate>
 @end
 
@@ -58,6 +58,7 @@ static const CGFloat kKeyboardPadding = 8.0f;
 
   self.navigationItem.backBarButtonItem.action = @selector(didTapBack);
   self.navigationItem.backBarButtonItem.target = self;
+  self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
   PLDLinkBankLoginViewController *viewController =
       [[PLDLinkBankLoginViewController alloc] initWithInstitution:_institution

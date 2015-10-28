@@ -49,6 +49,7 @@
 - (void)viewWillAppear:(BOOL)animated {
   [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.96 alpha:1]];
   [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+  [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -64,6 +65,10 @@
 
 - (void)didTapCancel {
   [_delegate bankSelectionViewControllerCancelled:self];
+}
+
+- (BOOL)prefersStatusBarHidden {
+  return NO;
 }
 
 #pragma mark - PLDLinkBankSelectionViewDelegate
