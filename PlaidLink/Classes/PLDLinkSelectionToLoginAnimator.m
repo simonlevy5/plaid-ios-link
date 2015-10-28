@@ -56,8 +56,6 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
       bankSelectionView.layer.transform = CATransform3DTranslate(fromViewTransform, 0, 0, -200);
       bankSelectionView.alpha = 0;
       } completion:^(BOOL finished) {
-        [animatedTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
-                           cornerRadii:CGSizeMake(8, 8)];
         [UIView animateWithDuration:kInputContainerAnimationDuration
                              delay:0
                            options:UIViewAnimationOptionCurveEaseOut
@@ -96,7 +94,6 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-        bankContainerView.bankTileView.transform = CGAffineTransformMakeTranslation(0, 20);
         bankContainerView.showContentContainer = NO;
         [bankContainerView layoutIfNeeded];
       } completion:^(BOOL finished) {
