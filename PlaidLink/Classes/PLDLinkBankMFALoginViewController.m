@@ -57,15 +57,17 @@
   NSDictionary *options = @{
       @"list" : @(YES)
   };
+  __weak PLDLinkBankMFALoginViewController *weakSelf = self;
+  __weak PLDLinkBankMFALoginView *weakView = _view;
   [[Plaid sharedInstance] addUserForProduct:_product
                                    username:_view.usernameTextField.text
                                    password:_view.passwordTextField.text
                                        type:_institution.type
                                     options:options
                                  completion:^(PLDAuthentication *authentication, id response, NSError *error) {
-    if (error) {
-     [_view.submitButton hideLoadingState];
-     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+    if (error && weakSelf) {
+     [weakView.submitButton hideLoadingState];
+     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
                                                          message:[error localizedRecoverySuggestion]
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
@@ -73,8 +75,7 @@
      [alertView show];
      return;
     }
-    [_delegate loginViewController:self
-      didFinishWithAuthentication:authentication];
+    [weakSelf.delegate loginViewController:self didFinishWithAuthentication:authentication];
   }];
 }
 

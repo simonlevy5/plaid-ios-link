@@ -45,6 +45,11 @@ static CGFloat const kDefaultContentHeight = 200;
   _contentContainer.backgroundColor = _bankTileView.institution.backgroundColor;
 }
 
+- (void)setShowContentContainer:(BOOL)showContentContainer {
+  _showContentContainer = showContentContainer;
+  [self setNeedsLayout];
+}
+
 - (void)setCurrentContentView:(UIView *)contentView {
   if (_currentContent) {
     [self animateCurrentContentOutWithCompletion:^(BOOL finished) {
@@ -73,6 +78,11 @@ static CGFloat const kDefaultContentHeight = 200;
                                        CGRectGetMaxY(_bankTileView.frame),
                                        self.bounds.size.width - 2 * kContentPadding,
                                        kDefaultContentHeight);
+  if (!_showContentContainer) {
+    _contentContainer.frame =
+        CGRectOffset(_contentContainer.frame, 0,
+                     -CGRectGetHeight(_contentContainer.bounds));
+  }
   if (_currentContent) {
     _currentContent.frame = _contentContainer.bounds;
     [_currentContent sizeToFit];
@@ -80,6 +90,9 @@ static CGFloat const kDefaultContentHeight = 200;
     containerFrame.size.height = _currentContent.bounds.size.height;
     _contentContainer.frame = containerFrame;
   }
+
+  [_bankTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
+                  cornerRadii:CGSizeMake(8, 8)];
 
   UIBezierPath *path =
       [UIBezierPath bezierPathWithRoundedRect:_contentContainer.bounds
@@ -90,16 +103,14 @@ static CGFloat const kDefaultContentHeight = 200;
   maskLayer.path  = path.CGPath;
   _contentContainer.layer.mask = maskLayer;
 
-  if (!CGAffineTransformEqualToTransform(_contentContainer.transform, CGAffineTransformIdentity)) {
-    _maskBehindTile.frame = self.frame;
-    _maskBehindTile.path =
-        [UIBezierPath bezierPathWithRoundedRect:CGRectMake(kContentPadding,
-                                                           0,
-                                                           self.bounds.size.width - 2 * kContentPadding,
-                                                           self.bounds.size.height)
-                                   cornerRadius:8.0].CGPath;
-    self.layer.mask = _maskBehindTile;
-  }
+  _maskBehindTile.frame = self.frame;
+  _maskBehindTile.path =
+      [UIBezierPath bezierPathWithRoundedRect:CGRectMake(kContentPadding,
+                                                         0,
+                                                         self.bounds.size.width - 2 * kContentPadding,
+                                                         self.bounds.size.height)
+                                 cornerRadius:8.0].CGPath;
+  self.layer.mask = _maskBehindTile;
 
   self.contentSize = CGSizeMake(bounds.size.width, CGRectGetMaxY(_contentContainer.frame));
 }

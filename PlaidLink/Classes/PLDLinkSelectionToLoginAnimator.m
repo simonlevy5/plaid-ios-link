@@ -44,8 +44,6 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
     selectedCell.hidden = YES;
 
     bankContainerView.contentContainer.hidden = YES;
-    bankContainerView.contentContainer.transform =
-        CGAffineTransformMakeTranslation(0, -bankContainerView.contentContainer.bounds.size.height);
 
     [UIView animateWithDuration:kBankTileAnimationDuration
                           delay:0
@@ -65,7 +63,8 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                            options:UIViewAnimationOptionCurveEaseOut
                         animations:^{
           bankContainerView.contentContainer.hidden = NO;
-          bankContainerView.contentContainer.transform = CGAffineTransformIdentity;
+          bankContainerView.showContentContainer = YES;
+          [bankContainerView layoutIfNeeded];
           } completion:^(BOOL finished) {
             bankContainerView.alpha = 1;
             bankSelectionView.alpha = 1;
@@ -81,15 +80,14 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
         [transitionContext viewForKey:UITransitionContextFromViewKey];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
-    bankSelectionView.frame =
-        [transitionContext finalFrameForViewController:[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
+    bankSelectionView.frame = [transitionContext finalFrameForViewController:
+        [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
     [bankSelectionView layoutSubviews];
     bankSelectionView.collectionView.alpha = 0;
     CATransform3D fromViewTransform = CATransform3DIdentity;
     fromViewTransform.m34 = 1.0 / -500;
     bankSelectionView.collectionView.layer.transform =
         CATransform3DTranslate(fromViewTransform, 0, 0, -200);
-    bankContainerView.backgroundColor = [UIColor clearColor];
 
     PLDLinkBankSelectionViewCell *selectedCell = [bankSelectionView selectedCell];
     selectedCell.hidden = YES;
@@ -98,11 +96,11 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-      bankContainerView.contentContainer.frame =
-          CGRectOffset(bankContainerView.contentContainer.frame, 0,
-                       -CGRectGetHeight(bankContainerView.contentContainer.bounds));
+        bankContainerView.bankTileView.transform = CGAffineTransformMakeTranslation(0, 20);
+        bankContainerView.showContentContainer = NO;
+        [bankContainerView layoutIfNeeded];
       } completion:^(BOOL finished) {
-        bankContainerView.contentContainer.alpha = 0;
+        bankContainerView.contentContainer.hidden = YES;
         PLDLinkBankTileView *bankTileView = bankContainerView.bankTileView;
         bankTileView.alpha = 0;
         CGRect adjustedFrame = [bankContainerView convertRect:bankTileView.frame
