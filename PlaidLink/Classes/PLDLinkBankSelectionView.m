@@ -40,10 +40,10 @@
     self.layer.cornerRadius = 8.0;
 
     _label = [[UILabel alloc] initWithFrame:frame];
-    _label.numberOfLines = 2;
-    _label.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+    _label.numberOfLines = 0;
+    _label.font = [UIFont systemFontOfSize:19 weight:UIFontWeightLight];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.text = @"Don't see your bank?\nTap here";
+    _label.text = @"More banks";
     [self addSubview:_label];
   }
   return self;
@@ -52,6 +52,8 @@
 - (void)layoutSubviews {
   [super layoutSubviews];
   _label.frame = self.bounds;
+  [_label sizeToFit];
+  _label.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 
 @end
@@ -101,7 +103,7 @@
     _collectionViewLayout = [[PLDLinkBankSelectionLayout alloc] init];
     _collectionViewLayout.minimumLineSpacing = 8;
     _collectionViewLayout.minimumInteritemSpacing = 8;
-    _collectionViewLayout.sectionInset = UIEdgeInsetsMake(0, 8, 8, 8);
+    _collectionViewLayout.sectionInset = UIEdgeInsetsMake(0, 8, 16, 8);
 
     _collectionView = [[UICollectionView alloc] initWithFrame:frame
                                          collectionViewLayout:_collectionViewLayout];

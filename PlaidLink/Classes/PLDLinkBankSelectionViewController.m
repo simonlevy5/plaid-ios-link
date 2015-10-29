@@ -97,11 +97,11 @@
   [[Plaid sharedInstance] getLongTailInstitutionsWithQuery:searchController.searchBar.text
                                                    product:_product
                                                 completion:^(id response, NSError *error) {
-                                                  if (error) {
-                                                    // TODO: Show error here.
-                                                    return;
-                                                  }
-                                                  _searchResultsController.institutions = response;
+    if (error) {
+      // TODO: Show error here.
+      return;
+    }
+    _searchResultsController.institutions = response;
   }];
 }
 
@@ -120,10 +120,65 @@
       [[UISearchController alloc] initWithSearchResultsController:_searchResultsController];
   _searchController.searchResultsUpdater = self;
   _searchController.hidesNavigationBarDuringPresentation = NO;
+  _searchController.dimsBackgroundDuringPresentation = NO;
+  _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+  _searchController.searchBar.tintColor = [UIColor blackColor];
+  self.definesPresentationContext = YES;
+  self.title = @"Search your bank";
+  self.navigationItem.rightBarButtonItem = nil;
+
+  [self animateSelectionViewOutForSearch];
   [self presentViewController:_searchController animated:YES completion:nil];
+  _searchResultsController.view.transform =
+      CGAffineTransformMakeTranslation(0, CGRectGetHeight(_searchController.searchBar.bounds));
+}
+
+- (void)animateSelectionViewOutForSearch {
+  CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+  transformAnimation.duration = 0.5;
+  transformAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+  transformAnimation.removedOnCompletion = NO;
+  transformAnimation.fillMode = kCAFillModeForwards;
+
+  CATransform3D xform = CATransform3DIdentity;
+  xform.m34 = 1.0 / -500;
+  xform = CATransform3DTranslate(xform, 0, 0, -50);
+  transformAnimation.toValue = [NSValue valueWithCATransform3D:xform];
+  [_bankSelectionView.collectionView.layer addAnimation:transformAnimation forKey:@"transformAnimation"];
+
+  _bankSelectionView.collectionView.layer.opacity = 0;
+  CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+  alphaAnimation.duration = 0.5;
+  alphaAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  alphaAnimation.removedOnCompletion = YES;
+  alphaAnimation.fromValue = [NSNumber numberWithFloat:1];
+  alphaAnimation.toValue = [NSNumber numberWithFloat:0];
+  [_bankSelectionView.collectionView.layer addAnimation:alphaAnimation forKey:@"alphaAnimation"];
+  _bankSelectionView.collectionView.userInteractionEnabled = NO;
 }
 
 #pragma mark - PLDLinkBankSelectionSearchResultsViewControllerDelegate
+
+- (void)searchResultsViewControllerWillDisappear:(PLDLinkBankSelectionSearchResultsViewController *)viewController {
+  self.title = @"Select your bank";
+  CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+  transformAnimation.duration = 0.5;
+  transformAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+  transformAnimation.removedOnCompletion = NO;
+  transformAnimation.fillMode = kCAFillModeForwards;
+  transformAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+  [_bankSelectionView.collectionView.layer addAnimation:transformAnimation forKey:@"revertTransformAnimation"];
+
+  _bankSelectionView.collectionView.layer.opacity = 1;
+  CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+  alphaAnimation.duration = 0.5;
+  alphaAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  alphaAnimation.removedOnCompletion = YES;
+  alphaAnimation.fromValue = [NSNumber numberWithFloat:0];
+  alphaAnimation.toValue = [NSNumber numberWithFloat:1];
+  [_bankSelectionView.collectionView.layer addAnimation:alphaAnimation forKey:@"appearAnimation"];
+  _bankSelectionView.collectionView.userInteractionEnabled = YES;
+}
 
 - (void)searchResultsViewController:(PLDLinkBankSelectionSearchResultsViewController *)viewController
        didSelectLongTailInstitution:(PLDLongTailInstitution *)institution {
@@ -138,7 +193,7 @@
   NSIndexPath *index = [NSIndexPath indexPathForRow:searchIndex inSection:0];
   [_bankSelectionView.collectionView selectItemAtIndexPath:index
                                                   animated:NO
-                                            scrollPosition:UICollectionViewScrollPositionBottom];
+                                            scrollPosition:UICollectionViewScrollPositionNone];
   [viewController dismissViewControllerAnimated:YES completion:^{
     [_delegate bankSelectionViewController:self didFinishWithInstitution:institution];
   }];

@@ -21,7 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     _label = [[UILabel alloc] initWithFrame:CGRectZero];
-    _label.text = @"Text goes here";
+    _label.font = [UIFont systemFontOfSize:17 weight:UIFontWeightLight];
     [self addSubview:_label];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -34,14 +34,14 @@
   [super layoutSubviews];
 
   CGRect bounds = self.bounds;
-  CGFloat imagePadding = 5.0;
+  CGFloat imagePadding = 12.0;
   _imageView.frame = CGRectMake(imagePadding,
                                 imagePadding,
-                                bounds.size.height - imagePadding,
-                                bounds.size.height - imagePadding);
-  _label.frame = CGRectMake(CGRectGetMaxX(_imageView.frame) + 10,
+                                bounds.size.height - 2 * imagePadding,
+                                bounds.size.height - 2 * imagePadding);
+  _label.frame = CGRectMake(CGRectGetMaxX(_imageView.frame) + imagePadding,
                             0,
-                            bounds.size.width - _imageView.frame.size.width - 10,
+                            bounds.size.width - (CGRectGetMaxX(_imageView.frame) + 2 *imagePadding),
                             bounds.size.height);
 }
 
@@ -60,8 +60,12 @@
   _layout = [[UICollectionViewFlowLayout alloc] init];
   if (self = [super initWithCollectionViewLayout:_layout]) {
     _institutions = [NSArray array];
-    
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+
+    _layout.minimumLineSpacing = 2;
+    _layout.minimumInteritemSpacing = 8;
+    _layout.sectionInset = UIEdgeInsetsMake(0, 8, 8, 8);
+
+    self.collectionView.backgroundColor = [UIColor clearColor];
     [self.collectionView registerClass:[PLDLinkBankSelectionSearchResultsViewCell class]
             forCellWithReuseIdentifier:@"cell"];
   }
@@ -75,8 +79,15 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.edgesForExtendedLayout = UIRectEdgeNone;
+  self.automaticallyAdjustsScrollViewInsets = NO;
+  [self.collectionView setContentInset:UIEdgeInsetsMake(6, 0, 0, 0)];
 
-  _layout.itemSize = CGSizeMake(self.view.bounds.size.width, 50);
+  _layout.itemSize = CGSizeMake(self.view.bounds.size.width - 16, 60);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [_delegate searchResultsViewControllerWillDisappear:self];
 }
 
 #pragma mark - UICollectionViewDataSource

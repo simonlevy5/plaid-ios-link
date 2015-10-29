@@ -15,6 +15,7 @@
 
 - (void)searchResultsViewController:(PLDLinkBankSelectionSearchResultsViewController *)viewController
        didSelectLongTailInstitution:(PLDLongTailInstitution *)institution;
+- (void)searchResultsViewControllerWillDisappear:(PLDLinkBankSelectionSearchResultsViewController *)viewController;
 
 @end
 
