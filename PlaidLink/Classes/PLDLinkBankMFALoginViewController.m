@@ -10,8 +10,8 @@
 
 #import "Plaid.h"
 #import "PLDAuthentication.h"
-#import "PLDLinkBankMFALoginView.h"
 #import "PLDInstitution.h"
+#import "PLDLinkBankMFALoginView.h"
 #import "PLDLinkStyledButton.h"
 
 @implementation PLDLinkBankMFALoginViewController {
