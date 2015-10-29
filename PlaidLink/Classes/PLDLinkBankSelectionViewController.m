@@ -19,8 +19,9 @@
 @end
 
 @implementation PLDLinkBankSelectionViewController {
-  PLDLinkBankSelectionView *_bankSelectionView;
   PlaidProduct _product;
+  PLDLinkBankSelectionView *_bankSelectionView;
+  UIBarButtonItem *_closeButton;
   UISearchController *_searchController;
   PLDLinkBankSelectionSearchResultsViewController *_searchResultsController;
 }
@@ -28,6 +29,7 @@
 - (instancetype)initWithProduct:(PlaidProduct)product {
   if (self = [super init]) {
     _product = product;
+    self.definesPresentationContext = YES;
   }
   return self;
 }
@@ -45,11 +47,11 @@
 
   self.edgesForExtendedLayout = UIRectEdgeNone;
 
-  UIBarButtonItem *closeButton =
+  _closeButton =
       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                     target:self
                                                     action:@selector(didTapCancel)];
-  self.navigationItem.rightBarButtonItem = closeButton;
+  self.navigationItem.rightBarButtonItem = _closeButton;
 
   [[Plaid sharedInstance] getInstitutionsWithCompletion:^(id response, NSError *error) {
     NSMutableArray *institutions = [NSMutableArray arrayWithArray:response];
@@ -122,7 +124,6 @@
   _searchController.dimsBackgroundDuringPresentation = NO;
   _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
   _searchController.searchBar.tintColor = [UIColor blackColor];
-  self.definesPresentationContext = YES;
   self.title = @"Search your bank";
   self.navigationItem.rightBarButtonItem = nil;
 
@@ -135,7 +136,8 @@
 - (void)animateSelectionViewOutForSearch {
   CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
   transformAnimation.duration = 0.5;
-  transformAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+  transformAnimation.timingFunction =
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
   transformAnimation.removedOnCompletion = NO;
   transformAnimation.fillMode = kCAFillModeForwards;
 
@@ -148,7 +150,8 @@
   _bankSelectionView.collectionView.layer.opacity = 0;
   CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
   alphaAnimation.duration = 0.5;
-  alphaAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  alphaAnimation.timingFunction =
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
   alphaAnimation.removedOnCompletion = YES;
   alphaAnimation.fromValue = [NSNumber numberWithFloat:1];
   alphaAnimation.toValue = [NSNumber numberWithFloat:0];
@@ -160,9 +163,12 @@
 
 - (void)searchResultsViewControllerWillDisappear:(PLDLinkBankSelectionSearchResultsViewController *)viewController {
   self.title = @"Select your bank";
+  self.navigationItem.rightBarButtonItem = _closeButton;
+
   CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
   transformAnimation.duration = 0.5;
-  transformAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+  transformAnimation.timingFunction =
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
   transformAnimation.removedOnCompletion = NO;
   transformAnimation.fillMode = kCAFillModeForwards;
   transformAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
@@ -171,7 +177,8 @@
   _bankSelectionView.collectionView.layer.opacity = 1;
   CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
   alphaAnimation.duration = 0.5;
-  alphaAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  alphaAnimation.timingFunction =
+      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
   alphaAnimation.removedOnCompletion = YES;
   alphaAnimation.fromValue = [NSNumber numberWithFloat:0];
   alphaAnimation.toValue = [NSNumber numberWithFloat:1];
