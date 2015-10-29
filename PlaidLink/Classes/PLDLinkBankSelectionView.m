@@ -138,7 +138,7 @@
 }
 
 - (void)setInstitutions:(NSArray *)institutions {
-  [self hideLoading];
+  [self hideLoadingSpinner];
   if (_institutions.count > 0) {
     _institutions = institutions;
     [_collectionView reloadData];
@@ -169,10 +169,10 @@
                                   animated:YES];
 }
 
-- (void)showLoading {
+- (void)showLoadingSpinner {
   [_spinner startAnimating];
-  [UIView animateWithDuration:1
-                        delay:0.15
+  [UIView animateWithDuration:0.5
+                        delay:0
                       options:UIViewAnimationOptionCurveEaseIn
                    animations:^{
                      if (_institutions.count == 0) {
@@ -181,7 +181,7 @@
                    } completion:nil];
 }
 
-- (void)hideLoading {
+- (void)hideLoadingSpinner {
   [_spinner stopAnimating];
 }
 

@@ -35,7 +35,7 @@
 @property(nonatomic) PLDLinkBankSelectionViewCell *selectedCell;
 
 - (void)scrollToBottom;
-- (void)showLoading;
-- (void)hideLoading;
+- (void)showLoadingSpinner;
+- (void)hideLoadingSpinner;
 
 @end

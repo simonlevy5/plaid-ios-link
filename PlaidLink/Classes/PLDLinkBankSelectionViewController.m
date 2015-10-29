@@ -71,7 +71,7 @@
 - (void)viewDidAppear:(BOOL)animated {
   self.title = @"Select your bank";
   if (_bankSelectionView.institutions.count == 0) {
-    [_bankSelectionView showLoading];
+    [_bankSelectionView showLoadingSpinner];
   }
 }
 
