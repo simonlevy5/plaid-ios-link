@@ -1,9 +1,8 @@
 //
 //  PLDLinkBankTileView.m
-//  plaid
+//  PlaidLink
 //
 //  Created by Andres Ugarte on 10/21/15.
-//  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
 #import "PLDLinkBankTileView.h"

@@ -3,7 +3,6 @@
 //  PlaidLink
 //
 //  Created by Simon Levy on 10/28/15.
-//  Copyright © 2015 Simon Levy. All rights reserved.
 //
 
 #import "PLDLinkBankSelectionSearchResultsViewController.h"

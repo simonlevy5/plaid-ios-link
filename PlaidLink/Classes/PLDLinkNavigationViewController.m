@@ -1,9 +1,8 @@
 //
 //  PLDLinkNavigationViewController.m
-//  Plaid
+//  PlaidLink
 //
 //  Created by Simon Levy on 10/14/15.
-//  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
 #import "PLDLinkNavigationViewController.h"
@@ -19,7 +18,6 @@
 @end
 
 @implementation PLDLinkNavigationViewController {
-  NSString *_accessToken;
   UIVisualEffectView *_bgBlurView;
   PLDLinkSelectionToLoginAnimator *_animator;
 }
@@ -30,8 +28,7 @@
 }
 
 - (instancetype)initWithEnvironment:(PlaidEnvironment)environment
-                            product:(PlaidProduct)product
-                          publicKey:(NSString *)publicKey {
+                            product:(PlaidProduct)product {
   PLDLinkBankSelectionViewController *rootViewController =
       [[PLDLinkBankSelectionViewController alloc] initWithProduct:product];
   if (self = [super initWithRootViewController:rootViewController]) {
@@ -40,7 +37,6 @@
 
     _environment = environment;
     _product = product;
-    _publicKey = publicKey;
     _animator = [[PLDLinkSelectionToLoginAnimator alloc] init];
 
     self.delegate = self;
@@ -75,15 +71,15 @@
 }
 
 - (void)bankSelectionViewControllerCancelled:(PLDLinkBankSelectionViewController *)viewController {
-  [_linkDelegate linkNavigationControllerCancelled:self];
+  [_linkDelegate linkNavigationControllerDidCancel:self];
 }
 
 #pragma mark - PLDLinkBankMFAContainerViewControllerDelegate
 
 - (void)mfaContainerViewController:(PLDLinkBankMFAContainerViewController *)viewController
        didFinishWithAuthentication:(PLDAuthentication *)authentication {
-  _accessToken = authentication.accessToken;
-  [_linkDelegate linkNavigationContoller:self didFinishWithAccessToken:_accessToken];
+  [_linkDelegate linkNavigationContoller:self
+                didFinishWithAccessToken:authentication.accessToken];
 }
 
 #pragma mark - UINavigationControllerDelegate

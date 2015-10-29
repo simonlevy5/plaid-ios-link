@@ -1,9 +1,8 @@
 //
 //  PLDLinkBankMFAQuestionOrCodeViewController.m
-//  Plaid
+//  PlaidLink
 //
 //  Created by Simon Levy on 10/20/15.
-//  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
 #import "PLDLinkBankMFAQuestionOrCodeViewController.h"
