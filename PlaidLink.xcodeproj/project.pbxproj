@@ -36,6 +36,8 @@
 		B18282841BD9EBA70032AF19 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18282821BD9EBA70032AF19 /* RootViewController.xib */; };
 		B182828B1BDAC4A40032AF19 /* PLDLinkStyledButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B182828A1BDAC4A40032AF19 /* PLDLinkStyledButton.m */; };
 		B18282911BDACC090032AF19 /* UIColor+PLDLinkUIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B18282901BDACC090032AF19 /* UIColor+PLDLinkUIColor.m */; };
+		B1A6FF571BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A6FF561BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m */; };
+		B1A6FF5A1BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1A6FF591BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.m */; };
 		C0F4E46B175DA32EFB1F370C /* libPods-PlaidLink.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2655A45D9522B3615EE7B18 /* libPods-PlaidLink.a */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +107,10 @@
 		B182828A1BDAC4A40032AF19 /* PLDLinkStyledButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkStyledButton.m; path = Classes/PLDLinkStyledButton.m; sourceTree = "<group>"; };
 		B182828F1BDACC090032AF19 /* UIColor+PLDLinkUIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+PLDLinkUIColor.h"; path = "Classes/UIColor+PLDLinkUIColor.h"; sourceTree = "<group>"; };
 		B18282901BDACC090032AF19 /* UIColor+PLDLinkUIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+PLDLinkUIColor.m"; path = "Classes/UIColor+PLDLinkUIColor.m"; sourceTree = "<group>"; };
+		B1A6FF551BE17D66007DECB9 /* PLDLinkBankMFASelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkBankMFASelectionView.h; path = Classes/PLDLinkBankMFASelectionView.h; sourceTree = "<group>"; };
+		B1A6FF561BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankMFASelectionView.m; path = Classes/PLDLinkBankMFASelectionView.m; sourceTree = "<group>"; };
+		B1A6FF581BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDLinkBankMFASelectionsView.h; path = Classes/PLDLinkBankMFASelectionsView.h; sourceTree = "<group>"; };
+		B1A6FF591BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDLinkBankMFASelectionsView.m; path = Classes/PLDLinkBankMFASelectionsView.m; sourceTree = "<group>"; };
 		C2655A45D9522B3615EE7B18 /* libPods-PlaidLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaidLink.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB45B1F18220C68AD92A8C70 /* Pods-PlaidLink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLink.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLink/Pods-PlaidLink.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +251,10 @@
 				B182827B1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m */,
 				B182827D1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.h */,
 				B182827E1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.m */,
+				B1A6FF551BE17D66007DECB9 /* PLDLinkBankMFASelectionView.h */,
+				B1A6FF561BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m */,
+				B1A6FF581BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.h */,
+				B1A6FF591BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -431,6 +441,7 @@
 				5316B5101BD866F6006F627E /* PLDLinkBankMFAViewController.m in Sources */,
 				5316B5161BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.m in Sources */,
 				5316B50B1BD866F6006F627E /* PLDLinkBankMFAContainerViewController.m in Sources */,
+				B1A6FF571BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m in Sources */,
 				5316B5091BD866F6006F627E /* PLDLinkBankMFALoginViewController.m in Sources */,
 				B18282831BD9EBA70032AF19 /* RootViewController.m in Sources */,
 				5316B5121BD866F6006F627E /* PLDLinkBankSelectionViewController.m in Sources */,
@@ -441,6 +452,7 @@
 				5316B50D1BD866F6006F627E /* PLDLinkBankMFAQuestionOrCodeViewController.m in Sources */,
 				B18282911BDACC090032AF19 /* UIColor+PLDLinkUIColor.m in Sources */,
 				B182827C1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m in Sources */,
+				B1A6FF5A1BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.m in Sources */,
 				5316B5151BD866F6006F627E /* PLDLinkNavigationViewController.m in Sources */,
 				5316B51F1BD8672B006F627E /* AppDelegate.m in Sources */,
 				5316B50A1BD866F6006F627E /* PLDLinkBankMFAChoiceViewController.m in Sources */,

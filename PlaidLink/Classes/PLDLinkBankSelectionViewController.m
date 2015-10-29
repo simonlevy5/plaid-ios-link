@@ -60,15 +60,16 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+  // Remove the title so that the transition looks 👌🏽
   self.title = @"";
-}
-
-- (void)didTapCancel {
-  [_delegate bankSelectionViewControllerCancelled:self];
 }
 
 - (BOOL)prefersStatusBarHidden {
   return NO;
+}
+
+- (void)didTapCancel {
+  [_delegate bankSelectionViewControllerCancelled:self];
 }
 
 #pragma mark - PLDLinkBankSelectionViewDelegate

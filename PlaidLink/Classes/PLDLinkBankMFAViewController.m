@@ -36,23 +36,6 @@
   self.view = _view;
 }
 
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-
-  self.childViewControllers.firstObject.view.frame = _view.contentContainer.frame;
-}
-
-#pragma mark - PLDLinkBankMFAViewControllerDelegate
-
-- (void)bankMFAViewController:(PLDLinkBankMFAViewController *)viewController
-    didFinishWithAuthentication:(PLDAuthentication *)authentication {
-  if (authentication.mfa) {
-    
-    return;
-  }
-  
-}
-
 #pragma mark - Protected
 
 - (void)submitMFAStepResponse:(id)response

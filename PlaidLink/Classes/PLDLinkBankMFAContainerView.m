@@ -56,6 +56,8 @@ static CGFloat const kDefaultContentHeight = 200;
       [_currentContent removeFromSuperview];
       _currentContent = contentView;
       [_contentContainer addSubview:_currentContent];
+      [self setNeedsLayout];
+      [self layoutIfNeeded];
       [self animateCurrentContentIn:^(BOOL finished) {
         [_currentContent becomeFirstResponder];
       }];
@@ -64,6 +66,7 @@ static CGFloat const kDefaultContentHeight = 200;
     [_currentContent removeFromSuperview];
     _currentContent = contentView;
     [_contentContainer addSubview:_currentContent];
+    [self setNeedsLayout];
   }
 }
 
@@ -127,8 +130,6 @@ static CGFloat const kDefaultContentHeight = 200;
 }
 
 - (void)animateCurrentContentIn:(void (^ __nullable)(BOOL finished))completion {
-  _currentContent.frame = _contentContainer.bounds;
-  [_currentContent layoutSubviews];
   _currentContent.alpha = 0;
   _currentContent.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.bounds), 0);
   [UIView animateWithDuration:0.25
