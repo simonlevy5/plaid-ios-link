@@ -13,6 +13,8 @@
 #import "Plaid.h"
 #import "PLDLinkBankLoginView.h"
 #import "PLDLinkBankSelectionSearchResultsViewController.h"
+#import "PLDInstitution.h"
+#import "PLDLinkBankMFALoginView.h"
 #import "PLDLinkBankSelectionView.h"
 
 @interface PLDLinkBankSelectionViewController ()<PLDLinkBankSelectionViewDelegate,
@@ -62,6 +64,7 @@
 - (void)viewWillAppear:(BOOL)animated {
   [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithWhite:0.96 alpha:1]];
   [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+  [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -72,7 +75,12 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+  // Remove the title so that the transition looks 👌🏽
   self.title = @"";
+}
+
+- (BOOL)prefersStatusBarHidden {
+  return NO;
 }
 
 - (void)didTapCancel {

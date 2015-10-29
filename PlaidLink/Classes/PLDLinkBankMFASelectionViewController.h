@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class PLDInstitution;
 @class PLDLinkBankMFASelectionViewController;
 @class PLDMFAAuthenticationSelection;
 
@@ -22,6 +23,7 @@
 
 @property(nonatomic, weak) id<PLDLinkBankMFASelectionViewControllerDelegate> delegate;
 
-- (instancetype)initWithAuthenticationSelection:(PLDMFAAuthenticationSelection *)selection;
+- (instancetype)initWithAuthenticationSelection:(PLDMFAAuthenticationSelection *)selection
+                                    institution:(PLDInstitution *)institution;
 
 @end

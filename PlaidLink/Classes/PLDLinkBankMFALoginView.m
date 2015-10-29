@@ -6,7 +6,7 @@
 //  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
-#import "PLDLinkBankLoginView.h"
+#import "PLDLinkBankMFALoginView.h"
 
 #import "PLDLinkStyledButton.h"
 #import "PLDLinkStyledTextField.h"
@@ -17,7 +17,7 @@ static CGFloat const kInputHorizontalPadding = 24.0;
 static CGFloat const kTextFieldHeight = 36.0;
 static CGFloat const kButtonHeight = 46.0;
 
-@implementation PLDLinkBankLoginView
+@implementation PLDLinkBankMFALoginView
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {

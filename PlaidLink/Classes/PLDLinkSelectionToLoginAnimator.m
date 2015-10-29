@@ -8,7 +8,7 @@
 
 #import "PLDLinkSelectionToLoginAnimator.h"
 
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFAContainerView.h"
 #import "PLDLinkBankSelectionView.h"
 #import "PLDLinkBankTileView.h"
 
@@ -25,7 +25,7 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
   if (!self.reverse) {
     PLDLinkBankSelectionView *bankSelectionView =
         [transitionContext viewForKey:UITransitionContextFromViewKey];
-    PLDLinkBankContainerView *bankContainerView =
+    PLDLinkBankMFAContainerView *bankContainerView =
         [transitionContext viewForKey:UITransitionContextToViewKey];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
@@ -44,8 +44,6 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
     selectedCell.hidden = YES;
 
     bankContainerView.contentContainer.hidden = YES;
-    bankContainerView.contentContainer.transform =
-        CGAffineTransformMakeTranslation(0, -bankContainerView.contentContainer.bounds.size.height);
 
     [UIView animateWithDuration:kBankTileAnimationDuration
                           delay:0
@@ -58,14 +56,13 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
       bankSelectionView.layer.transform = CATransform3DTranslate(fromViewTransform, 0, 0, -200);
       bankSelectionView.alpha = 0;
       } completion:^(BOOL finished) {
-        [animatedTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
-                           cornerRadii:CGSizeMake(8, 8)];
         [UIView animateWithDuration:kInputContainerAnimationDuration
                              delay:0
                            options:UIViewAnimationOptionCurveEaseOut
                         animations:^{
           bankContainerView.contentContainer.hidden = NO;
-          bankContainerView.contentContainer.transform = CGAffineTransformIdentity;
+          bankContainerView.showContentContainer = YES;
+          [bankContainerView layoutIfNeeded];
           } completion:^(BOOL finished) {
             bankContainerView.alpha = 1;
             bankSelectionView.alpha = 1;
@@ -77,19 +74,18 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
   } else {
     PLDLinkBankSelectionView *bankSelectionView =
         [transitionContext viewForKey:UITransitionContextToViewKey];
-    PLDLinkBankContainerView *bankContainerView =
+    PLDLinkBankMFAContainerView *bankContainerView =
         [transitionContext viewForKey:UITransitionContextFromViewKey];
     [[transitionContext containerView] addSubview:bankSelectionView];
     [[transitionContext containerView] addSubview:bankContainerView];
-    bankSelectionView.frame =
-        [transitionContext finalFrameForViewController:[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
+    bankSelectionView.frame = [transitionContext finalFrameForViewController:
+        [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey]];
     [bankSelectionView layoutSubviews];
     bankSelectionView.collectionView.alpha = 0;
     CATransform3D fromViewTransform = CATransform3DIdentity;
     fromViewTransform.m34 = 1.0 / -500;
     bankSelectionView.collectionView.layer.transform =
         CATransform3DTranslate(fromViewTransform, 0, 0, -200);
-    bankContainerView.backgroundColor = [UIColor clearColor];
 
     PLDLinkBankSelectionViewCell *selectedCell = [bankSelectionView selectedCell];
     selectedCell.hidden = YES;
@@ -98,11 +94,10 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-      bankContainerView.contentContainer.frame =
-          CGRectOffset(bankContainerView.contentContainer.frame, 0,
-                       -CGRectGetHeight(bankContainerView.contentContainer.bounds));
+        bankContainerView.showContentContainer = NO;
+        [bankContainerView layoutIfNeeded];
       } completion:^(BOOL finished) {
-        bankContainerView.contentContainer.alpha = 0;
+        bankContainerView.contentContainer.hidden = YES;
         PLDLinkBankTileView *bankTileView = bankContainerView.bankTileView;
         bankTileView.alpha = 0;
         CGRect adjustedFrame = [bankContainerView convertRect:bankTileView.frame

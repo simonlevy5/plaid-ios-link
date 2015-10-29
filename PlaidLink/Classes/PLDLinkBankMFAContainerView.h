@@ -10,11 +10,12 @@
 
 @class PLDLinkBankTileView;
 
-@interface PLDLinkBankContainerView : UIScrollView
+@interface PLDLinkBankMFAContainerView : UIScrollView
 
 @property(nonatomic) PLDLinkBankTileView *bankTileView;
 @property(nonatomic, assign) NSString *explainerText;
 @property(nonatomic, readonly) UIView *contentContainer;
+@property(nonatomic) BOOL showContentContainer;
 
 - (void)setCurrentContentView:(UIView *)contentView;
 

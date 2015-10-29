@@ -20,6 +20,7 @@
 
 @implementation PLDLinkNavigationViewController {
   NSString *_accessToken;
+  UIVisualEffectView *_bgBlurView;
   PLDLinkSelectionToLoginAnimator *_animator;
 }
 
@@ -45,9 +46,8 @@
     self.delegate = self;
 
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    blurView.frame = self.view.frame;
-    [self.view insertSubview:blurView atIndex:0];
+    _bgBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [self.view insertSubview:_bgBlurView atIndex:0];
 
     [self.navigationBar setTranslucent:YES];
     [self.navigationBar setTintColor:[UIColor blackColor]];
@@ -57,6 +57,10 @@
         @{NSFontAttributeName:[UIFont systemFontOfSize:20 weight:UIFontWeightLight]}];
   }
   return self;
+}
+
+- (void)viewDidLayoutSubviews {
+  _bgBlurView.frame = self.view.frame;
 }
 
 #pragma mark - PLDLinkBankSelectionViewControllerDelegate

@@ -11,7 +11,7 @@
 #import "PLDAuthentication.h"
 #import "PLDInstitution.h"
 
-#import "PLDLinkBankContainerView.h"
+#import "PLDLinkBankMFAContainerView.h"
 #import "PLDLinkBankMFAChoiceView.h"
 
 @interface PLDLinkBankMFAChoiceViewController ()<PLDLinkBankMFAChoiceViewDelegate>

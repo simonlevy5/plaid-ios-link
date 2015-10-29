@@ -11,17 +11,17 @@
 #import "PLDDefines.h"
 
 @class PLDAuthentication;
-@class PLDLinkBankLoginViewController;
+@class PLDLinkBankMFALoginViewController;
 @class PLDInstitution;
 
 @protocol PLDLinkBankLoginViewControllerDelegate <NSObject>
 
-- (void)loginViewController:(PLDLinkBankLoginViewController *)loginViewController
+- (void)loginViewController:(PLDLinkBankMFALoginViewController *)loginViewController
     didFinishWithAuthentication:(PLDAuthentication *)authentication;
 
 @end
 
-@interface PLDLinkBankLoginViewController : UIViewController
+@interface PLDLinkBankMFALoginViewController : UIViewController
 
 @property(nonatomic, weak) id<PLDLinkBankLoginViewControllerDelegate> delegate;
 

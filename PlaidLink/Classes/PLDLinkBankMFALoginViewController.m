@@ -6,18 +6,18 @@
 //  Copyright © 2015 Vouch Financial, Inc. All rights reserved.
 //
 
-#import "PLDLinkBankLoginViewController.h"
+#import "PLDLinkBankMFALoginViewController.h"
 
 #import "Plaid.h"
 #import "PLDAuthentication.h"
-#import "PLDLinkBankLoginView.h"
+#import "PLDLinkBankMFALoginView.h"
 #import "PLDInstitution.h"
 #import "PLDLinkStyledButton.h"
 
-@implementation PLDLinkBankLoginViewController {
+@implementation PLDLinkBankMFALoginViewController {
   PLDInstitution *_institution;
   PlaidProduct _product;
-  PLDLinkBankLoginView *_view;
+  PLDLinkBankMFALoginView *_view;
 }
 
 - (instancetype)initWithInstitution:(PLDInstitution *)institution
@@ -30,7 +30,7 @@
 }
 
 - (void)loadView {
-  _view = [[PLDLinkBankLoginView alloc] initWithFrame:CGRectZero
+  _view = [[PLDLinkBankMFALoginView alloc] initWithFrame:CGRectZero
                                             tintColor:_institution.backgroundColor];
   self.view = _view;
 }
@@ -57,15 +57,17 @@
   NSDictionary *options = @{
       @"list" : @(YES)
   };
+  __weak PLDLinkBankMFALoginViewController *weakSelf = self;
+  __weak PLDLinkBankMFALoginView *weakView = _view;
   [[Plaid sharedInstance] addUserForProduct:_product
                                    username:_view.usernameTextField.text
                                    password:_view.passwordTextField.text
                                        type:_institution.type
                                     options:options
                                  completion:^(PLDAuthentication *authentication, id response, NSError *error) {
-    if (error) {
-     [_view.submitButton hideLoadingState];
-     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+    if (error && weakSelf) {
+     [weakView.submitButton hideLoadingState];
+     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
                                                          message:[error localizedRecoverySuggestion]
                                                         delegate:nil
                                                cancelButtonTitle:@"OK"
@@ -73,8 +75,7 @@
      [alertView show];
      return;
     }
-    [_delegate loginViewController:self
-      didFinishWithAuthentication:authentication];
+    [weakSelf.delegate loginViewController:self didFinishWithAuthentication:authentication];
   }];
 }
 

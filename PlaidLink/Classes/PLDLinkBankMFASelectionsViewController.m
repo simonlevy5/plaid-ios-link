@@ -9,6 +9,8 @@
 #import "PLDLinkBankMFASelectionsViewController.h"
 
 #import "PLDAuthentication.h"
+#import "PLDInstitution.h"
+#import "PLDLinkBankMFASelectionsView.h"
 #import "PLDLinkBankMFASelectionViewController.h"
 
 @interface PLDLinkBankMFASelectionsViewController ()<PLDLinkBankMFASelectionViewControllerDelegate>
@@ -17,16 +19,22 @@
 @implementation PLDLinkBankMFASelectionsViewController {
   NSMutableArray *_answers;
   NSArray *_selections;
+  PLDLinkBankMFASelectionsView *_view;
+  PLDInstitution *_institution;
+  int _currentChildViewController;
 }
 
 - (instancetype)initWithAuthentication:(PLDAuthentication *)authentication
                            institution:(PLDInstitution *)institution {
   if (self = [super initWithAuthentication:authentication institution:institution]) {
+    _institution = institution;
     _answers = [NSMutableArray array];
     _selections = authentication.mfa.data;
+    _currentChildViewController = 0;
     for (PLDMFAAuthenticationSelection *selection in _selections) {
       PLDLinkBankMFASelectionViewController *selectionViewController =
-          [[PLDLinkBankMFASelectionViewController alloc] initWithAuthenticationSelection:selection];
+          [[PLDLinkBankMFASelectionViewController alloc] initWithAuthenticationSelection:selection
+                                                                             institution:institution];
       selectionViewController.delegate = self;
       [self addChildViewController:selectionViewController];
     }
@@ -35,28 +43,23 @@
 }
 
 - (void)loadView {
-  self.view = [[UIView alloc] initWithFrame:CGRectZero];
-}
-
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-
-  // Assign to bounds since this is child within a child.
-  [self currentChildViewController].view.frame = self.view.bounds;
+  _view = [[PLDLinkBankMFASelectionsView alloc] initWithFrame:CGRectZero
+                                                tintColor:_institution.backgroundColor];
+  self.view = _view;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   UIViewController *viewController = [self currentChildViewController];
-  [self.view addSubview:viewController.view];
+  [_view setCurrentSelectionView:viewController.view];
   [viewController didMoveToParentViewController:self];
 }
 
 #pragma mark - PLDLinkBankMFASelectionViewControllerDelegate
 
 - (UIViewController *)currentChildViewController {
-  return [self.childViewControllers firstObject];
+  return [self.childViewControllers objectAtIndex:_currentChildViewController];
 }
 
 - (void)selectionViewController:(PLDLinkBankMFASelectionViewController *)viewController
@@ -72,11 +75,9 @@
 }
 
 - (void)showNextViewController {
+  _currentChildViewController++;
   UIViewController *currentViewController = [self currentChildViewController];
-  [currentViewController.view removeFromSuperview];
-  [currentViewController removeFromParentViewController];
-  currentViewController = [self currentChildViewController];
-  [self.view addSubview:currentViewController.view];
+  [_view setCurrentSelectionView:currentViewController.view];
   [currentViewController didMoveToParentViewController:self];
 }
 
