@@ -22,6 +22,7 @@
 @implementation PLDLinkBankSelectionViewController {
   PLDLinkBankSelectionView *_bankSelectionView;
   PlaidProduct _product;
+  UISearchController *_searchController;
   PLDLinkBankSelectionSearchResultsViewController *_searchResultsController;
 }
 
@@ -44,6 +45,7 @@
   [super viewDidLoad];
 
   self.edgesForExtendedLayout = UIRectEdgeNone;
+
   UIBarButtonItem *closeButton =
       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                     target:self
@@ -89,7 +91,7 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
   NSString *searchQuery = searchController.searchBar.text;
-  if ([searchQuery length] <= 1) {
+  if ([searchQuery length] == 0) {
     return;
   }
   [[Plaid sharedInstance] getLongTailInstitutionsWithQuery:searchController.searchBar.text
@@ -114,16 +116,19 @@
   _searchResultsController =
       [[PLDLinkBankSelectionSearchResultsViewController alloc] init];
   _searchResultsController.delegate = self;
-  UISearchController *search =
+  _searchController =
       [[UISearchController alloc] initWithSearchResultsController:_searchResultsController];
-  search.searchResultsUpdater = self;
-  [self presentViewController:search animated:YES completion:nil];
+  _searchController.searchResultsUpdater = self;
+  _searchController.hidesNavigationBarDuringPresentation = NO;
+  [self presentViewController:_searchController animated:YES completion:nil];
 }
 
 #pragma mark - PLDLinkBankSelectionSearchResultsViewControllerDelegate
 
 - (void)searchResultsViewController:(PLDLinkBankSelectionSearchResultsViewController *)viewController
        didSelectLongTailInstitution:(PLDLongTailInstitution *)institution {
+  [_searchController.view endEditing:YES];
+
   NSMutableArray *institutions = [NSMutableArray arrayWithArray:_bankSelectionView.institutions];
   NSUInteger searchIndex = ([institutions count] - 1);
   [institutions insertObject:institution atIndex:searchIndex];

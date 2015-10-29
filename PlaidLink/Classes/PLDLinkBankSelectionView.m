@@ -138,10 +138,15 @@
 
 - (void)setInstitutions:(NSArray *)institutions {
   [self hideLoading];
-  _institutions = institutions;
-  [_collectionView performBatchUpdates:^{
-    [_collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-  } completion:^(BOOL finished) {}];
+  if (_institutions.count > 0) {
+    _institutions = institutions;
+    [_collectionView reloadData];
+  } else {
+    _institutions = institutions;
+    [_collectionView performBatchUpdates:^{
+      [_collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    } completion:^(BOOL finished) {}];
+  }
 }
 
 - (PLDLinkBankSelectionViewCell *)selectedCell {
@@ -152,6 +157,15 @@
     return cell;
   }
   return nil;
+}
+
+- (void)scrollToBottom {
+  NSInteger section = [self numberOfSectionsInCollectionView:_collectionView] - 1;
+  NSInteger item = [self collectionView:_collectionView numberOfItemsInSection:section] - 1;
+  NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+  [_collectionView scrollToItemAtIndexPath:lastIndexPath
+                          atScrollPosition:UICollectionViewScrollPositionBottom
+                                  animated:YES];
 }
 
 - (void)showLoading {
