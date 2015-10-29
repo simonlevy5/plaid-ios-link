@@ -121,14 +121,13 @@
   NSMutableArray *institutions = [NSMutableArray arrayWithArray:_bankSelectionView.institutions];
   NSUInteger searchIndex = ([institutions count] - 1);
   [institutions insertObject:institution atIndex:searchIndex];
-
   _bankSelectionView.institutions = institutions;
 
+  // Animator expects a selected cell
   NSIndexPath *index = [NSIndexPath indexPathForRow:searchIndex inSection:0];
   [_bankSelectionView.collectionView selectItemAtIndexPath:index
                                                   animated:NO
                                             scrollPosition:UICollectionViewScrollPositionBottom];
-
   [viewController dismissViewControllerAnimated:YES completion:^{
     [_delegate bankSelectionViewController:self didFinishWithInstitution:institution];
   }];
