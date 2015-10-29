@@ -3,7 +3,6 @@
 //  PlaidLink
 //
 //  Created by Andres Ugarte on 10/22/15.
-//  Copyright © 2015 Simon Levy. All rights reserved.
 //
 
 #import "RootViewController.h"
@@ -22,8 +21,7 @@
 - (IBAction)didTapConnect:(id)sender {
   PLDLinkNavigationViewController *plaidLink =
       [[PLDLinkNavigationViewController alloc] initWithEnvironment:PlaidEnvironmentTartan
-                                                           product:PlaidProductConnect
-                                                         publicKey:nil];
+                                                           product:PlaidProductConnect];
 
   plaidLink.linkDelegate = self;
   plaidLink.providesPresentationContextTransitionStyle = true;
@@ -41,7 +39,7 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)linkNavigationControllerCancelled:(PLDLinkNavigationViewController *)navigationController {
+- (void)linkNavigationControllerDidCancel:(PLDLinkNavigationViewController *)navigationController {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 

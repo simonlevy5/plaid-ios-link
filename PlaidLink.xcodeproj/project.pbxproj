@@ -201,6 +201,7 @@
 		5316B4E51BD866DC006F627E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5369A5631BE2D058006829D5 /* Shared */,
 				5316B5171BD866FE006F627E /* Views */,
 				5316B4EB1BD866F6006F627E /* PLDLinkBankMFALoginViewController.h */,
 				5316B4EC1BD866F6006F627E /* PLDLinkBankMFALoginViewController.m */,
@@ -240,7 +241,6 @@
 		5316B5171BD866FE006F627E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B18282881BDAC48A0032AF19 /* Shared */,
 				5316B4E71BD866F6006F627E /* PLDLinkBankMFAContainerView.h */,
 				5316B4E81BD866F6006F627E /* PLDLinkBankMFAContainerView.m */,
 				5316B4E91BD866F6006F627E /* PLDLinkBankMFALoginView.h */,
@@ -263,15 +263,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		B18282881BDAC48A0032AF19 /* Shared */ = {
+		5369A5631BE2D058006829D5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				B182828F1BDACC090032AF19 /* UIColor+PLDLinkUIColor.h */,
-				B18282901BDACC090032AF19 /* UIColor+PLDLinkUIColor.m */,
 				B18282891BDAC4A40032AF19 /* PLDLinkStyledButton.h */,
 				B182828A1BDAC4A40032AF19 /* PLDLinkStyledButton.m */,
 				B13E99AB1BDB06E0007A1B27 /* PLDLinkStyledTextField.h */,
 				B13E99AC1BDB06E0007A1B27 /* PLDLinkStyledTextField.m */,
+				B182828F1BDACC090032AF19 /* UIColor+PLDLinkUIColor.h */,
+				B18282901BDACC090032AF19 /* UIColor+PLDLinkUIColor.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
