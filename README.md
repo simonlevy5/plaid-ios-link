@@ -5,6 +5,8 @@
 # plaid-ios-link
 Plaid Link experience built natively for iOS. For more on Plaid Link, please see https://github.com/plaid/link
 
+[![Demo](https://j.gifs.com/Kep6Bp.gif)]()
+
 This project is currently under active development.
 
 **Usage**
