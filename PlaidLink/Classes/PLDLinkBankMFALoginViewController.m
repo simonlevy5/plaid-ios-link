@@ -32,6 +32,7 @@
 - (void)loadView {
   _view = [[PLDLinkBankMFALoginView alloc] initWithFrame:CGRectZero
                                             tintColor:_institution.backgroundColor];
+  _view.isPinRequired = [_institution.type isEqualToString:@"usaa"];
   self.view = _view;
 }
 

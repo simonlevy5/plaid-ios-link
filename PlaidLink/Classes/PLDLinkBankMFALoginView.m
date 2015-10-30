@@ -20,6 +20,7 @@ static CGFloat const kButtonHeight = 46.0;
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
+    self.tintColor = tintColor;
     _usernameTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                              tintColor:tintColor
                                                            placeholder:@"username"];
@@ -32,23 +33,26 @@ static CGFloat const kButtonHeight = 46.0;
     _passwordTextField.secureTextEntry = YES;
     _passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self addSubview:_passwordTextField];
-    
-    _pinTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-    _pinTextField.secureTextEntry = YES;
-    _pinTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    _pinTextField.hidden = YES;
-    _pinTextField.textColor = [UIColor whiteColor];
-    _pinTextField.tintColor = [UIColor whiteColor];
-    _pinTextField.attributedPlaceholder =
-        [[NSAttributedString alloc] initWithString:@"pin"
-                                        attributes:@{NSForegroundColorAttributeName: [tintColor lighterColorForText]}];
-    [self addSubview:_pinTextField];
 
     _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:tintColor];
     [_submitButton setTitle:@"Log in" forState:UIControlStateNormal];
     [self addSubview:_submitButton];
   }
   return self;
+}
+
+- (void)setIsPinRequired:(BOOL)isPinRequired {
+  _isPinRequired = isPinRequired;
+  if (_isPinRequired) {
+    _pinTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
+                                                        tintColor:self.tintColor
+                                                      placeholder:@"pin"];
+    _pinTextField.secureTextEntry = YES;
+    _pinTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self addSubview:_pinTextField];
+  } else {
+    _pinTextField = nil;
+  }
 }
 
 - (void)layoutSubviews {
