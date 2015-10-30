@@ -13,10 +13,10 @@ Right now the Plaid library is required to run this. Edit Podfile and enter the 
 3. Address known issues
 
 **Known issues**
--Copy in login inputs aren't desirable (Using hardcoded strings vs. institution-specific values)
--Error messages are being pulled from API
--Not showing forgot password, account recovery, or locked out links
--Need better loading states for very long loading situations
+- Copy in login inputs aren't desirable (Using hardcoded strings vs. institution-specific values)
+- Error messages are being pulled from API
+- Not showing forgot password, account recovery, or locked out links
+- Need better loading states for very long loading situations
 
 **License**
 
