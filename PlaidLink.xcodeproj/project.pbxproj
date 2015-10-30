@@ -27,7 +27,7 @@
 		5316B5201BD8672B006F627E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5316B51A1BD8672B006F627E /* Assets.xcassets */; };
 		5316B5211BD8672B006F627E /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 5316B51B1BD8672B006F627E /* Base.lproj */; };
 		5316B5221BD8672B006F627E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5316B51C1BD8672B006F627E /* main.m */; };
-		5369A53B1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5369A53B1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */; };
 		B13E99AD1BDB06E0007A1B27 /* PLDLinkStyledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B13E99AC1BDB06E0007A1B27 /* PLDLinkStyledTextField.m */; };
 		B18282791BD9560B0032AF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B18282781BD9560B0032AF19 /* Assets.xcassets */; };
 		B182827C1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B182827B1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m */; };
@@ -203,6 +203,16 @@
 			children = (
 				5369A5631BE2D058006829D5 /* Shared */,
 				5316B5171BD866FE006F627E /* Views */,
+				5316B5031BD866F6006F627E /* PLDLinkNavigationViewController.h */,
+				5316B5041BD866F6006F627E /* PLDLinkNavigationViewController.m */,
+				5316B4FD1BD866F6006F627E /* PLDLinkBankSelectionViewController.h */,
+				5316B4FE1BD866F6006F627E /* PLDLinkBankSelectionViewController.m */,
+				5369A5391BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.h */,
+				5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */,
+				5316B5051BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.h */,
+				5316B5061BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.m */,
+				5316B4F91BD866F6006F627E /* PLDLinkBankMFAViewController.h */,
+				5316B4FA1BD866F6006F627E /* PLDLinkBankMFAViewController.m */,
 				5316B4EB1BD866F6006F627E /* PLDLinkBankMFALoginViewController.h */,
 				5316B4EC1BD866F6006F627E /* PLDLinkBankMFALoginViewController.m */,
 				5316B4ED1BD866F6006F627E /* PLDLinkBankMFAChoiceViewController.h */,
@@ -215,16 +225,6 @@
 				5316B4F61BD866F6006F627E /* PLDLinkBankMFASelectionsViewController.m */,
 				5316B4F71BD866F6006F627E /* PLDLinkBankMFASelectionViewController.h */,
 				5316B4F81BD866F6006F627E /* PLDLinkBankMFASelectionViewController.m */,
-				5316B4F91BD866F6006F627E /* PLDLinkBankMFAViewController.h */,
-				5316B4FA1BD866F6006F627E /* PLDLinkBankMFAViewController.m */,
-				5369A5391BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.h */,
-				5369A53A1BE14793006829D5 /* PLDLinkBankSelectionSearchResultsViewController.m */,
-				5316B4FD1BD866F6006F627E /* PLDLinkBankSelectionViewController.h */,
-				5316B4FE1BD866F6006F627E /* PLDLinkBankSelectionViewController.m */,
-				5316B5031BD866F6006F627E /* PLDLinkNavigationViewController.h */,
-				5316B5041BD866F6006F627E /* PLDLinkNavigationViewController.m */,
-				5316B5051BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.h */,
-				5316B5061BD866F6006F627E /* PLDLinkSelectionToLoginAnimator.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -241,24 +241,24 @@
 		5316B5171BD866FE006F627E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5316B4FF1BD866F6006F627E /* PLDLinkBankTileView.h */,
+				5316B5001BD866F6006F627E /* PLDLinkBankTileView.m */,
+				5316B4FB1BD866F6006F627E /* PLDLinkBankSelectionView.h */,
+				5316B4FC1BD866F6006F627E /* PLDLinkBankSelectionView.m */,
 				5316B4E71BD866F6006F627E /* PLDLinkBankMFAContainerView.h */,
 				5316B4E81BD866F6006F627E /* PLDLinkBankMFAContainerView.m */,
 				5316B4E91BD866F6006F627E /* PLDLinkBankMFALoginView.h */,
 				5316B4EA1BD866F6006F627E /* PLDLinkBankMFALoginView.m */,
 				5316B4F11BD866F6006F627E /* PLDLinkBankMFAExplainerView.h */,
 				5316B4F21BD866F6006F627E /* PLDLinkBankMFAExplainerView.m */,
-				5316B4FB1BD866F6006F627E /* PLDLinkBankSelectionView.h */,
-				5316B4FC1BD866F6006F627E /* PLDLinkBankSelectionView.m */,
-				5316B4FF1BD866F6006F627E /* PLDLinkBankTileView.h */,
-				5316B5001BD866F6006F627E /* PLDLinkBankTileView.m */,
 				B182827A1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.h */,
 				B182827B1BD996550032AF19 /* PLDLinkBankMFAQuestionOrCodeView.m */,
 				B182827D1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.h */,
 				B182827E1BD9A4D30032AF19 /* PLDLinkBankMFAChoiceView.m */,
-				B1A6FF551BE17D66007DECB9 /* PLDLinkBankMFASelectionView.h */,
-				B1A6FF561BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m */,
 				B1A6FF581BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.h */,
 				B1A6FF591BE184DE007DECB9 /* PLDLinkBankMFASelectionsView.m */,
+				B1A6FF551BE17D66007DECB9 /* PLDLinkBankMFASelectionView.h */,
+				B1A6FF561BE17D66007DECB9 /* PLDLinkBankMFASelectionView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
