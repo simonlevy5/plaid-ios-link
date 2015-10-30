@@ -38,8 +38,6 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  _view.usernameTextField.text = @"plaid_test";
-  _view.passwordTextField.text = @"plaid_good";
   [_view.submitButton addTarget:self
                          action:@selector(didTapSubmit)
                forControlEvents:UIControlEventTouchUpInside];
