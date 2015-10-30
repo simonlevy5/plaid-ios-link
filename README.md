@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/vouch/plaid-ios-link.svg)](https://travis-ci.org/vouch/plaid-ios-link)
+[![Platforms](https://img.shields.io/badge/platform-ios-lightgrey.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/vouch/plaid-ios-link/blob/master/LICENSE)
+
 # plaid-ios-link
 Plaid Link experience built natively for iOS. For more on Plaid Link, please see https://github.com/plaid/link
 
