@@ -11,18 +11,9 @@
 
 @implementation PLDLinkBankTileView {
   UIImageView *_logo;
+  UILabel *_fallbackLabel;
   UIBezierPath *_maskPath;
   CAShapeLayer *_maskLayer;
-}
-
-- (void)setInstitution:(PLDInstitution *)institution {
-  _institution = institution;
-  if (institution.logoImage) {
-    [_logo setImage:institution.logoImage];
-  } else {
-    [_logo setImage:[UIImage imageNamed:_institution.type]];
-  }
-  [self setNeedsLayout];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -33,14 +24,46 @@
     _logo = [[UIImageView alloc] initWithFrame:frame];
     _logo.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:_logo];
+
+    _fallbackLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    _fallbackLabel.font = [UIFont systemFontOfSize:17 weight:UIFontWeightLight];
+    _fallbackLabel.textAlignment = NSTextAlignmentCenter;
+    _fallbackLabel.numberOfLines = 0;
+    [self addSubview:_fallbackLabel];
   }
   return self;
+}
+
+- (void)setInstitution:(PLDInstitution *)institution {
+  _institution = institution;
+  _logo.hidden = YES;
+  _fallbackLabel.hidden = YES;
+
+  // Longtail institutions have a logoImage.
+  if (institution.logoImage) {
+    [_logo setImage:institution.logoImage];
+    _logo.hidden = NO;
+  } else {
+    // For the top banks, we have better logos.
+    UIImage *logo = [UIImage imageNamed:_institution.type];
+    if (logo) {
+      [_logo setImage:logo];
+      _logo.hidden = NO;
+    } else {
+      // Fallback to showing the name of the institution.
+      _fallbackLabel.text = institution.name;
+      _fallbackLabel.hidden = NO;
+    }
+  }
+  [self setNeedsLayout];
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
   _logo.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2.5);
   _logo.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+  _fallbackLabel.frame = CGRectInset(self.bounds, 16, 16);
+  _fallbackLabel.center = _logo.center;
 }
 
 - (void)roundCorners:(UIRectCorner)corners cornerRadii:(CGSize)cornerRadii {
