@@ -40,14 +40,19 @@
         @"type" : choice
       }
     };
+  __weak PLDLinkBankMFAChoiceViewController *weakSelf = self;
   [self submitMFAStepResponse:nil options:options completion:^(NSError *error) {
     if (error) {
-      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
-                                                          message:[error localizedRecoverySuggestion]
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-      [alertView show];
+      UIAlertController *alert =
+          [UIAlertController alertControllerWithTitle:[error localizedDescription]
+                                              message:[error localizedRecoverySuggestion]
+                                       preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action) {}];
+
+      [alert addAction:defaultAction];
+      [weakSelf presentViewController:alert animated:YES completion:nil];
     }
   }];
 }

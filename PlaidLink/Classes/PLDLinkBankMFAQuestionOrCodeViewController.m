@@ -60,12 +60,16 @@
       } else {
         errorTitle = @"Invalid security code";
       }
-      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:errorTitle
-                                                          message:[error localizedRecoverySuggestion]
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-      [alertView show];
+      UIAlertController *alert =
+          [UIAlertController alertControllerWithTitle:errorTitle
+                                              message:[error localizedRecoverySuggestion]
+                                       preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action) {}];
+
+      [alert addAction:defaultAction];
+      [weakSelf presentViewController:alert animated:YES completion:nil];
     }
   }];
 }

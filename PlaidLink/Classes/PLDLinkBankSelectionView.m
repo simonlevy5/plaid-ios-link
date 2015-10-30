@@ -25,7 +25,7 @@
 
     _label = [[UILabel alloc] initWithFrame:frame];
     _label.numberOfLines = 0;
-    _label.font = [UIFont systemFontOfSize:19 weight:UIFontWeightLight];
+    _label.font = [UIFont systemFontOfSize:18 weight:UIFontWeightLight];
     _label.textAlignment = NSTextAlignmentCenter;
     _label.text = @"More banks";
     [self addSubview:_label];
@@ -37,7 +37,7 @@
   [super layoutSubviews];
   _label.frame = self.bounds;
   [_label sizeToFit];
-  _label.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+  _label.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - 1);
 }
 
 @end

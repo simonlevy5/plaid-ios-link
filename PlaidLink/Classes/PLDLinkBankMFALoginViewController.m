@@ -66,13 +66,17 @@
                                     options:options
                                  completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
-     [weakView.submitButton hideLoadingState];
-     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
-                                                         message:[error localizedRecoverySuggestion]
-                                                        delegate:nil
-                                               cancelButtonTitle:@"OK"
-                                               otherButtonTitles:nil];
-     [alertView show];
+      [weakView.submitButton hideLoadingState];
+      UIAlertController *alert =
+          [UIAlertController alertControllerWithTitle:@"Invalid credentials"
+                                              message:[error localizedRecoverySuggestion]
+                                       preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action) {}];
+      
+      [alert addAction:defaultAction];
+      [weakSelf presentViewController:alert animated:YES completion:nil];
      return;
     }
     [weakSelf.delegate loginViewController:self didFinishWithAuthentication:authentication];

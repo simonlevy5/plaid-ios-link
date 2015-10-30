@@ -21,7 +21,7 @@
 - (IBAction)didTapConnect:(id)sender {
   PLDLinkNavigationViewController *plaidLink =
       [[PLDLinkNavigationViewController alloc] initWithEnvironment:PlaidEnvironmentTartan
-                                                           product:PlaidProductAuth];
+                                                           product:PlaidProductConnect];
 
   plaidLink.linkDelegate = self;
   plaidLink.providesPresentationContextTransitionStyle = true;
