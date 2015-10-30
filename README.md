@@ -1,10 +1,19 @@
 # plaid-ios-link
 Plaid Link experience built natively for iOS. For more on Plaid Link, please see https://github.com/plaid/link
 
+This project is currently under active development.
+
 **Usage**
 
 For development:
-Right now the Plaid library is required to run this. Edit Podfile and enter the path to that library (https://github.com/vouch/plaid-ios-sdk) for the plaid-ios-sdk Pod. Then open the workspace and run the PlaidLink target.
+The plaid-ios-sdk (https://github.com/vouch/plaid-ios-sdk) is required to use this. There are two options:
+
+1. Use the Cocoapod by adding the following to your Podfile:
+    pod 'plaid-ios-sdk'
+2. Download the plaid-ios-sdk project and add the following to your Podfile:
+    pod 'plaid-ios-sdk', :path => 'path_to_project'
+
+The second option allows for developing against the local version of the SDK if changes are required.
 
 **Project Tasks**
 
