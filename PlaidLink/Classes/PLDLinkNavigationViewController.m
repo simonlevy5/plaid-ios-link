@@ -74,6 +74,10 @@
   [_linkDelegate linkNavigationControllerDidCancel:self];
 }
 
+- (void)bankSelectionViewControllerDidFinishWithBankNotListed:(PLDLinkBankSelectionViewController *)viewController {
+  [_linkDelegate linkNavigationControllerDidFinishWithBankNotListed:self];
+}
+
 #pragma mark - PLDLinkBankMFAContainerViewControllerDelegate
 
 - (void)mfaContainerViewController:(PLDLinkBankMFAContainerViewController *)viewController

@@ -57,6 +57,8 @@
     NSMutableArray *institutions = [NSMutableArray arrayWithArray:response];
     if (_product == PlaidProductConnect) {
       [institutions addObject:@"searchCell"];
+    } else {
+      [institutions addObject:@"bankNotListedCell"];
     }
     _bankSelectionView.institutions = institutions;
   }];
@@ -133,30 +135,8 @@
       CGAffineTransformMakeTranslation(0, CGRectGetHeight(_searchController.searchBar.bounds));
 }
 
-- (void)animateSelectionViewOutForSearch {
-  CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-  transformAnimation.duration = 0.5;
-  transformAnimation.timingFunction =
-      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-  transformAnimation.removedOnCompletion = NO;
-  transformAnimation.fillMode = kCAFillModeForwards;
-
-  CATransform3D xform = CATransform3DIdentity;
-  xform.m34 = 1.0 / -500;
-  xform = CATransform3DTranslate(xform, 0, 0, -50);
-  transformAnimation.toValue = [NSValue valueWithCATransform3D:xform];
-  [_bankSelectionView.collectionView.layer addAnimation:transformAnimation forKey:@"transformAnimation"];
-
-  _bankSelectionView.collectionView.layer.opacity = 0;
-  CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-  alphaAnimation.duration = 0.5;
-  alphaAnimation.timingFunction =
-      [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-  alphaAnimation.removedOnCompletion = YES;
-  alphaAnimation.fromValue = [NSNumber numberWithFloat:1];
-  alphaAnimation.toValue = [NSNumber numberWithFloat:0];
-  [_bankSelectionView.collectionView.layer addAnimation:alphaAnimation forKey:@"alphaAnimation"];
-  _bankSelectionView.collectionView.userInteractionEnabled = NO;
+- (void)bankSelectionViewDidSelectNotListed:(PLDLinkBankSelectionView *)view {
+  [_delegate bankSelectionViewControllerDidFinishWithBankNotListed:self];
 }
 
 #pragma mark - PLDLinkBankSelectionSearchResultsViewControllerDelegate
@@ -203,6 +183,34 @@
   [viewController dismissViewControllerAnimated:YES completion:^{
     [_delegate bankSelectionViewController:self didFinishWithInstitution:institution];
   }];
+}
+
+#pragma mark - Private
+
+- (void)animateSelectionViewOutForSearch {
+  CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+  transformAnimation.duration = 0.5;
+  transformAnimation.timingFunction =
+  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+  transformAnimation.removedOnCompletion = NO;
+  transformAnimation.fillMode = kCAFillModeForwards;
+
+  CATransform3D xform = CATransform3DIdentity;
+  xform.m34 = 1.0 / -500;
+  xform = CATransform3DTranslate(xform, 0, 0, -50);
+  transformAnimation.toValue = [NSValue valueWithCATransform3D:xform];
+  [_bankSelectionView.collectionView.layer addAnimation:transformAnimation forKey:@"transformAnimation"];
+
+  _bankSelectionView.collectionView.layer.opacity = 0;
+  CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+  alphaAnimation.duration = 0.5;
+  alphaAnimation.timingFunction =
+  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  alphaAnimation.removedOnCompletion = YES;
+  alphaAnimation.fromValue = [NSNumber numberWithFloat:1];
+  alphaAnimation.toValue = [NSNumber numberWithFloat:0];
+  [_bankSelectionView.collectionView.layer addAnimation:alphaAnimation forKey:@"alphaAnimation"];
+  _bankSelectionView.collectionView.userInteractionEnabled = NO;
 }
 
 @end

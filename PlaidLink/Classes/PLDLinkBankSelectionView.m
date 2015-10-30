@@ -11,21 +11,6 @@
 
 #import "PLDInstitution.h"
 
-@interface PLDLinkBankSelectionLayout : UICollectionViewFlowLayout
-@end
-
-@implementation PLDLinkBankSelectionLayout
-
-- (UICollectionViewLayoutAttributes*)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
-  UICollectionViewLayoutAttributes *attributes =
-      [super initialLayoutAttributesForAppearingItemAtIndexPath:itemIndexPath];
-  attributes.alpha = 0;
-  attributes.transform = CGAffineTransformMakeTranslation(0, 300);
-  return attributes;
-}
-
-@end
-
 @interface PLDLinkBankLongtailSearchViewCell : UICollectionViewCell
 @end
 
@@ -57,6 +42,37 @@
 
 @end
 
+@interface PLDLinkBankNotListedViewCell : UICollectionViewCell
+@end
+
+@implementation PLDLinkBankNotListedViewCell {
+  UILabel *_label;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+  if (self = [super initWithFrame:frame]) {
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.cornerRadius = 8.0;
+
+    _label = [[UILabel alloc] initWithFrame:frame];
+    _label.numberOfLines = 0;
+    _label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightLight];
+    _label.textAlignment = NSTextAlignmentCenter;
+    _label.text = @"I don't see\n my bank";
+    [self addSubview:_label];
+  }
+  return self;
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  _label.frame = self.bounds;
+  [_label sizeToFit];
+  _label.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) - 1);
+}
+
+@end
+
 @implementation PLDLinkBankSelectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -74,6 +90,21 @@
 - (void)layoutSubviews {
   [super layoutSubviews];
   _tileView.frame = self.bounds;
+}
+
+@end
+
+@interface PLDLinkBankSelectionLayout : UICollectionViewFlowLayout
+@end
+
+@implementation PLDLinkBankSelectionLayout
+
+- (UICollectionViewLayoutAttributes*)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+  UICollectionViewLayoutAttributes *attributes =
+  [super initialLayoutAttributesForAppearingItemAtIndexPath:itemIndexPath];
+  attributes.alpha = 0;
+  attributes.transform = CGAffineTransformMakeTranslation(0, 300);
+  return attributes;
 }
 
 @end
@@ -114,6 +145,8 @@
         forCellWithReuseIdentifier:@"cell"];
     [_collectionView registerClass:[PLDLinkBankLongtailSearchViewCell class]
         forCellWithReuseIdentifier:@"searchCell"];
+    [_collectionView registerClass:[PLDLinkBankNotListedViewCell class]
+        forCellWithReuseIdentifier:@"bankNotListedCell"];
     [self addSubview:_collectionView];
 
     _gestureRecognizer =
@@ -201,7 +234,7 @@
   id rowData = _institutions[indexPath.row];
   if ([rowData isKindOfClass:[NSString class]]) {
     PLDLinkBankLongtailSearchViewCell *cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:@"searchCell"
+        [collectionView dequeueReusableCellWithReuseIdentifier:rowData
                                                   forIndexPath:indexPath];
     return cell;
   }
@@ -218,8 +251,14 @@
     didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
   id rowData = _institutions[indexPath.row];
   if ([rowData isKindOfClass:[NSString class]]) {
-    [_delegate bankSelectionViewDidSelectSearch:self];
-    return;
+    NSString *cellName = rowData;
+    if ([cellName isEqual:@"searchCell"]) {
+      [_delegate bankSelectionViewDidSelectSearch:self];
+      return;
+    } else if ([cellName isEqual:@"bankNotListedCell"]) {
+      [_delegate bankSelectionViewDidSelectNotListed:self];
+      return;
+    }
   }
   [_delegate bankSelectionView:self didSelectInstitution:_institutions[indexPath.row]];
 }

@@ -16,7 +16,7 @@
 
 - (void)bankSelectionViewController:(PLDLinkBankSelectionViewController *)viewController
            didFinishWithInstitution:(PLDInstitution *)institution;
-
+- (void)bankSelectionViewControllerDidFinishWithBankNotListed:(PLDLinkBankSelectionViewController *)viewController;
 - (void)bankSelectionViewControllerCancelled:(PLDLinkBankSelectionViewController *)viewController;
 
 @end

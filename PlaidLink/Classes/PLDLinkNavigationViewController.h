@@ -26,6 +26,15 @@
        didFinishWithAccessToken:(NSString *)accessToken;
 
 /**
+ Called when a user taps the "I don't see my bank" cell.
+
+ Implementing classes should dismiss the PLDLinkNavigationViewController when this is called, and probably give the option to manually enter bank information.
+
+ @param navigationController The navigation controller presenting Plaid Link.
+ */
+- (void)linkNavigationControllerDidFinishWithBankNotListed:(PLDLinkNavigationViewController *)navigationController;
+
+/**
  Called when a user taps the 'X' in the top right corner of the navigation controller with the intention of cancelling their bank login process.
  
  Implementing classes should dismiss the PLDLinkNavigationViewController when this is called.

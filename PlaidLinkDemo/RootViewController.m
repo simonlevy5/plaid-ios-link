@@ -21,7 +21,7 @@
 - (IBAction)didTapConnect:(id)sender {
   PLDLinkNavigationViewController *plaidLink =
       [[PLDLinkNavigationViewController alloc] initWithEnvironment:PlaidEnvironmentTartan
-                                                           product:PlaidProductConnect];
+                                                           product:PlaidProductAuth];
 
   plaidLink.linkDelegate = self;
   plaidLink.providesPresentationContextTransitionStyle = true;
@@ -36,6 +36,11 @@
 - (void)linkNavigationContoller:(PLDLinkNavigationViewController *)navigationController
        didFinishWithAccessToken:(NSString *)accessToken {
   _titleLabel.text = @"Success!";
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)linkNavigationControllerDidFinishWithBankNotListed:(PLDLinkNavigationViewController *)navigationController {
+  _titleLabel.text = @"Manually enter bank info?";
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
