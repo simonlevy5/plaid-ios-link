@@ -8,8 +8,8 @@ This project is currently under active development.
 For development:
 The plaid-ios-sdk (https://github.com/vouch/plaid-ios-sdk) is required to use this. There are two options:
 
-1. Use the Cocoapod by adding the following to your Podfile:
-    pod 'plaid-ios-sdk'
+1. Use the Cocoapods and run the following command:
+    pod install
 2. Download the plaid-ios-sdk project and add the following to your Podfile:
     pod 'plaid-ios-sdk', :path => 'path_to_project'
 
