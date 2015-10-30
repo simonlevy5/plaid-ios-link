@@ -7,6 +7,7 @@ For development:
 Right now the Plaid library is required to run this. Edit Podfile and enter the path to that library (https://github.com/vouch/plaid-ios-sdk) for the plaid-ios-sdk Pod. Then open the workspace and run the PlaidLink target.
 
 **Project Tasks**
+
 1. Documentation & Usage
 2. Move test targets to subproject
 3. Address known issues
