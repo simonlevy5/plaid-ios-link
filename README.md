@@ -9,7 +9,7 @@ This project is currently under active development.
 
 **Demo**
 
-[![Demo](https://j.gifs.com/Kep6Bp.gif)](https://www.youtube.com/watch?v=Brnwkmj4v60)
+[![Demo](https://media.giphy.com/media/VS4Jm37UWT6Eg/giphy.gif)](https://www.youtube.com/watch?v=Brnwkmj4v60)
 
 https://www.youtube.com/watch?v=Brnwkmj4v60
 
