@@ -45,7 +45,17 @@
     _logo.hidden = NO;
   } else {
     // For the top banks, we have better logos.
-    UIImage *logo = [UIImage imageNamed:_institution.type];
+    static NSBundle *resources;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+      NSString *resourcePath = [bundle pathForResource:@"Resources" ofType:@"bundle"];
+      resources = [NSBundle bundleWithPath:resourcePath];
+    });
+
+    UIImage *logo = [UIImage imageNamed:_institution.type
+                               inBundle:resources
+          compatibleWithTraitCollection:nil];
     if (logo) {
       [_logo setImage:logo];
       _logo.hidden = NO;

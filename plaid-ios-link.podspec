@@ -13,5 +13,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'PlaidLink/Classes/**/*'
   s.public_header_files = 'PlaidLink/Classes/*.h'
+
+  s.resource_bundle = { 'Resources' => ['PlaidLink/Resources/Images/*.png'] }
   s.dependency 'plaid-ios-sdk'
 end

@@ -1,17 +1,18 @@
 //
-//  PlaidLinkUITests.m
-//  PlaidLinkUITests
+//  PlaidLinkUITest.m
+//  PlaidLinkTests
 //
-//  Created by Simon Levy on 10/21/15.
+//  Created by Simon Levy on 11/23/15.
+//
 //
 
 #import <XCTest/XCTest.h>
 
-@interface PlaidLinkUITests : XCTestCase
+@interface PlaidLinkUITest : XCTestCase
 
 @end
 
-@implementation PlaidLinkUITests
+@implementation PlaidLinkUITest
 
 - (void)setUp {
     [super setUp];
@@ -22,7 +23,7 @@
     self.continueAfterFailure = NO;
     // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
     [[[XCUIApplication alloc] init] launch];
-    
+
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 }
 

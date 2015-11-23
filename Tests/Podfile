@@ -1,0 +1,6 @@
+xcodeproj 'PlaidLinkTests'
+workspace '../PlaidLinkTests'
+
+target 'ios' do
+pod 'plaid-ios-link', :path => '../'
+end

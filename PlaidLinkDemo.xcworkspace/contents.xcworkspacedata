@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:PlaidLink.xcodeproj">
+      location = "group:PlaidLinkDemo/PlaidLinkDemo.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:PlaidLinkDemo/Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
