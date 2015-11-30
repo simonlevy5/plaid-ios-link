@@ -28,6 +28,7 @@ static CGFloat const kButtonHeight = 46.0;
     _inputLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _inputLabel.textColor = [UIColor whiteColor];
     _inputLabel.font = [UIFont systemFontOfSize:16];
+    _inputLabel.numberOfLines = 0;
     [self addSubview:_inputLabel];
 
     _inputTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero

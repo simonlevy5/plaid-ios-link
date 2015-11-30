@@ -34,14 +34,9 @@
 
 #pragma mark - PLDLinkBankMFAChoiceViewDelegate
 
-- (void)choiceView:(UIView *)view didSelectChoice:(NSString *)choice {
-  NSDictionary *options = @{
-    @"send_method" : @{
-        @"type" : choice
-      }
-    };
+- (void)choiceView:(UIView *)view didSelectChoice:(id)choice {
   __weak PLDLinkBankMFAChoiceViewController *weakSelf = self;
-  [self submitMFAStepResponse:nil options:options completion:^(NSError *error) {
+  [self submitMFAStepResponse:choice options:nil completion:^(NSError *error) {
     if (error) {
       UIAlertController *alert =
           [UIAlertController alertControllerWithTitle:[error localizedDescription]

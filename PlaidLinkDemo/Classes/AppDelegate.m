@@ -19,9 +19,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [[Plaid sharedInstance] setClientId:@"test_id"
-                               secret:@"test_secret"];
-
+  [[Plaid sharedInstance] setPublicKey:@"76589eeee668a81308beca8d3499d0"];
   UIViewController *vc = [[RootViewController alloc] init];
   
   _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -58,12 +58,12 @@
   };
   __weak PLDLinkBankMFALoginViewController *weakSelf = self;
   __weak PLDLinkBankMFALoginView *weakView = _view;
-  [[Plaid sharedInstance] addUserForProduct:_product
-                                   username:_view.usernameTextField.text
-                                   password:_view.passwordTextField.text
-                                       type:_institution.type
-                                    options:options
-                                 completion:^(PLDAuthentication *authentication, id response, NSError *error) {
+  [[Plaid sharedInstance] addLinkUserForProduct:_product
+                                       username:_view.usernameTextField.text
+                                       password:_view.passwordTextField.text
+                                           type:_institution.type
+                                        options:options
+                                     completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
       [weakView.submitButton hideLoadingState];
       UIAlertController *alert =

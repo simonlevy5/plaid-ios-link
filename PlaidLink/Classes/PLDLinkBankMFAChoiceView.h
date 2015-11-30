@@ -11,7 +11,7 @@
 
 @protocol PLDLinkBankMFAChoiceViewDelegate <NSObject>
 
-- (void)choiceView:(UIView *)view didSelectChoice:(NSString *)choice;
+- (void)choiceView:(UIView *)view didSelectChoice:(id)choice;
 
 @end
 

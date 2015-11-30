@@ -39,11 +39,11 @@
 - (void)submitMFAStepResponse:(id)response
                       options:(NSDictionary *)options
                    completion:(void (^)(NSError *))completion {
-  [[Plaid sharedInstance] stepUserForProduct:_authentication.product
-                                 accessToken:_authentication.accessToken
-                                 mfaResponse:response
-                                     options:options
-                                  completion:^(PLDAuthentication *authentication, id response, NSError *error) {
+  [[Plaid sharedInstance] stepLinkUserForProduct:_authentication.product
+                                     publicToken:_authentication.accessToken
+                                     mfaResponse:response
+                                         options:options
+                                      completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error) {
       completion(error);
       return;
