@@ -61,13 +61,14 @@
   [[Plaid sharedInstance] addLinkUserForProduct:_product
                                        username:_view.usernameTextField.text
                                        password:_view.passwordTextField.text
+                                            pin:_view.pinTextField.text
                                            type:_institution.type
                                         options:options
                                      completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
       [weakView.submitButton hideLoadingState];
       UIAlertController *alert =
-          [UIAlertController alertControllerWithTitle:@"Invalid credentials"
+          [UIAlertController alertControllerWithTitle:[error localizedDescription]
                                               message:[error localizedRecoverySuggestion]
                                        preferredStyle:UIAlertControllerStyleAlert];
       UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
