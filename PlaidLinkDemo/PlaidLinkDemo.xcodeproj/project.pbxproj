@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		530708D51C03C3C600E296B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 530708CE1C03C3C600E296B8 /* AppDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		530708D81C03C3C600E296B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 530708D11C03C3C600E296B8 /* main.m */; settings = {ASSET_TAGS = (); }; };
-		530708D91C03C3C600E296B8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 530708D31C03C3C600E296B8 /* RootViewController.m */; settings = {ASSET_TAGS = (); }; };
-		530708DA1C03C3C600E296B8 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530708D41C03C3C600E296B8 /* RootViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		530708E01C03C61700E296B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530708DD1C03C61700E296B8 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
-		530708E11C03C61700E296B8 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 530708DE1C03C61700E296B8 /* Base.lproj */; settings = {ASSET_TAGS = (); }; };
-		530708E21C03C61700E296B8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530708DF1C03C61700E296B8 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
+		530708D51C03C3C600E296B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 530708CE1C03C3C600E296B8 /* AppDelegate.m */; };
+		530708D81C03C3C600E296B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 530708D11C03C3C600E296B8 /* main.m */; };
+		530708D91C03C3C600E296B8 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 530708D31C03C3C600E296B8 /* RootViewController.m */; };
+		530708DA1C03C3C600E296B8 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 530708D41C03C3C600E296B8 /* RootViewController.xib */; };
+		530708E01C03C61700E296B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530708DD1C03C61700E296B8 /* Assets.xcassets */; };
+		530708E11C03C61700E296B8 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 530708DE1C03C61700E296B8 /* Base.lproj */; };
+		530708E21C03C61700E296B8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530708DF1C03C61700E296B8 /* Info.plist */; };
 		7D7039A958F945CEF8074DAA /* libPods-PlaidLinkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57097E924C6704CEDC4A8266 /* libPods-PlaidLinkDemo.a */; };
+		B1A759861C3DCE7A0003E945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A759851C3DCE7A0003E945 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		530708DF1C03C61700E296B8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		57097E924C6704CEDC4A8266 /* libPods-PlaidLinkDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaidLinkDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D22906C8A3E0721E2B34631 /* Pods-PlaidLinkDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLinkDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLinkDemo/Pods-PlaidLinkDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		B1A759851C3DCE7A0003E945 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				530708D21C03C3C600E296B8 /* RootViewController.h */,
 				530708D31C03C3C600E296B8 /* RootViewController.m */,
 				530708D41C03C3C600E296B8 /* RootViewController.xib */,
+				B1A759851C3DCE7A0003E945 /* LaunchScreen.storyboard */,
 				530708DC1C03C60100E296B8 /* Resources */,
 				530708DB1C03C5F600E296B8 /* Support Files */,
 			);
@@ -174,6 +177,7 @@
 				530708E21C03C61700E296B8 /* Info.plist in Resources */,
 				530708E01C03C61700E296B8 /* Assets.xcassets in Resources */,
 				530708E11C03C61700E296B8 /* Base.lproj in Resources */,
+				B1A759861C3DCE7A0003E945 /* LaunchScreen.storyboard in Resources */,
 				530708DA1C03C3C600E296B8 /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
