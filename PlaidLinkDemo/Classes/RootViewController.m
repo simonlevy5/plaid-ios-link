@@ -23,8 +23,8 @@
                                                            product:PlaidProductConnect];
 
   plaidLink.linkDelegate = self;
-  plaidLink.providesPresentationContextTransitionStyle = true;
-  plaidLink.definesPresentationContext = true;
+  plaidLink.providesPresentationContextTransitionStyle = YES;
+  plaidLink.definesPresentationContext = YES;
   plaidLink.modalPresentationStyle = UIModalPresentationCustom;
 
   [self presentViewController:plaidLink animated:YES completion:nil];
