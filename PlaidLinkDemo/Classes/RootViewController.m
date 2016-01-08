@@ -7,7 +7,6 @@
 
 #import "RootViewController.h"
 
-#import "Plaid.h"
 #import "PLDLinkNavigationViewController.h"
 
 @interface RootViewController ()<PLDLinkNavigationControllerDelegate>

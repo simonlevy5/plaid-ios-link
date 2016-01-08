@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'PlaidLink/Classes/**/*', 'plaid_ios_sdk.framework/Headers/*.h'
-  s.public_header_files = 'PlaidLink/Classes/*.h', 'plaid_ios_sdk.framework/Headers/*.h'
+  s.source_files = 'PlaidLink/Classes/**/*'
+  s.ios.public_header_files = 'PlaidLink/Classes/*.h'
 
   s.resource_bundle = { 'Resources' => ['PlaidLink/Resources/Images/*.png'] }
   s.dependency 'plaid-ios-sdk'
