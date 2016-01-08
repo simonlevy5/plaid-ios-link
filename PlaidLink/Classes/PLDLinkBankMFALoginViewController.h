@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <plaid_ios_link/PLDDefines.h>
+#import "PLDDefines.h"
 
 @class PLDAuthentication;
 @class PLDLinkBankMFALoginViewController;

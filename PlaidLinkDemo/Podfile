@@ -1,5 +1,6 @@
 xcodeproj 'PlaidLinkDemo'
 workspace '../PlaidLinkDemo'
+use_frameworks!
 
 target 'PlaidLinkDemo' do
 pod 'plaid-ios-sdk'

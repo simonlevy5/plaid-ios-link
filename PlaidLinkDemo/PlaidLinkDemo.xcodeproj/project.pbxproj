@@ -14,12 +14,13 @@
 		530708E01C03C61700E296B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530708DD1C03C61700E296B8 /* Assets.xcassets */; };
 		530708E11C03C61700E296B8 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 530708DE1C03C61700E296B8 /* Base.lproj */; };
 		530708E21C03C61700E296B8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 530708DF1C03C61700E296B8 /* Info.plist */; };
-		7D7039A958F945CEF8074DAA /* libPods-PlaidLinkDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57097E924C6704CEDC4A8266 /* libPods-PlaidLinkDemo.a */; };
+		6ECD0E23C0635B7C8FE8882C /* Pods_PlaidLinkDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F62C53B693B043537E23EA /* Pods_PlaidLinkDemo.framework */; };
 		B1A759861C3DCE7A0003E945 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A759851C3DCE7A0003E945 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0508CFADB92BB68AF9AA5A1E /* Pods-PlaidLinkDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLinkDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLinkDemo/Pods-PlaidLinkDemo.release.xcconfig"; sourceTree = "<group>"; };
+		35F62C53B693B043537E23EA /* Pods_PlaidLinkDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlaidLinkDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		530708B31C03C39500E296B8 /* PlaidLinkDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaidLinkDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		530708CD1C03C3C600E296B8 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		530708CE1C03C3C600E296B8 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -30,7 +31,6 @@
 		530708DD1C03C61700E296B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		530708DE1C03C61700E296B8 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = Resources/Base.lproj; sourceTree = SOURCE_ROOT; };
 		530708DF1C03C61700E296B8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = SOURCE_ROOT; };
-		57097E924C6704CEDC4A8266 /* libPods-PlaidLinkDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaidLinkDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D22906C8A3E0721E2B34631 /* Pods-PlaidLinkDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaidLinkDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaidLinkDemo/Pods-PlaidLinkDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		B1A759851C3DCE7A0003E945 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D7039A958F945CEF8074DAA /* libPods-PlaidLinkDemo.a in Frameworks */,
+				6ECD0E23C0635B7C8FE8882C /* Pods_PlaidLinkDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +110,7 @@
 		841911EF1960759611EF8032 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				57097E924C6704CEDC4A8266 /* libPods-PlaidLinkDemo.a */,
+				35F62C53B693B043537E23EA /* Pods_PlaidLinkDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
