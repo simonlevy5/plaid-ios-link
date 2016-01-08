@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "plaid-ios-link"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "Native iOS implementation of Plaid Link"
 
   s.homepage         = "https://github.com/vouch/plaid-ios-link"
