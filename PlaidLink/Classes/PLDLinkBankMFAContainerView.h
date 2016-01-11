@@ -13,8 +13,11 @@
 
 @property(nonatomic) PLDLinkBankTileView *bankTileView;
 @property(nonatomic, readonly) UIView *contentContainer;
+@property(nonatomic, readonly) UIButton *forgotPasswordLink;
 @property(nonatomic) BOOL showContentContainer;
+@property(nonatomic) BOOL showForgotPasswordLink;
 
 - (void)setCurrentContentView:(UIView *)contentView;
+- (void)animateForgotPasswordButtonIn;
 
 @end

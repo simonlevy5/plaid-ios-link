@@ -32,6 +32,18 @@ static CGFloat const kDefaultContentHeight = 200;
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
     [self addSubview:_contentContainer];
 
+    _forgotPasswordLink = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_forgotPasswordLink setTitle:@"Forget your password? Tap here to reset it"
+                         forState:UIControlStateNormal];
+    [_forgotPasswordLink setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [_forgotPasswordLink setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    [_forgotPasswordLink.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [_forgotPasswordLink setAlpha:0];
+    [self addSubview:_forgotPasswordLink];
+    [_forgotPasswordLink addTarget:self
+                            action:@selector(didTapForgotPassword:)
+                  forControlEvents:UIControlEventTouchUpInside];
+
     _maskBehindTile = [[CAShapeLayer alloc] init];
   }
   return self;
@@ -46,6 +58,11 @@ static CGFloat const kDefaultContentHeight = 200;
 
 - (void)setShowContentContainer:(BOOL)showContentContainer {
   _showContentContainer = showContentContainer;
+  [self setNeedsLayout];
+}
+
+- (void)setShowForgotPasswordLink:(BOOL)showForgotPasswordLink {
+  _showForgotPasswordLink = showForgotPasswordLink;
   [self setNeedsLayout];
 }
 
@@ -75,22 +92,32 @@ static CGFloat const kDefaultContentHeight = 200;
   CGRect bounds = self.bounds;
 
   _bankTileView.frame =
-      CGRectMake(kContentPadding, 0, bounds.size.width - kContentPadding * 2, bounds.size.height / 4);
+      CGRectMake(kContentPadding, 0, bounds.size.width - kContentPadding * 2, bounds.size.height / 4.5);
   _contentContainer.frame = CGRectMake(kContentPadding,
                                        CGRectGetMaxY(_bankTileView.frame),
                                        self.bounds.size.width - 2 * kContentPadding,
                                        kDefaultContentHeight);
+
+  // The initial state of this view has the bottom half of the card hidden behind the tile with the
+  // bank logo.
   if (!_showContentContainer) {
     _contentContainer.frame =
         CGRectOffset(_contentContainer.frame, 0,
                      -CGRectGetHeight(_contentContainer.bounds));
   }
+
   if (_currentContent) {
     _currentContent.frame = _contentContainer.bounds;
     [_currentContent sizeToFit];
     CGRect containerFrame = _contentContainer.frame;
     containerFrame.size.height = _currentContent.bounds.size.height;
     _contentContainer.frame = containerFrame;
+
+    _forgotPasswordLink.frame = CGRectMake(0,
+                                           CGRectGetMaxY(_contentContainer.frame) + 4,
+                                           _contentContainer.bounds.size.width,
+                                           30);
+    _forgotPasswordLink.alpha = _showForgotPasswordLink;
   }
 
   [_bankTileView roundCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
@@ -113,8 +140,14 @@ static CGFloat const kDefaultContentHeight = 200;
                                                          self.bounds.size.height)
                                  cornerRadius:8.0].CGPath;
   self.layer.mask = _maskBehindTile;
+  CGFloat contentHeight = CGRectGetMaxY(_contentContainer.frame) + 32 * _showForgotPasswordLink;
+  self.contentSize = CGSizeMake(bounds.size.width, contentHeight);
+}
 
-  self.contentSize = CGSizeMake(bounds.size.width, CGRectGetMaxY(_contentContainer.frame));
+- (void)didTapForgotPassword:(id)sender {
+  if (_bankTileView.institution.forgottenPasswordURL != nil) {
+    [[UIApplication sharedApplication] openURL:_bankTileView.institution.forgottenPasswordURL];
+  }
 }
 
 - (void)animateCurrentContentOutWithCompletion:(void (^ __nullable)(BOOL finished))completion {
@@ -125,7 +158,10 @@ static CGFloat const kDefaultContentHeight = 200;
                    animations:^{
                      _currentContent.alpha = 0;
                      _currentContent.transform = transform;
-                   } completion:completion];
+                   } completion:^(BOOL finished) {
+                     self.showForgotPasswordLink = NO;
+                     completion(finished);
+                   }];
 }
 
 - (void)animateCurrentContentIn:(void (^ __nullable)(BOOL finished))completion {
@@ -139,6 +175,16 @@ static CGFloat const kDefaultContentHeight = 200;
                      _currentContent.transform = CGAffineTransformIdentity;
                      [self layoutSubviews];
                    } completion:completion];
+}
+
+- (void)animateForgotPasswordButtonIn {
+  [UIView animateWithDuration:0.5
+                        delay:0.3
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+                     self.showForgotPasswordLink = YES;
+                     [self layoutSubviews];
+                   } completion:nil];
 }
 
 @end

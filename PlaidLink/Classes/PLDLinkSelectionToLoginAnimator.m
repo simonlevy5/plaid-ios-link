@@ -67,6 +67,7 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
             bankSelectionView.alpha = 1;
             selectedCell.hidden = NO;
             bankSelectionView.layer.transform = CATransform3DIdentity;
+            [bankContainerView animateForgotPasswordButtonIn];
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
           }];
     }];
@@ -94,6 +95,7 @@ static CGFloat const kBankTileAnimationDuration = 0.35;
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
         bankContainerView.showContentContainer = NO;
+        bankContainerView.showForgotPasswordLink = NO;
         [bankContainerView layoutIfNeeded];
       } completion:^(BOOL finished) {
         bankContainerView.contentContainer.hidden = YES;
