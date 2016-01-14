@@ -7,9 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PLDLinkBankMFABaseStepView.h"
+
 @class PLDLinkStyledButton;
 
-@interface PLDLinkBankMFALoginView : UIView
+@interface PLDLinkBankMFALoginView : PLDLinkBankMFABaseStepView
 
 @property(nonatomic, assign) BOOL isPinRequired;
 
