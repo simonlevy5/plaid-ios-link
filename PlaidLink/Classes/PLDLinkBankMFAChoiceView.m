@@ -11,6 +11,7 @@
 
 #import "PLDLinkBankMFAExplainerView.h"
 #import "PLDLinkStyledButton.h"
+#import "NSString+Localization.h"
 
 static CGFloat const kExplainerHeight = 24.0;
 static CGFloat const kInputVerticalPadding = 16.0;
@@ -26,13 +27,14 @@ static CGFloat const kButtonHeight = 46.0;
     self.tintColor = tintColor;
     _choiceButtons = [NSMutableArray array];
 
+    NSString *explainerText = [NSString stringWithIdentifier:@"mfa_choice_title"];
     _explainer = [[PLDLinkBankMFAExplainerView alloc] initWithFrame:CGRectZero tintColor:tintColor];
-    [_explainer setExplainerText:@"SECURITY CODE"];
+    [_explainer setExplainerText:explainerText];
     [self addSubview:_explainer];
 
     _inputLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _inputLabel.textColor = [UIColor whiteColor];
-    _inputLabel.text = @"Where would you like to send your security code?";
+    _inputLabel.text = [NSString stringWithIdentifier:@"mfa_choice_subtitle"];
     _inputLabel.numberOfLines = 0;
     _inputLabel.font = [UIFont systemFontOfSize:16];
     [self addSubview:_inputLabel];

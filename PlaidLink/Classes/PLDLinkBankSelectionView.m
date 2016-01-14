@@ -7,9 +7,10 @@
 
 #import "PLDLinkBankSelectionView.h"
 
-#import "PLDLinkBankTileView.h"
-
 #import "PLDInstitution.h"
+
+#import "PLDLinkBankTileView.h"
+#import "NSString+Localization.h"
 
 @interface PLDLinkBankLongtailSearchViewCell : UICollectionViewCell
 @end
@@ -27,7 +28,7 @@
     _label.numberOfLines = 0;
     _label.font = [UIFont systemFontOfSize:18 weight:UIFontWeightLight];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.text = @"More banks";
+    _label.text = [NSString stringWithIdentifier:@"bank_selection_more_banks"];
     [self addSubview:_label];
   }
   return self;
@@ -58,7 +59,7 @@
     _label.numberOfLines = 0;
     _label.font = [UIFont systemFontOfSize:16 weight:UIFontWeightLight];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.text = @"I don't see\n my bank";
+    _label.text = [NSString stringWithIdentifier:@"bank_selection_not_found"];
     [self addSubview:_label];
   }
   return self;

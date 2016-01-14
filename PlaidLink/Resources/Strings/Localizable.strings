@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  plaid-ios-link
+
+  Created by Simon Levy on 1/14/16.
+
+*/
+
+"common_ok" = "OK";
+"forgot_password" = "Forget your password? Tap here to reset it";
+
+"login_username_placeholder" = "username";
+"login_password_placeholder" = "password";
+"login_pin_placeholder" = "pin";
+
+"mfa_choice_title" = "SECURITY CODE";
+"mfa_choice_subtitle" = "Where would you like to send your security code?";
+"mfa_code_explainer" = "ENTER THE SECURITY CODE";
+"mfa_code_placeholder" = "Code";
+"mfa_questions_explainer" = "SECURITY QUESTIONS";
+"mfa_questions_placeholder" = "Answer";
+"mfa_selections_explainer" = "SECURITY SELECTIONS";
+"mfa_error_wrong_answer" = "Wrong answer";
+"mfa_error_invalid_security_code" = "Invalid security code";
+
+"bank_selection_search_title" = "Search your bank";
+"bank_selection_title" = "Select your bank";
+"bank_selection_more_banks" = "More banks";
+"bank_selection_not_found" = "I don't see\n by bank";
+
+"button_login" = "Log in";
+"button_sending" = "Sending";
+"button_submit" = "Submit";

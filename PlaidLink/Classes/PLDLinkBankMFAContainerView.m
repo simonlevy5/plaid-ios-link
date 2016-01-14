@@ -7,10 +7,11 @@
 
 #import "PLDLinkBankMFAContainerView.h"
 
+#import "PLDInstitution.h"
+
 #import "PLDLinkBankTileView.h"
 #import "PLDLinkBankMFAExplainerView.h"
-
-#import "PLDInstitution.h"
+#import "NSString+Localization.h"
 
 static CGFloat const kContentPadding = 8.0;
 static CGFloat const kDefaultContentHeight = 200;
@@ -32,8 +33,9 @@ static CGFloat const kDefaultContentHeight = 200;
     _contentContainer = [[UIView alloc] initWithFrame:CGRectZero];
     [self addSubview:_contentContainer];
 
+    NSString *forgotPasswordTitle = [NSString stringWithIdentifier:@"forgot_password"];
     _forgotPasswordLink = [[UIButton alloc] initWithFrame:CGRectZero];
-    [_forgotPasswordLink setTitle:@"Forget your password? Tap here to reset it"
+    [_forgotPasswordLink setTitle:forgotPasswordTitle
                          forState:UIControlStateNormal];
     [_forgotPasswordLink setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [_forgotPasswordLink setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];

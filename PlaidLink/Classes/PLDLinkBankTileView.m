@@ -9,6 +9,8 @@
 
 #import "PLDInstitution.h"
 
+#import "PLDLinkResourceBundle.h"
+
 @implementation PLDLinkBankTileView {
   UIImageView *_logo;
   UILabel *_fallbackLabel;
@@ -45,14 +47,7 @@
     _logo.hidden = NO;
   } else {
     // For the top banks, we have better logos.
-    static NSBundle *resources;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-      NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-      NSString *resourcePath = [bundle pathForResource:@"Resources" ofType:@"bundle"];
-      resources = [NSBundle bundleWithPath:resourcePath];
-    });
-
+    NSBundle *resources = [PLDLinkResourceBundle mainBundle];
     UIImage *logo = [UIImage imageNamed:_institution.type
                                inBundle:resources
           compatibleWithTraitCollection:nil];

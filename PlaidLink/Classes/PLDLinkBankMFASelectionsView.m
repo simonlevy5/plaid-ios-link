@@ -8,6 +8,7 @@
 #import "PLDLinkBankMFASelectionsView.h"
 
 #import "PLDLinkBankMFAExplainerView.h"
+#import "NSString+Localization.h"
 
 static CGFloat const kExplainerHeight = 24.0;
 
@@ -18,7 +19,7 @@ static CGFloat const kExplainerHeight = 24.0;
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
     _explainer = [[PLDLinkBankMFAExplainerView alloc] initWithFrame:CGRectZero tintColor:tintColor];
-    [_explainer setExplainerText:@"SECURITY SELECTIONS"];
+    _explainer.explainerText = [NSString stringWithIdentifier:@"mfa_selections_explainer"];
     [self addSubview:_explainer];
   }
   return self;

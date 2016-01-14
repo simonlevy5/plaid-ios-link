@@ -7,6 +7,7 @@
 
 #import "PLDLinkStyledButton.h"
 
+#import "NSString+Localization.h"
 #import "UIColor+PLDLinkUIColor.h"
 
 @implementation PLDLinkStyledButton {
@@ -30,7 +31,7 @@
     _spinner.alpha = 0.6;
     [self addSubview:_spinner];
 
-    _loadingText = @"Sending";
+    _loadingText = [NSString stringWithIdentifier:@"button_sending"];
   }
   return self;
 }

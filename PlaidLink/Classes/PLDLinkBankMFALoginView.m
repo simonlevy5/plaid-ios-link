@@ -9,6 +9,7 @@
 
 #import "PLDLinkStyledButton.h"
 #import "PLDLinkStyledTextField.h"
+#import "NSString+Localization.h"
 #import "UIColor+PLDLinkUIColor.h"
 
 static CGFloat const kInputVerticalPadding = 12.0;
@@ -21,15 +22,17 @@ static CGFloat const kButtonHeight = 46.0;
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
   if (self = [super initWithFrame:frame]) {
     self.tintColor = tintColor;
+    NSString *usernamePlaceholder = [NSString stringWithIdentifier:@"login_username_placeholder"];
     _usernameTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                              tintColor:tintColor
-                                                           placeholder:@"username"];
+                                                           placeholder:usernamePlaceholder];
     _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self addSubview:_usernameTextField];
 
+    NSString *passwordPlaceholder = [NSString stringWithIdentifier:@"login_password_placeholder"];
     _passwordTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                              tintColor:tintColor
-                                                           placeholder:@"password"];
+                                                           placeholder:passwordPlaceholder];
     _passwordTextField.secureTextEntry = YES;
     _passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self addSubview:_passwordTextField];
@@ -44,9 +47,10 @@ static CGFloat const kButtonHeight = 46.0;
 - (void)setIsPinRequired:(BOOL)isPinRequired {
   _isPinRequired = isPinRequired;
   if (_isPinRequired) {
+    NSString *pinPlaceholder = [NSString stringWithIdentifier:@"login_pin_placeholder"];
     _pinTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                         tintColor:self.tintColor
-                                                      placeholder:@"pin"];
+                                                      placeholder:pinPlaceholder];
     _pinTextField.secureTextEntry = YES;
     _pinTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self addSubview:_pinTextField];

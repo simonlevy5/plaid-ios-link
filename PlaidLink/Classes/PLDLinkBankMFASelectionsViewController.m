@@ -11,6 +11,7 @@
 #import "PLDInstitution.h"
 #import "PLDLinkBankMFASelectionsView.h"
 #import "PLDLinkBankMFASelectionViewController.h"
+#import "NSString+Localization.h"
 
 @interface PLDLinkBankMFASelectionsViewController ()<PLDLinkBankMFASelectionViewControllerDelegate>
 @end
@@ -75,7 +76,8 @@
       [UIAlertController alertControllerWithTitle:[error localizedDescription]
                                           message:[error localizedRecoverySuggestion]
                                    preferredStyle:UIAlertControllerStyleAlert];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+      NSString *actionTitle = [NSString stringWithIdentifier:@"common_ok"];
+      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:actionTitle
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {}];
       

@@ -9,9 +9,11 @@
 
 #import "Plaid.h"
 #import "PLDInstitution.h"
+
 #import "PLDLinkBankMFAContainerViewController.h"
 #import "PLDLinkBankSelectionViewController.h"
 #import "PLDLinkSelectionToLoginAnimator.h"
+#import "NSString+Localization.h"
 
 @interface PLDLinkNavigationViewController()<UINavigationControllerDelegate,
     PLDLinkBankSelectionViewControllerDelegate, PLDLinkBankMFAContainerViewControllerDelegate>
@@ -33,7 +35,7 @@
       [[PLDLinkBankSelectionViewController alloc] initWithProduct:product];
   if (self = [super initWithRootViewController:rootViewController]) {
     rootViewController.delegate = self;
-    rootViewController.title = @"Select your bank";
+    rootViewController.title = [NSString stringWithIdentifier:@"bank_selection_title"];
 
     _environment = environment;
     _product = product;

@@ -10,9 +10,11 @@
 #import "PLDLinkBankSelectionViewController.h"
 
 #import "Plaid.h"
+
 #import "PLDLinkBankSelectionSearchResultsViewController.h"
 #import "PLDLinkBankMFALoginView.h"
 #import "PLDLinkBankSelectionView.h"
+#import "NSString+Localization.h"
 
 @interface PLDLinkBankSelectionViewController ()<PLDLinkBankSelectionViewDelegate,
     PLDLinkBankSelectionSearchResultsViewControllerDelegate, UISearchResultsUpdating>
@@ -75,7 +77,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  self.title = @"Select your bank";
+  self.title = [NSString stringWithIdentifier:@"bank_selection_title"];
   if (_bankSelectionView.institutions.count == 0) {
     [_bankSelectionView showLoadingSpinner];
   }
@@ -130,7 +132,7 @@
   _searchController.dimsBackgroundDuringPresentation = NO;
   _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
   _searchController.searchBar.tintColor = [UIColor blackColor];
-  self.title = @"Search your bank";
+  self.title = [NSString stringWithIdentifier:@"bank_selection_search_title"];
   self.navigationItem.rightBarButtonItem = nil;
 
   [self animateSelectionViewOutForSearch];
@@ -146,7 +148,7 @@
 #pragma mark - PLDLinkBankSelectionSearchResultsViewControllerDelegate
 
 - (void)searchResultsViewControllerWillDisappear:(PLDLinkBankSelectionSearchResultsViewController *)viewController {
-  self.title = @"Select your bank";
+  self.title = [NSString stringWithIdentifier:@"bank_selection_title"];
   self.navigationItem.rightBarButtonItem = _closeButton;
 
   CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];

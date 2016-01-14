@@ -14,6 +14,7 @@
 #import "PLDLinkBankMFAQuestionOrCodeView.h"
 #import "PLDLinkStyledButton.h"
 #import "PLDLinkBankMFAExplainerView.h"
+#import "NSString+Localization.h"
 
 @interface PLDLinkBankMFAQuestionOrCodeViewController ()<PLDLinkBankMFAQuestionOrCodeViewDelegate>
 @end
@@ -34,14 +35,14 @@
   _view.delegate = self;
   if (self.authentication.mfa.type == kPLDMFATypeCode) {
     _view.inputLabel.text = self.authentication.mfa.data;
-    _view.inputTextField.placeholder = @"Code";
-    [_view.explainer setExplainerText:@"ENTER THE SECURITY CODE"];
+    _view.inputTextField.placeholder = [NSString stringWithIdentifier:@"mfa_code_placeholder"];
+    _view.explainer.explainerText = [NSString stringWithIdentifier:@"mfa_code_explainer"];
   } else if (self.authentication.mfa.type == kPLDMFATypeQuestion) {
     _view.inputLabel.text = self.authentication.mfa.data;
-    _view.inputTextField.placeholder = @"Answer";
-    [_view.explainer setExplainerText:@"SECURITY QUESTIONS"];
+    _view.inputTextField.placeholder = [NSString stringWithIdentifier:@"mfa_questions_placeholder"];
+    _view.explainer.explainerText = [NSString stringWithIdentifier:@"mfa_questions_explainer"];
   } else {
-    NSAssert(NO, @"Inproper mfa type for PLDLinkBankMFAQuestionOrCodeViewController");
+    NSAssert(NO, @"Incorrect mfa type for PLDLinkBankMFAQuestionOrCodeViewController");
   }
 }
 
@@ -56,15 +57,16 @@
       [weakView.submitButton hideLoadingState];
       NSString *errorTitle;
       if (weakSelf.authentication.mfa.type == kPLDMFATypeQuestion) {
-        errorTitle = @"Wrong answer";
+        errorTitle = [NSString stringWithIdentifier:@"mfa_error_wrong_answer"];
       } else {
-        errorTitle = @"Invalid security code";
+        errorTitle = [NSString stringWithIdentifier:@"mfa_error_invalid_security_code"];
       }
       UIAlertController *alert =
           [UIAlertController alertControllerWithTitle:errorTitle
                                               message:[error localizedRecoverySuggestion]
                                        preferredStyle:UIAlertControllerStyleAlert];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+      NSString *actionTitle = [NSString stringWithIdentifier:@"common_ok"];
+      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:actionTitle
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {}];
 

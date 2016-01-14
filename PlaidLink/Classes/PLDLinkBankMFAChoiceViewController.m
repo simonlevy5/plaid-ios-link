@@ -12,6 +12,7 @@
 
 #import "PLDLinkBankMFAContainerView.h"
 #import "PLDLinkBankMFAChoiceView.h"
+#import "NSString+Localization.h"
 
 @interface PLDLinkBankMFAChoiceViewController ()<PLDLinkBankMFAChoiceViewDelegate>
 @end
@@ -42,7 +43,8 @@
           [UIAlertController alertControllerWithTitle:[error localizedDescription]
                                               message:[error localizedRecoverySuggestion]
                                        preferredStyle:UIAlertControllerStyleAlert];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+      NSString *buttonTitle = [NSString stringWithIdentifier:@"common_ok"];
+      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:buttonTitle
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {}];
 

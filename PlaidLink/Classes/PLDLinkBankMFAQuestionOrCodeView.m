@@ -10,6 +10,7 @@
 #import "PLDLinkBankMFAExplainerView.h"
 #import "PLDLinkStyledButton.h"
 #import "PLDLinkStyledTextField.h"
+#import "NSString+Localization.h"
 
 static CGFloat const kInputVerticalPadding = 16.0;
 static CGFloat const kInputHorizontalPadding = 24.0;
@@ -36,8 +37,9 @@ static CGFloat const kButtonHeight = 46.0;
                                                         placeholder:@""];
     [self addSubview:_inputTextField];
 
+    NSString *submitTitle = [NSString stringWithIdentifier:@"button_submit"];
     _submitButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:self.tintColor];
-    [_submitButton setTitle:@"Submit" forState:UIControlStateNormal];
+    [_submitButton setTitle:submitTitle forState:UIControlStateNormal];
     [_submitButton addTarget:self
                       action:@selector(didTapSubmit)
             forControlEvents:UIControlEventTouchUpInside];
