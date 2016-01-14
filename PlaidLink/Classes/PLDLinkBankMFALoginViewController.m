@@ -70,17 +70,6 @@
       [weakView showErrorWithTitle:[error localizedDescription]
                        description:[error localizedFailureReason]];
       [weakView.submitButton hideLoadingState];
-      UIAlertController *alert =
-          [UIAlertController alertControllerWithTitle:[error localizedDescription]
-                                              message:[error localizedRecoverySuggestion]
-                                       preferredStyle:UIAlertControllerStyleAlert];
-      NSString *actionTitle = [NSString stringWithIdentifier:@"common_ok"];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:actionTitle
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {}];
-      
-      [alert addAction:defaultAction];
-      [weakSelf presentViewController:alert animated:YES completion:nil];
       return;
     }
     [weakSelf.delegate loginViewController:self didFinishWithAuthentication:authentication];
