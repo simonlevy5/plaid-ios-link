@@ -66,17 +66,9 @@
                                         options:options
                                      completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
+      [weakView showErrorWithTitle:[error localizedDescription]
+                       description:[error localizedFailureReason]];
       [weakView.submitButton hideLoadingState];
-      UIAlertController *alert =
-          [UIAlertController alertControllerWithTitle:[error localizedDescription]
-                                              message:[error localizedRecoverySuggestion]
-                                       preferredStyle:UIAlertControllerStyleAlert];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {}];
-      
-      [alert addAction:defaultAction];
-      [weakSelf presentViewController:alert animated:YES completion:nil];
      return;
     }
     [weakSelf.delegate loginViewController:self didFinishWithAuthentication:authentication];

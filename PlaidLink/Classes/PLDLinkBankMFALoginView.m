@@ -19,7 +19,7 @@ static CGFloat const kButtonHeight = 46.0;
 @implementation PLDLinkBankMFALoginView
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor {
-  if (self = [super initWithFrame:frame]) {
+  if (self = [super initWithFrame:frame tintColor:tintColor]) {
     self.tintColor = tintColor;
     _usernameTextField = [[PLDLinkStyledTextField alloc] initWithFrame:CGRectZero
                                                              tintColor:tintColor
