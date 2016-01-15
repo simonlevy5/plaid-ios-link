@@ -50,42 +50,6 @@ static CGFloat const kButtonHeight = 46.0;
   return self;
 }
 
-- (void)showErrorWithTitle:(NSString *)title
-               description:(NSString *)description
-                buttonCopy:(NSString *)buttonCopy {
-  _titleLabel.text = title;
-  _descriptionLabel.text = description;
-  [self bringSubviewToFront:_errorContainer];
-
-  _titleLabel.transform = CGAffineTransformMakeTranslation(0, 20);
-  _descriptionLabel.transform = CGAffineTransformMakeTranslation(0, 20);
-  [UIView animateWithDuration:0.3
-                        delay:0
-                      options:UIViewAnimationOptionCurveEaseOut
-                   animations:^{
-                     _errorContainer.alpha = 1;
-                     _titleLabel.transform = CGAffineTransformIdentity;
-                     _descriptionLabel.transform = CGAffineTransformIdentity;
-                   } completion:nil];
-
-  [_closeButton setTitle:buttonCopy forState:UIControlStateNormal];
-}
-
-- (void)didTapOnCloseError {
-  [UIView animateWithDuration:0.3
-                        delay:0
-                      options:UIViewAnimationOptionCurveEaseIn
-                   animations:^{
-                     _errorContainer.alpha = 0;
-                     _titleLabel.center =
-                         CGPointMake(_titleLabel.center.x, _titleLabel.center.y + 20);
-                     _descriptionLabel.center =
-                         CGPointMake(_descriptionLabel.center.x, _descriptionLabel.center.y + 20);
-                   } completion:^(BOOL finished) {
-                     [self layoutSubviews];
-                   }];
-}
-
 - (void)layoutSubviews {
   [super layoutSubviews];
 
@@ -95,8 +59,7 @@ static CGFloat const kButtonHeight = 46.0;
   _titleLabel.frame = CGRectMake(kInputHorizontalPadding,
                                  kInputVerticalPadding + 6,
                                  bounds.size.width - kInputHorizontalPadding * 2,
-                                 0);
-  [_titleLabel sizeToFit];
+                                 24);
   _titleLabel.center = CGPointMake(bounds.size.width / 2, _titleLabel.center.y);
 
   _descriptionLabel.frame = CGRectMake(kInputHorizontalPadding,
@@ -109,6 +72,44 @@ static CGFloat const kButtonHeight = 46.0;
                                   bounds.size.height - kButtonHeight - 2 * kInputVerticalPadding,
                                   bounds.size.width - kInputHorizontalPadding * 2,
                                   kButtonHeight);
+}
+
+- (void)showErrorWithTitle:(NSString *)title
+               description:(NSString *)description
+                buttonCopy:(NSString *)buttonCopy {
+  _titleLabel.text = title;
+  _descriptionLabel.text = description;
+  [_closeButton setTitle:buttonCopy forState:UIControlStateNormal];
+  [self bringSubviewToFront:_errorContainer];
+
+  [self layoutSubviews];
+  _titleLabel.transform = CGAffineTransformMakeTranslation(0, 20);
+  _descriptionLabel.transform = CGAffineTransformMakeTranslation(0, 20);
+
+  [UIView animateWithDuration:0.3
+                        delay:0
+                      options:UIViewAnimationOptionCurveEaseOut
+                   animations:^{
+                     _errorContainer.alpha = 1;
+                     _titleLabel.transform = CGAffineTransformIdentity;
+                     _descriptionLabel.transform = CGAffineTransformIdentity;
+                     [self layoutSubviews];
+                   } completion:nil];
+}
+
+- (void)didTapOnCloseError {
+  [UIView animateWithDuration:0.3
+                        delay:0
+                      options:UIViewAnimationOptionCurveEaseIn
+                   animations:^{
+                     _errorContainer.alpha = 0;
+                     _titleLabel.transform = CGAffineTransformMakeTranslation(0, 20);
+                     _descriptionLabel.transform = CGAffineTransformMakeTranslation(0, 20);
+                     [self layoutSubviews];
+                   } completion:^(BOOL finished) {
+                     _titleLabel.transform = CGAffineTransformIdentity;
+                     _descriptionLabel.transform = CGAffineTransformIdentity;
+                   }];
 }
 
 @end
