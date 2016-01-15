@@ -29,14 +29,10 @@ The second option allows for developing against the local version of the SDK if 
 **Project Tasks**
 
 1. Documentation & Usage
-2. Move test targets to subproject
-3. Address known issues
+2. Address known issues
 
 **Known issues**
-- Copy in login inputs aren't desirable (Using hardcoded strings vs. institution-specific values)
-- Error messages are being pulled from API
-- Not showing forgot password, account recovery, or locked out links
-- Need better loading states for very long loading situations
+- Not showing account recovery or locked out links
 
 **License**
 
