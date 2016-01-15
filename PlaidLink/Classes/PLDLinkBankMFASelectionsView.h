@@ -7,9 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PLDLinkBankMFABaseStepView.h"
+
 @class PLDLinkBankMFAExplainerView;
 
-@interface PLDLinkBankMFASelectionsView : UIView
+@interface PLDLinkBankMFASelectionsView : PLDLinkBankMFABaseStepView
 
 @property(nonatomic, readonly) PLDLinkBankMFAExplainerView *explainer;
 

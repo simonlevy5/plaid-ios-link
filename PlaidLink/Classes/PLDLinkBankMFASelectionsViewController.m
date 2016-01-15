@@ -70,19 +70,12 @@
     return;
   }
   __weak PLDLinkBankMFASelectionsViewController *weakSelf = self;
+  __weak PLDLinkBankMFASelectionsView *weakView = _view;
   [self submitMFAStepResponse:_answers options:nil completion:^(NSError *error) {
-    if (error) {
-      UIAlertController *alert =
-      [UIAlertController alertControllerWithTitle:[error localizedDescription]
-                                          message:[error localizedRecoverySuggestion]
-                                   preferredStyle:UIAlertControllerStyleAlert];
-      NSString *actionTitle = [NSString stringWithIdentifier:@"common_ok"];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:actionTitle
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {}];
-      
-      [alert addAction:defaultAction];
-      [weakSelf presentViewController:alert animated:YES completion:nil];
+    if (error && weakSelf) {
+      [weakView showErrorWithTitle:[error localizedDescription]
+                       description:[error localizedFailureReason]
+                        buttonCopy:[error localizedRecoverySuggestion]];
     }
   }];
 }

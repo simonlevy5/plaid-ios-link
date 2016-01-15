@@ -54,24 +54,10 @@
   __weak PLDLinkBankMFAQuestionOrCodeView *weakView = _view;
   [self submitMFAStepResponse:response options:nil completion:^(NSError *error) {
     if (error && weakSelf) {
+      [weakView showErrorWithTitle:[error localizedDescription]
+                       description:[error localizedFailureReason]
+                        buttonCopy:[error localizedRecoverySuggestion]];
       [weakView.submitButton hideLoadingState];
-      NSString *errorTitle;
-      if (weakSelf.authentication.mfa.type == kPLDMFATypeQuestion) {
-        errorTitle = [NSString stringWithIdentifier:@"mfa_error_wrong_answer"];
-      } else {
-        errorTitle = [NSString stringWithIdentifier:@"mfa_error_invalid_security_code"];
-      }
-      UIAlertController *alert =
-          [UIAlertController alertControllerWithTitle:errorTitle
-                                              message:[error localizedRecoverySuggestion]
-                                       preferredStyle:UIAlertControllerStyleAlert];
-      NSString *actionTitle = [NSString stringWithIdentifier:@"common_ok"];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:actionTitle
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {}];
-
-      [alert addAction:defaultAction];
-      [weakSelf presentViewController:alert animated:YES completion:nil];
     }
   }];
 }

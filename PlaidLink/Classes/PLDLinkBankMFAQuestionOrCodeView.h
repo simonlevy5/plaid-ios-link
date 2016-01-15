@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PLDLinkBankMFABaseStepView.h"
+
 @class PLDLinkStyledButton;
 @class PLDLinkStyledTextField;
 @class PLDLinkBankMFAExplainerView;
@@ -17,7 +19,7 @@
 
 @end
 
-@interface PLDLinkBankMFAQuestionOrCodeView : UIView
+@interface PLDLinkBankMFAQuestionOrCodeView : PLDLinkBankMFABaseStepView
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
 

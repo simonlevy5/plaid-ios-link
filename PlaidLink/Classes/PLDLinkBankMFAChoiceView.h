@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PLDLinkBankMFABaseStepView.h"
+
 @class PLDLinkBankMFAExplainerView;
 
 @protocol PLDLinkBankMFAChoiceViewDelegate <NSObject>
@@ -15,7 +17,7 @@
 
 @end
 
-@interface PLDLinkBankMFAChoiceView : UIView
+@interface PLDLinkBankMFAChoiceView : PLDLinkBankMFABaseStepView
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
 

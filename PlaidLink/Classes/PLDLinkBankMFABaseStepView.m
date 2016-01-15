@@ -26,6 +26,9 @@ static CGFloat const kButtonHeight = 46.0;
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.font = [UIFont systemFontOfSize:17];
+    _titleLabel.numberOfLines = 1;
+    _titleLabel.adjustsFontSizeToFitWidth = YES;
+    _titleLabel.minimumScaleFactor = 0.6;
     [_errorContainer addSubview:_titleLabel];
 
     _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -33,10 +36,11 @@ static CGFloat const kButtonHeight = 46.0;
     _descriptionLabel.textAlignment = NSTextAlignmentCenter;
     _descriptionLabel.textColor = [UIColor whiteColor];
     _descriptionLabel.font = [UIFont systemFontOfSize:12];
+    _descriptionLabel.adjustsFontSizeToFitWidth = YES;
+    _descriptionLabel.minimumScaleFactor = 0.6;
     [_errorContainer addSubview:_descriptionLabel];
 
     _closeButton = [[PLDLinkStyledButton alloc] initWithFrame:CGRectZero tintColor:tintColor];
-    [_closeButton setTitle:@"Retry" forState:UIControlStateNormal];
     [_errorContainer addSubview:_closeButton];
 
     [_closeButton addTarget:self
@@ -46,7 +50,9 @@ static CGFloat const kButtonHeight = 46.0;
   return self;
 }
 
-- (void)showErrorWithTitle:(NSString *)title description:(NSString *)description {
+- (void)showErrorWithTitle:(NSString *)title
+               description:(NSString *)description
+                buttonCopy:(NSString *)buttonCopy {
   _titleLabel.text = title;
   _descriptionLabel.text = description;
   [self bringSubviewToFront:_errorContainer];
@@ -61,6 +67,8 @@ static CGFloat const kButtonHeight = 46.0;
                      _titleLabel.transform = CGAffineTransformIdentity;
                      _descriptionLabel.transform = CGAffineTransformIdentity;
                    } completion:nil];
+
+  [_closeButton setTitle:buttonCopy forState:UIControlStateNormal];
 }
 
 - (void)didTapOnCloseError {

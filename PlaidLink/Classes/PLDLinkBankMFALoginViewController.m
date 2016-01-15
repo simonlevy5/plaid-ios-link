@@ -68,7 +68,8 @@
                                      completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
       [weakView showErrorWithTitle:[error localizedDescription]
-                       description:[error localizedFailureReason]];
+                       description:[error localizedFailureReason]
+                        buttonCopy:[error localizedRecoverySuggestion]];
       [weakView.submitButton hideLoadingState];
       return;
     }

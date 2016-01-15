@@ -37,19 +37,12 @@
 
 - (void)choiceView:(UIView *)view didSelectChoice:(id)choice {
   __weak PLDLinkBankMFAChoiceViewController *weakSelf = self;
+  __weak PLDLinkBankMFAChoiceView *weakView = _view;
   [self submitMFAStepResponse:choice options:nil completion:^(NSError *error) {
-    if (error) {
-      UIAlertController *alert =
-          [UIAlertController alertControllerWithTitle:[error localizedDescription]
-                                              message:[error localizedRecoverySuggestion]
-                                       preferredStyle:UIAlertControllerStyleAlert];
-      NSString *buttonTitle = [NSString stringWithIdentifier:@"common_ok"];
-      UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:buttonTitle
-                                                              style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {}];
-
-      [alert addAction:defaultAction];
-      [weakSelf presentViewController:alert animated:YES completion:nil];
+    if (error && weakSelf) {
+      [weakView showErrorWithTitle:[error localizedDescription]
+                       description:[error localizedFailureReason]
+                        buttonCopy:[error localizedRecoverySuggestion]];
     }
   }];
 }

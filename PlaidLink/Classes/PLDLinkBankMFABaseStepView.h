@@ -19,6 +19,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame tintColor:(UIColor *)tintColor;
 
-- (void)showErrorWithTitle:(NSString *)title description:(NSString *)description;
-
+- (void)showErrorWithTitle:(NSString *)title
+               description:(NSString *)description
+                buttonCopy:(NSString *)buttonCopy;
 @end
