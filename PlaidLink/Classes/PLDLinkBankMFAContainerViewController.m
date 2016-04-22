@@ -31,14 +31,25 @@ static const CGFloat kKeyboardPadding = 8.0f;
 
   PLDInstitution *_institution;
   PlaidProduct _product;
+  NSMutableDictionary *_options;
 }
 
 - (instancetype)initWithInstitution:(PLDInstitution *)institution product:(PlaidProduct)product {
   if (self = [super init]) {
     _institution = institution;
     _product = product;
+    _options = [NSMutableDictionary new];
   }
   return self;
+}
+
+- (instancetype)initWithInstitution:(PLDInstitution *)institution product:(PlaidProduct)product options:(NSMutableDictionary *)options {
+    if (self = [super init]) {
+        _institution = institution;
+        _product = product;
+        _options = options;
+    }
+    return self;
 }
 
 - (void)loadView {
@@ -59,9 +70,16 @@ static const CGFloat kKeyboardPadding = 8.0f;
   self.navigationItem.backBarButtonItem.target = self;
   self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
-  PLDLinkBankMFALoginViewController *viewController =
-      [[PLDLinkBankMFALoginViewController alloc] initWithInstitution:_institution
-                                                          product:_product];
+  PLDLinkBankMFALoginViewController *viewController;
+  if (_options) {
+    viewController = [[PLDLinkBankMFALoginViewController alloc]     initWithInstitution:_institution
+        product:_product
+        options:_options];
+  } else {
+      viewController =
+      [[PLDLinkBankMFALoginViewController alloc] initWithInstitution:_institution product:_product];
+  }
+    
   viewController.delegate = self;
   [self addChildViewController:viewController];
   [_view setCurrentContentView:viewController.view];

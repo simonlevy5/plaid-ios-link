@@ -18,6 +18,7 @@
 @implementation PLDLinkBankMFALoginViewController {
   PLDInstitution *_institution;
   PlaidProduct _product;
+  NSMutableDictionary *_options;
   PLDLinkBankMFALoginView *_view;
 }
 
@@ -26,6 +27,18 @@
   if (self = [super init]) {
     _institution = institution;
     _product = product;
+    _options = [NSMutableDictionary new];
+  }
+  return self;
+}
+
+- (instancetype)initWithInstitution:(PLDInstitution *)institution
+                            product:(PlaidProduct)product
+                            options:(NSMutableDictionary *)options{
+  if (self = [super init]) {
+    _institution = institution;
+    _product = product;
+    _options = options;
   }
   return self;
 }
@@ -54,9 +67,9 @@
 - (void)didTapSubmit {
   [_view.submitButton showLoadingState];
   [self.view endEditing:YES];
-  NSDictionary *options = @{
-      @"list" : @(YES)
-  };
+  
+  _options[@"list"] = @(YES);
+
   __weak PLDLinkBankMFALoginViewController *weakSelf = self;
   __weak PLDLinkBankMFALoginView *weakView = _view;
   [[Plaid sharedInstance] addLinkUserForProduct:_product
@@ -64,7 +77,7 @@
                                        password:_view.passwordTextField.text
                                             pin:_view.pinTextField.text
                                            type:_institution.type
-                                        options:options
+                                        options:_options
                                      completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
       [weakView showErrorWithTitle:[error localizedDescription]

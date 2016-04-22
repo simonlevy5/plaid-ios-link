@@ -65,9 +65,17 @@
 
 - (void)bankSelectionViewController:(PLDLinkBankSelectionViewController *)viewController
            didFinishWithInstitution:(PLDInstitution *)institution {
-  PLDLinkBankMFAContainerViewController *nextViewController =
-      [[PLDLinkBankMFAContainerViewController alloc] initWithInstitution:institution
-                                                                 product:_product];
+    
+  PLDLinkBankMFAContainerViewController *nextViewController;
+  
+  if (self.options) {
+    nextViewController = [[PLDLinkBankMFAContainerViewController alloc] initWithInstitution:institution
+        product:_product
+        options:self.options];
+  } else {
+    nextViewController = [[PLDLinkBankMFAContainerViewController alloc] initWithInstitution:institution
+        product:_product];
+  }
   nextViewController.delegate = self;
   [self pushViewController:nextViewController animated:YES];
 }
