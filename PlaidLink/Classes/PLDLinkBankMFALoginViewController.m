@@ -18,7 +18,6 @@
 @implementation PLDLinkBankMFALoginViewController {
   PLDInstitution *_institution;
   PlaidProduct _product;
-  NSMutableDictionary *_options;
   PLDLinkBankMFALoginView *_view;
 }
 
@@ -27,21 +26,10 @@
   if (self = [super init]) {
     _institution = institution;
     _product = product;
-    _options = [NSMutableDictionary new];
   }
   return self;
 }
 
-- (instancetype)initWithInstitution:(PLDInstitution *)institution
-                            product:(PlaidProduct)product
-                            options:(NSMutableDictionary *)options{
-  if (self = [super init]) {
-    _institution = institution;
-    _product = product;
-    _options = options;
-  }
-  return self;
-}
 
 - (void)loadView {
   _view = [[PLDLinkBankMFALoginView alloc] initWithFrame:CGRectZero
@@ -68,7 +56,9 @@
   [_view.submitButton showLoadingState];
   [self.view endEditing:YES];
   
-  _options[@"list"] = @(YES);
+    
+  NSMutableDictionary* options = [_options mutableCopy];
+  options[@"list"] = @(YES);
 
   __weak PLDLinkBankMFALoginViewController *weakSelf = self;
   __weak PLDLinkBankMFALoginView *weakView = _view;
@@ -77,7 +67,7 @@
                                        password:_view.passwordTextField.text
                                             pin:_view.pinTextField.text
                                            type:_institution.type
-                                        options:_options
+                                        options:options
                                      completion:^(PLDAuthentication *authentication, id response, NSError *error) {
     if (error && weakSelf) {
       [weakView showErrorWithTitle:[error localizedDescription]

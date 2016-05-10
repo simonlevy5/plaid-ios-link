@@ -71,7 +71,7 @@
 @property(nonatomic, readonly) PlaidProduct product;
 
 // Optional Properties
-@property(nonatomic, weak) NSMutableDictionary *options;
+@property(nonatomic, weak) NSDictionary *options;
 
 /**
  Create a new PLDLinkNavigationController instance to present the authentication workflow to a user.
