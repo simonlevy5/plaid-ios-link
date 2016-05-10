@@ -24,7 +24,7 @@
 
 @property(nonatomic, weak) id<PLDLinkBankMFAContainerViewControllerDelegate> delegate;
 
-@property(nonatomic, weak) NSDictionary *options;
+@property(nonatomic, copy) NSDictionary *options;
 
 - (instancetype)initWithInstitution:(PLDInstitution *)institution
                             product:(PlaidProduct)product;

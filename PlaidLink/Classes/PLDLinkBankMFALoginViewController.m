@@ -56,8 +56,13 @@
   [_view.submitButton showLoadingState];
   [self.view endEditing:YES];
   
-    
-  NSMutableDictionary* options = [_options mutableCopy];
+  NSMutableDictionary *options;
+  if(_options == nil){
+    options = [[NSMutableDictionary alloc] init];
+  }else {
+    options = [_options mutableCopy];
+  }
+
   options[@"list"] = @(YES);
 
   __weak PLDLinkBankMFALoginViewController *weakSelf = self;
