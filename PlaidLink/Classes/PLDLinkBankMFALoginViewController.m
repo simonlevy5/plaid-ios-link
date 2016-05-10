@@ -30,6 +30,7 @@
   return self;
 }
 
+
 - (void)loadView {
   _view = [[PLDLinkBankMFALoginView alloc] initWithFrame:CGRectZero
                                             tintColor:_institution.backgroundColor];
@@ -54,9 +55,16 @@
 - (void)didTapSubmit {
   [_view.submitButton showLoadingState];
   [self.view endEditing:YES];
-  NSDictionary *options = @{
-      @"list" : @(YES)
-  };
+  
+  NSMutableDictionary *options;
+  if(_options == nil){
+    options = [[NSMutableDictionary alloc] init];
+  }else {
+    options = [_options mutableCopy];
+  }
+
+  options[@"list"] = @(YES);
+
   __weak PLDLinkBankMFALoginViewController *weakSelf = self;
   __weak PLDLinkBankMFALoginView *weakView = _view;
   [[Plaid sharedInstance] addLinkUserForProduct:_product

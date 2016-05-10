@@ -60,9 +60,11 @@ static const CGFloat kKeyboardPadding = 8.0f;
   self.navigationController.interactivePopGestureRecognizer.delegate = self;
 
   PLDLinkBankMFALoginViewController *viewController =
-      [[PLDLinkBankMFALoginViewController alloc] initWithInstitution:_institution
-                                                          product:_product];
+    [[PLDLinkBankMFALoginViewController alloc] initWithInstitution:_institution
+                                                           product:_product];
+    
   viewController.delegate = self;
+  viewController.options = _options;
   [self addChildViewController:viewController];
   [_view setCurrentContentView:viewController.view];
   [viewController didMoveToParentViewController:self];

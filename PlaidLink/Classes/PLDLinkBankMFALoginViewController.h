@@ -24,6 +24,8 @@
 
 @property(nonatomic, weak) id<PLDLinkBankLoginViewControllerDelegate> delegate;
 
+@property(nonatomic, copy) NSDictionary *options;
+
 - (instancetype)initWithInstitution:(PLDInstitution *)institution
                             product:(PlaidProduct)product;
 
