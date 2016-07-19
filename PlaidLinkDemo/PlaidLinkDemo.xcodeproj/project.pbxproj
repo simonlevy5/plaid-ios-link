@@ -122,12 +122,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 530708CA1C03C39500E296B8 /* Build configuration list for PBXNativeTarget "PlaidLinkDemo" */;
 			buildPhases = (
-				8B78E763B4DC58F3357755E2 /* Check Pods Manifest.lock */,
+				8B78E763B4DC58F3357755E2 /* 📦 Check Pods Manifest.lock */,
 				530708AF1C03C39500E296B8 /* Sources */,
 				530708B01C03C39500E296B8 /* Frameworks */,
 				530708B11C03C39500E296B8 /* Resources */,
-				E98BEA14D95CB85A1364923C /* Embed Pods Frameworks */,
-				AABA3C750219357500E4E435 /* Copy Pods Resources */,
+				E98BEA14D95CB85A1364923C /* 📦 Embed Pods Frameworks */,
+				AABA3C750219357500E4E435 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -185,14 +185,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8B78E763B4DC58F3357755E2 /* Check Pods Manifest.lock */ = {
+		8B78E763B4DC58F3357755E2 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,14 +200,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AABA3C750219357500E4E435 /* Copy Pods Resources */ = {
+		AABA3C750219357500E4E435 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,14 +215,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlaidLinkDemo/Pods-PlaidLinkDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E98BEA14D95CB85A1364923C /* Embed Pods Frameworks */ = {
+		E98BEA14D95CB85A1364923C /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
