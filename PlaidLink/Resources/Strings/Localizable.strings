@@ -26,7 +26,7 @@
 "bank_selection_search_title" = "Search your bank";
 "bank_selection_title" = "Select your bank";
 "bank_selection_more_banks" = "More banks";
-"bank_selection_not_found" = "I don't see\n by bank";
+"bank_selection_not_found" = "I don't see\n my bank";
 
 "button_login" = "Log in";
 "button_sending" = "Sending";
