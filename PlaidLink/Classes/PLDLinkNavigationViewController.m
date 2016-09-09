@@ -37,7 +37,7 @@
     rootViewController.delegate = self;
     rootViewController.title = [NSString stringWithIdentifier:@"bank_selection_title"];
 
-    _environment = environment;
+    self.environment = environment;
     _product = product;
     _animator = [[PLDLinkSelectionToLoginAnimator alloc] init];
 
